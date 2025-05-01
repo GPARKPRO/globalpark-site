@@ -1,15 +1,17 @@
 'use client'
 
-import { WagmiProvider } from 'wagmi'
+import { WagmiConfig } from 'wagmi'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { config, queryClient } from '@/lib/wagmiConfig'
+import { queryClient } from '@/lib/queryClient'
+import { wagmiConfig, web3Modal } from '@/lib/web3modalConfig'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProvider config={config}>
+    <WagmiConfig config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         {children}
+        {web3Modal}
       </QueryClientProvider>
-    </WagmiProvider>
+    </WagmiConfig>
   )
 }
