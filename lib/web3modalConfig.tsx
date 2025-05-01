@@ -1,6 +1,6 @@
 'use client'
 
-import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { configureChains, createConfig } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
@@ -20,7 +20,8 @@ export const wagmiConfig = createConfig({
 })
 
 export const ethereumClient = new EthereumClient(wagmiConfig, chains)
-export const web3Modal = (
+
+export const Web3ModalWrapper = () => (
   <Web3Modal
     projectId={projectId}
     ethereumClient={ethereumClient}
