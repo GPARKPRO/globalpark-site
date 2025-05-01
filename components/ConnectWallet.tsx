@@ -1,32 +1,36 @@
 'use client'
 
-import { useConnect, useDisconnect, useAccount } from 'wagmi'
-import { walletConnect } from 'wagmi/connectors'
+import { useAccount, useDisconnect } from 'wagmi'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
+import { useEffect } from 'react'
 
 export default function ConnectWallet() {
-  const { connect } = useConnect()
-  const { disconnect } = useDisconnect()
   const { isConnected, address } = useAccount()
+  const { disconnect } = useDisconnect()
+  const { openConnectModal } = useConnectModal()
+
+  useEffect(() => {
+    console.log('[ConnectWallet] mounted')
+  }, [])
 
   return (
-    <div className="mt-6 w-full max-w-xs">
+    <div className="mt-8 w-full max-w-sm">
       {!isConnected ? (
         <button
-          onClick={() =>
-            connect({
-              connector: walletConnect({
-                projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-              }),
-            })
-          }
-          className="w-full bg-white text-black py-2 px-4 rounded hover:bg-gray-200 transition"
+          onClick={openConnectModal}
+          className="bg-white text-black px-6 py-2 rounded-md font-semibold hover:bg-gray-200 transition w-full"
         >
           Connect Wallet
         </button>
       ) : (
-        <div className="bg-gray-800 px-4 py-2 rounded flex justify-between items-center">
-          <span className="text-sm font-mono truncate">{address?.slice(0, 6)}...{address?.slice(-4)}</span>
-          <button onClick={() => disconnect()} className="text-red-400 text-sm">
+        <div className="flex items-center justify-between bg-gray-800 px-4 py-2 rounded-md">
+          <span className="text-sm font-mono truncate">
+            {address?.slice(0, 6)}...{address?.slice(-4)}
+          </span>
+          <button
+            onClick={() => disconnect()}
+            className="text-sm text-red-400 hover:text-red-300 transition"
+          >
             Disconnect
           </button>
         </div>
