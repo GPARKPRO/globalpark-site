@@ -15,7 +15,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="bg-black text-white min-h-screen overflow-x-hidden">
         <Providers>
-          <div className="relative z-0 flex flex-col min-h-screen w-full max-w-6xl mx-auto px-4 sm:px-6">
             <main className="flex-grow">
               {children}
             </main>
