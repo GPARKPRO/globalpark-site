@@ -28,4 +28,5 @@ body {
 
 :root {
   --rk-zIndex: 9999;
+  box-sizing: border-box;
 }
