@@ -15,8 +15,8 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
-  chains,
-  projectId: '404ebf9e40a036343451598086ce75e5' // 👈 твой WalletConnect projectId
+  projectId: '404ebf9e40a036343451598086ce75e5', // 👈 WalletConnect Project ID
+  chains
 })
 
 const wagmiClient = createClient({
