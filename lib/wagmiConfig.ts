@@ -14,7 +14,7 @@ export const config = getDefaultConfig({
       `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`
     ),
   },
-  ssr: true, // можно оставить
+  ssr: true,
 })
 
 export const queryClient = new QueryClient()
