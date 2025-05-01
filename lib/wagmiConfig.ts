@@ -2,7 +2,7 @@
 
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { mainnet } from 'wagmi/chains';
-import { http } from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { QueryClient } from '@tanstack/react-query';
 
 export const config = getDefaultConfig({
@@ -10,7 +10,9 @@ export const config = getDefaultConfig({
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   chains: [mainnet],
   transports: {
-    [mainnet.id]: http(),
+    [mainnet.id]: alchemyProvider({
+      apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY!,
+    }),
   },
 });
 
