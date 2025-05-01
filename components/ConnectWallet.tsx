@@ -1,35 +1,12 @@
 'use client'
 
-import { useWeb3Modal } from '@web3modal/react'
 import { useAccount, useDisconnect } from 'wagmi'
-import { useEffect } from 'react'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 
 export default function ConnectWallet() {
   const { isConnected, address } = useAccount()
   const { disconnect } = useDisconnect()
-  const { open } = useWeb3Modal()'use client'
-
-import { useAccount } from 'wagmi'
-import { Web3Button } from '@web3modal/wagmi/react'
-
-export default function ConnectWallet() {
-  const { address, isConnected } = useAccount()
-
-  return (
-    <div className="mt-8 w-full max-w-sm">
-      <Web3Button />
-      {isConnected && (
-        <div className="mt-4 text-sm text-gray-300 font-mono truncate">
-          Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
-        </div>
-      )}
-    </div>
-  )
-}
-
-  useEffect(() => {
-    console.log('[ConnectWallet] mounted')
-  }, [])
+  const { open } = useWeb3Modal()
 
   return (
     <div className="mt-8 w-full max-w-sm">
