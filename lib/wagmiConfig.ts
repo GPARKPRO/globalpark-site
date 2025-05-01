@@ -1,4 +1,3 @@
-// lib/wagmiConfig.ts
 'use client'
 
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
@@ -13,12 +12,7 @@ export const config = getDefaultConfig({
   transports: {
     [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`)
   },
-  ssr: true,
-  metadata: {
-    name: 'Global Park',
-    description: 'A Decentralized Initiative for Art, Technology & Collective Memory',
-    url: 'https://globalpark.io',
-  }
+  ssr: true
 })
 
 export const queryClient = new QueryClient()
