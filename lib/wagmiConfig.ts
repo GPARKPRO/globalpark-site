@@ -2,12 +2,14 @@
 
 import { createConfig, http } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
-import { injected } from '@wagmi/connectors'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { QueryClient } from '@tanstack/react-query'
 
 export const config = createConfig({
   connectors: [
-    injected({ targetChain: mainnet })
+    new InjectedConnector({
+      chains: [mainnet],
+    }),
   ],
   chains: [mainnet],
   transports: {
