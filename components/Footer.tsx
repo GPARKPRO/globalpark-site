@@ -36,11 +36,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/Founder_Manifesto.pdf" target="_blank" rel="noopener noreferrer">
-                Founder's Manifesto
-              </Link>
-            </li>
-            <li>
               <Link href="https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/Tokenomics_&_Economic_Model.pdf" target="_blank" rel="noopener noreferrer">
                 Tokenomics & Economic Model
               </Link>
