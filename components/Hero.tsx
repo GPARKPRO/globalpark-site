@@ -1,5 +1,7 @@
 import Image from "next/image";
-
+import ConnectWallet from './ConnectWallet'
+...
+<ConnectWallet />
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16 bg-black text-white">
