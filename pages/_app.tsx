@@ -12,6 +12,7 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
+  projectId: 'gpark-dev',
   chains
 })
 
