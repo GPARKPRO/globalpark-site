@@ -1,6 +1,6 @@
 {
   "name": "globalpark-site",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,21 +8,22 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.0.0",
+    "@rainbow-me/rainbowkit": "^2.2.5",
+    "@tanstack/react-query": "^5.20.1",
     "ethers": "^5.7.2",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "wagmi": "^2.9.0",
-    "viem": "^2.0.0"
+    "wagmi": "^2.9.7",
+    "viem": "^1.24.1"
   },
   "devDependencies": {
+    "@types/node": "^18.17.19",
+    "@types/react": "^18.2.21",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.2",
-    "typescript": "^5.1.6",
-    "@types/react": "^18.2.21",
-    "@types/node": "^18.17.19"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": "18.x"
