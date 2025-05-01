@@ -17,7 +17,7 @@ Global Park is more than just a website — it’s a living interface to a decen
 
 Everything you see here is fully transparent and open to the community.
 
----
+--- 
 
 ## 🛠️ Stack
 
