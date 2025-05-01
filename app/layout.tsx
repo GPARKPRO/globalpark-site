@@ -1,14 +1,11 @@
 // app/layout.tsx
-'use client'
 
-import '../styles/globals.css'
+import './globals.css'
+import type { Metadata } from 'next'
 import { ReactNode } from 'react'
-import { config, queryClient } from '@/lib/wagmiConfig'
-import { WagmiProvider } from 'wagmi'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
+import Providers from './providers'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Global Park',
   description: 'A Decentralized Initiative for Art, Technology & Collective Memory',
 }
@@ -17,21 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-black text-white">
-        <WagmiProvider config={config}>
-          <QueryClientProvider client={queryClient}>
-            <RainbowKitProvider
-              locale="en-US"
-              theme={lightTheme({
-                accentColor: '#000000',
-                accentColorForeground: '#ffffff',
-                borderRadius: 'medium',
-                fontStack: 'system',
-              })}
-            >
-              {children}
-            </RainbowKitProvider>
-          </QueryClientProvider>
-        </WagmiProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
