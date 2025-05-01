@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Hero from '../components/Hero'
+import Footer from '../components/Footer'
 
 export default function Home() {
   return (
@@ -10,8 +11,9 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <main className="bg-black text-white">
+      <main className="bg-black text-white min-h-screen">
         <Hero />
+        <Footer />
       </main>
     </>
   )
