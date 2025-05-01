@@ -37,3 +37,16 @@ div[class*="RainbowKitConnectModal"] {
   padding: 1rem;
   border-radius: 12px;
 }
+
+div[class*="RainbowKitConnectModal"] {
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  padding: 1.5rem !important;
+  border-radius: 12px;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
