@@ -5,7 +5,7 @@
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Footer from '@/components/Footer'
+import Footer from '../components/Footer'
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount()
