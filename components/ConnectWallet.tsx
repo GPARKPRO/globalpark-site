@@ -1,17 +1,15 @@
 'use client'
 
-import { useConnect } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export default function ConnectWallet() {
-  const { connect, connectors, isLoading, pendingConnector } = useConnect()
+  const { isConnected, address } = useAccount()
+  const { disconnect } = useDisconnect()
 
   return (
-    <button
-      onClick={() => connect({ connector: new InjectedConnector() })}
-      className="bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
-    >
-      Connect Wallet
-    </button>
+    <div>
+      <ConnectButton />
+    </div>
   )
 }
