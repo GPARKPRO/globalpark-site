@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import ConnectWallet from '../components/ConnectWallet'
 import Providers from './providers'
