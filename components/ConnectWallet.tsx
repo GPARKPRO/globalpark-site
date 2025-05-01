@@ -1,23 +1,45 @@
+// components/ConnectWallet.tsx
 'use client'
 
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { injectedConnector } from '@wagmi/connectors/injected'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { ethers } from 'ethers'
 
 export default function ConnectWallet() {
-  const { isConnected, address } = useAccount()
-  const { connect } = useConnect({ connector: injectedConnector() })
-  const { disconnect } = useDisconnect()
+  const [account, setAccount] = useState<string | null>(null)
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        await provider.send('eth_requestAccounts', [])
+        const signer = provider.getSigner()
+        const address = await signer.getAddress()
+        setAccount(address)
+      } catch (error) {
+        console.error('Connection error:', error)
+      }
+    } else {
+      alert('MetaMask is not installed')
+    }
+  }
+
+  const disconnectWallet = () => {
+    setAccount(null)
+  }
 
   useEffect(() => {
-    console.log('[ConnectWallet] mounted')
+    if (typeof window.ethereum !== 'undefined') {
+      window.ethereum.on('accountsChanged', (accounts: string[]) => {
+        setAccount(accounts[0] || null)
+      })
+    }
   }, [])
 
   return (
     <div className="mt-8 w-full max-w-sm">
-      {!isConnected ? (
+      {!account ? (
         <button
-          onClick={() => connect()}
+          onClick={connectWallet}
           className="bg-white text-black px-6 py-2 rounded-md font-semibold hover:bg-gray-200 transition w-full"
         >
           Connect Wallet
@@ -25,10 +47,10 @@ export default function ConnectWallet() {
       ) : (
         <div className="flex items-center justify-between bg-gray-800 px-4 py-2 rounded-md">
           <span className="text-sm font-mono truncate">
-            {address?.slice(0, 6)}...{address?.slice(-4)}
+            {account.slice(0, 6)}...{account.slice(-4)}
           </span>
           <button
-            onClick={() => disconnect()}
+            onClick={disconnectWallet}
             className="text-sm text-red-400 hover:text-red-300 transition"
           >
             Disconnect
