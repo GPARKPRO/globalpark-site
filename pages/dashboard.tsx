@@ -1,11 +1,10 @@
-// pages/dashboard.tsx
-
 'use client'
 
 import { useAccount } from 'wagmi'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Footer from '../components/Footer'
+import Link from 'next/link'
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount()
@@ -19,30 +18,62 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-      <main className="flex-grow flex flex-col items-center justify-center px-6 py-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+      <main className="flex-grow px-6 py-12 max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-10">
           Welcome to your Dashboard
         </h1>
 
-        <div className="bg-gray-900 rounded-lg p-6 max-w-lg w-full shadow-lg">
-          <p className="mb-2">
-            <strong>Wallet Address:</strong> {address}
-          </p>
-          <p className="mb-2 text-gray-300">More modules coming soon:</p>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
-            <li>NFT Inventory</li>
-            <li>DAO Voting</li>
-            <li>Proof of Presence</li>
-            <li>Staking Program</li>
-          </ul>
+        <div className="bg-gray-900 p-6 rounded-xl shadow-md mb-10">
+          <p className="text-sm text-gray-400 mb-1">Connected Wallet:</p>
+          <p className="text-lg font-mono truncate">{address}</p>
         </div>
 
-        <button
-          onClick={() => router.push('/')}
-          className="mt-8 bg-white text-black px-5 py-2 font-medium rounded hover:bg-gray-200 transition"
-        >
-          ← Back to Home
-        </button>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[
+            {
+              title: 'NFT Inventory',
+              desc: 'View all your Global Park digital assets.',
+              comingSoon: true,
+            },
+            {
+              title: 'DAO Voting',
+              desc: 'Participate in important decisions of the DAO.',
+              comingSoon: true,
+            },
+            {
+              title: 'Proof of Presence',
+              desc: 'Record your physical interaction with the park.',
+              comingSoon: true,
+            },
+            {
+              title: 'Staking Program',
+              desc: 'Earn rewards by staking GPARK tokens.',
+              comingSoon: true,
+            },
+          ].map((mod, i) => (
+            <div
+              key={i}
+              className="bg-gray-800 p-5 rounded-lg border border-gray-700 hover:border-white transition"
+            >
+              <h3 className="text-xl font-semibold mb-1">{mod.title}</h3>
+              <p className="text-sm text-gray-400">{mod.desc}</p>
+              {mod.comingSoon && (
+                <span className="mt-3 inline-block text-xs text-yellow-400 font-medium">
+                  Coming soon...
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <button
+            onClick={() => router.push('/')}
+            className="bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
+          >
+            ← Back to Home
+          </button>
+        </div>
       </main>
 
       <Footer />
