@@ -1,9 +1,18 @@
-import React from 'react';
+import Head from 'next/head'
+import Hero from '../components/Hero'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <h1 className="text-4xl font-bold">Global Park is coming soon...</h1>
-    </div>
-  );
+    <>
+      <Head>
+        <title>Global Park</title>
+        <meta name="description" content="A decentralized initiative for art, technology & collective memory." />
+        <link rel="icon" href="/logo.png" />
+      </Head>
+
+      <main className="bg-black text-white">
+        <Hero />
+      </main>
+    </>
+  )
 }
