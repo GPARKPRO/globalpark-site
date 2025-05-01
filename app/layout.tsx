@@ -12,10 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white min-h-screen overflow-x-hidden">
+      <body className="bg-black text-white min-h-screen">
         <div className="relative z-0 flex flex-col min-h-screen">
           <Providers>
-            {/* ⬇️ Ограничим ширину и дадим паддинг */}
+            {/* ⬇️ cut */}
             <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
               {children}
             </div>
