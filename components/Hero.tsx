@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import ConnectWallet from './ConnectWallet'
 
 export default function Hero() {
@@ -15,12 +16,16 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
-          <button className="bg-white text-black px-5 py-2 font-medium rounded hover:bg-gray-200">
-            Explore DAO
-          </button>
-          <button className="border border-white px-5 py-2 font-medium rounded hover:bg-white hover:text-black">
-            View GitHub / Docs
-          </button>
+          <Link href="#dao">
+            <a className="bg-white text-black px-5 py-2 font-medium rounded hover:bg-gray-200">
+              Explore DAO
+            </a>
+          </Link>
+          <Link href="https://github.com/GPARKPRO/GlobalPark-DAO" target="_blank">
+            <a className="border border-white px-5 py-2 font-medium rounded hover:bg-white hover:text-black">
+              View GitHub / Docs
+            </a>
+          </Link>
         </div>
 
         <ConnectWallet />
