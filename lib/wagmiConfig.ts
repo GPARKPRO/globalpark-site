@@ -1,19 +1,21 @@
-// lib/wagmiConfig.ts
 'use client'
 
-import { configureChains, createConfig } from 'wagmi'
-import { publicProvider } from 'wagmi/providers/public'
+import { createConfig, http } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
+import { injected } from 'wagmi/connectors'
 import { QueryClient } from '@tanstack/react-query'
 
-const { chains, publicClient } = configureChains(
-  [mainnet],
-  [publicProvider()]
-)
-
 export const config = createConfig({
-  autoConnect: true,
-  publicClient,
+  connectors: [
+    injected({
+      targetChain: mainnet,
+    }),
+  ],
+  chains: [mainnet],
+  transports: {
+    [mainnet.id]: http(),
+  },
+  ssr: true,
 })
 
 export const queryClient = new QueryClient()
