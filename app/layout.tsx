@@ -14,7 +14,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="bg-black text-white min-h-screen overflow-x-hidden">
         <div className="relative z-0 flex flex-col min-h-screen">
-          <Providers>{children}</Providers>
+          <Providers>
+            {/* ⬇️ Ограничим ширину и дадим паддинг */}
+            <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
+              {children}
+            </div>
+          </Providers>
         </div>
       </body>
     </html>
