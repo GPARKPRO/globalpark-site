@@ -3,14 +3,14 @@
 import { WagmiConfig } from 'wagmi'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/queryClient'
-import { wagmiConfig, web3Modal } from '@/lib/web3modalConfig'
+import { wagmiConfig, Web3ModalWrapper } from '@/lib/web3modalConfig'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         {children}
-        {web3Modal}
+        <Web3ModalWrapper />
       </QueryClientProvider>
     </WagmiConfig>
   )
