@@ -30,3 +30,10 @@ body {
   --rk-zIndex: 9999;
   box-sizing: border-box;
 }
+
+div[class*="RainbowKitConnectModal"] {
+  max-width: 420px !important;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 12px;
+}
