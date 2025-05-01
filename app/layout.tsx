@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import '../styles/globals.css'
 import type { ReactNode } from 'react'
 import Providers from './providers'
