@@ -1,7 +1,7 @@
 // app/layout.tsx
+
 import '../styles/globals.css'
-import { ReactNode } from 'react'
-import Providers from './providers'
+import type { ReactNode } from 'react'
 
 export const metadata = {
   title: 'Global Park',
@@ -12,9 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-black text-white">
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html>
   )
