@@ -1,17 +1,34 @@
-'use client';
+'use client'
 
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { mainnet } from 'wagmi/chains';
-import { http } from 'wagmi';
-import { QueryClient } from '@tanstack/react-query';
+import { createConfig, http } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+import { QueryClient } from '@tanstack/react-query'
+import { walletConnect, injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
 
-export const config = getDefaultConfig({
-  appName: 'Global Park',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+const alchemyHttpUrl = `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`
+
+export const config = createConfig({
   chains: [mainnet],
   transports: {
-    [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`),
+    [mainnet.id]: http(alchemyHttpUrl),
   },
-});
+  connectors: [
+    injected(),
+    metaMask(),
+    coinbaseWallet({
+      appName: 'Global Park',
+    }),
+    walletConnect({
+      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+      metadata: {
+        name: 'Global Park',
+        description: 'Connect to the Global Park DAO',
+        url: 'https://globalpark.io',
+        icons: ['https://globalpark.io/logo.png'],
+      },
+    }),
+  ],
+  ssr: true,
+})
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient()
