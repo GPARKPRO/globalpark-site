@@ -1,31 +1,34 @@
+'use client'
+
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { WagmiConfig, createClient, chain, configureChains } from 'wagmi'
+
+import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
 
-const { chains, provider, webSocketProvider } = configureChains(
-  [chain.mainnet],
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet],
   [publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
-  projectId: 'gpark-dev',
+  projectId: '404ebf9e40a036343451598086ce75e5',
   chains
 })
 
-const client = createClient({
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  provider,
-  webSocketProvider
+  publicClient,
+  webSocketPublicClient
 })
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
