@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-      <main className="flex-grow px-6 py-12 max-w-4xl mx-auto">
+      <main className="relative z-0 flex-grow px-6 py-12 max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-10">
           Welcome to your Dashboard
         </h1>
