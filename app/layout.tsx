@@ -1,6 +1,6 @@
 // app/layout.tsx
 
-import './globals.css'
+import '../styles/globals.css'
 import { ReactNode } from 'react'
 import { config, queryClient } from '@/lib/wagmiConfig'
 import { WagmiProvider } from 'wagmi'
