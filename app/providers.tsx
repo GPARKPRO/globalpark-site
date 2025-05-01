@@ -1,15 +1,22 @@
 'use client'
 
-import { WagmiProvider } from 'wagmi'
-import { RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
+import { WagmiProvider, http } from 'wagmi'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient, config } from '@/lib/wagmiConfig'
+import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { config, queryClient } from '@/lib/wagmiConfig'
+import { mainnet } from 'wagmi/chains'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const { wallets } = getDefaultWallets({
+    appName: 'Global Park',
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+    chains: [mainnet],
+  })
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider modalSize="compact" theme={lightTheme()}>
+        <RainbowKitProvider chains={[mainnet]} wallets={wallets}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
