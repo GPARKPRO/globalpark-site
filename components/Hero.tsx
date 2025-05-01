@@ -1,7 +1,6 @@
-import Image from "next/image";
+import Image from 'next/image'
 import ConnectWallet from './ConnectWallet'
-...
-<ConnectWallet />
+
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16 bg-black text-white">
@@ -17,15 +16,14 @@ export default function Hero() {
 
         <div className="mt-8 flex flex-wrap gap-4">
           <button className="bg-white text-black px-5 py-2 font-medium rounded hover:bg-gray-200">
-            Connect Wallet
-          </button>
-          <button className="border border-white px-5 py-2 font-medium rounded hover:bg-white hover:text-black">
             Explore DAO
           </button>
           <button className="border border-white px-5 py-2 font-medium rounded hover:bg-white hover:text-black">
             View GitHub / Docs
           </button>
         </div>
+
+        <ConnectWallet />
       </div>
 
       <div className="py-20 hidden md:block">
