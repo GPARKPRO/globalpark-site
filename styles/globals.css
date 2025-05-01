@@ -18,7 +18,6 @@ html, body {
   box-sizing: inherit;
 }
 
-/* ⬇️ Важно: контейнер для порталов и всего UI */
 #__next,
 body {
   position: relative;
@@ -31,22 +30,17 @@ body {
   box-sizing: border-box;
 }
 
-div[class*="RainbowKitConnectModal"] {
-  max-width: 420px !important;
-  margin: 0 auto;
-  padding: 1rem;
-  border-radius: 12px;
-}
-
+/* 💡 RainbowKit Modal override */
 div[class*="RainbowKitConnectModal"] {
   max-width: 420px !important;
   margin: 0 auto !important;
   padding: 1.5rem !important;
-  border-radius: 12px;
+  border-radius: 12px !important;
+  position: fixed !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  position: fixed !important;
   z-index: 9999 !important;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.2) !important;
+  background-color: #111 !important;
 }
