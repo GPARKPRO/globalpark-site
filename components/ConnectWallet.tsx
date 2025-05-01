@@ -1,7 +1,7 @@
 'use client'
 
 import { useConnect } from 'wagmi'
-import { InjectedConnector } from '@wagmi/connectors/injected'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export default function ConnectWallet() {
   const { connect, connectors, isLoading, pendingConnector } = useConnect()
