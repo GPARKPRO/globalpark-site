@@ -1,6 +1,9 @@
+// app/layout.tsx
+
 import '../styles/globals.css'
 import type { ReactNode } from 'react'
 import Providers from './providers'
+import Footer from '../components/Footer'
 
 export const metadata = {
   title: 'Global Park',
@@ -13,7 +16,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-black text-white min-h-screen overflow-x-hidden">
         <Providers>
           <div className="relative z-0 flex flex-col min-h-screen w-full max-w-6xl mx-auto px-4 sm:px-6">
-            {children}
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
           </div>
         </Providers>
       </body>
