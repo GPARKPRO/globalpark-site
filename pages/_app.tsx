@@ -13,7 +13,7 @@ import { mainnet } from 'wagmi/chains';
 
 const config = getDefaultConfig({
   appName: 'Global Park',
-  projectId: '404ebf9e40a036343451598086ce75e5', // ← твой WalletConnect ID
+  projectId: '404ebf9e40a036343451598086ce75e5', //ID
   chains: [mainnet],
   ssr: true
 });
