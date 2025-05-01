@@ -1,13 +1,15 @@
 'use client'
 
-import { useAccount, useDisconnect } from 'wagmi'
-import { useConnectModal } from '@rainbow-me/rainbowkit'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { useEffect } from 'react'
 
 export default function ConnectWallet() {
-  const { isConnected, address } = useAccount()
+  const { address, isConnected } = useAccount()
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  })
   const { disconnect } = useDisconnect()
-  const { openConnectModal } = useConnectModal()
 
   useEffect(() => {
     console.log('[ConnectWallet] mounted')
@@ -17,7 +19,7 @@ export default function ConnectWallet() {
     <div className="mt-8 w-full max-w-sm">
       {!isConnected ? (
         <button
-          onClick={openConnectModal}
+          onClick={() => connect()}
           className="bg-white text-black px-6 py-2 rounded-md font-semibold hover:bg-gray-200 transition w-full"
         >
           Connect Wallet
