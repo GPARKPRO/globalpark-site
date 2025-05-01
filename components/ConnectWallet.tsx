@@ -1,12 +1,12 @@
 'use client'
 
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { injectedConnector } from '@wagmi/connectors/injected'
 import { useEffect } from 'react'
 
 export default function ConnectWallet() {
   const { isConnected, address } = useAccount()
-  const { connect } = useConnect({ connector: new InjectedConnector() })
+  const { connect } = useConnect({ connector: injectedConnector() })
   const { disconnect } = useDisconnect()
 
   useEffect(() => {
