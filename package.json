@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^0.10.4",
+    "@walletconnect/ethereum-provider": "^2.10.6",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
