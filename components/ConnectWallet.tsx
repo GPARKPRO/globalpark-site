@@ -1,32 +1,17 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useAccount } from 'wagmi'
-import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic'
-
-const ConnectButton = dynamic(
-  () => import('@rainbow-me/rainbowkit').then(mod => mod.ConnectButton),
-  { ssr: false }
-)
+import { useConnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export default function ConnectWallet() {
-  const { isConnected } = useAccount()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (isConnected) {
-      router.push('/dashboard')
-    }
-  }, [isConnected, router])
+  const { connect, connectors, isLoading, pendingConnector } = useConnect()
 
   return (
-    <div className="mt-6">
-      <ConnectButton
-        accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }}
-        chainStatus="icon"
-        showBalance={false}
-      />
-    </div>
+    <button
+      onClick={() => connect({ connector: new InjectedConnector() })}
+      className="bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
+    >
+      Connect Wallet
+    </button>
   )
 }
