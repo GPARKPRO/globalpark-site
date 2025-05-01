@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useAccount } from 'wagmi'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 const ConnectButton = dynamic(
@@ -21,14 +21,12 @@ export default function ConnectWallet() {
   }, [isConnected, router])
 
   return (
-    <div className="mt-8">
-      <div className="inline-block border border-white px-5 py-2 font-medium rounded hover:bg-white hover:text-black transition text-white">
-        <ConnectButton
-          accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }}
-          chainStatus="icon"
-          showBalance={false}
-        />
-      </div>
+    <div className="mt-6">
+      <ConnectButton
+        accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }}
+        chainStatus="icon"
+        showBalance={false}
+      />
     </div>
   )
 }
