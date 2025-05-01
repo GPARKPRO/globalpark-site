@@ -5,7 +5,7 @@ import Providers from './providers'
 export default function Home() {
   return (
     <Providers>
-      <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16">
+      <section className="relative z-0 min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16">
         <div className="max-w-2xl py-20">
           <h1 className="text-5xl md:text-6xl font-bold leading-tight">GLOBAL PARK</h1>
           <p className="mt-6 text-xl font-light">
