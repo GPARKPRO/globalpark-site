@@ -1,37 +1,33 @@
-'use client'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import '@rainbow-me/rainbowkit/styles.css';
 
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import {
+  getDefaultConfig,
+  RainbowKitProvider
+} from '@rainbow-me/rainbowkit';
 
-import { WagmiConfig, createClient, configureChains, chain } from 'wagmi'
-import { publicProvider } from 'wagmi/providers/public'
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { mainnet } from 'wagmi/chains';
 
-const { chains, provider, webSocketProvider } = configureChains(
-  [chain.mainnet],
-  [publicProvider()]
-)
-
-const { connectors } = getDefaultWallets({
+const config = getDefaultConfig({
   appName: 'Global Park',
-  projectId: '404ebf9e40a036343451598086ce75e5', // 👈 WalletConnect Project ID
-  chains
-})
+  projectId: '404ebf9e40a036343451598086ce75e5', // ← твой WalletConnect ID
+  chains: [mainnet],
+  ssr: true
+});
 
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-  webSocketProvider
-})
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
-  )
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
 }
