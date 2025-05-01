@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
-// Динамически подключаем обычную кнопку
+// upd
 const ConnectButton = dynamic(
   () => import('@rainbow-me/rainbowkit').then((mod) => mod.ConnectButton),
   { ssr: false }
