@@ -10,16 +10,23 @@ export default function AskGPTPage() {
   const ask = async () => {
     if (!input.trim()) return
     setLoading(true)
+
     try {
       const res = await fetch('/api/gpt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: input })
+        body: JSON.stringify({ prompt: input }),
       })
+
       const data = await res.json()
-      setMessages((prev) => [...prev, `🧑 ${input}`, `🧠 ${data.reply}`])
+
+      if (res.ok) {
+        setMessages((prev) => [...prev, `🧑 ${input}`, `🧠 ${data.reply}`])
+      } else {
+        setMessages((prev) => [...prev, `🧑 ${input}`, `⚠️ Error: ${data.reply}`])
+      }
     } catch (err) {
-      setMessages((prev) => [...prev, `🚧 Failed to connect to GPT.`])
+      setMessages((prev) => [...prev, `🧑 ${input}`, `🚧 Failed to connect to GPT.`])
     } finally {
       setInput('')
       setLoading(false)
