@@ -1,29 +1,27 @@
 // middleware.ts
 
-import { NextRequest, NextResponse } from 'next/server'
-
-const RATE_LIMIT = 10; // max 10 req
-const WINDOW_TIME = 60 * 1000; // per 60 seconds
-const ipCache = new Map<string, { count: number; last: number }>();
-
-export function middleware(request: NextRequest) {
-  const ip = request.ip ?? 'global';
-  const now = Date.now();
-
-  const entry = ipCache.get(ip);
-  if (entry && now - entry.last < WINDOW_TIME) {
-    if (entry.count >= RATE_LIMIT) {
-      return new NextResponse('Too many requests', { status: 429 });
-    } else {
-      entry.count++;
-    }
-  } else {
-    ipCache.set(ip, { count: 1, last: now });
-  }
-
-  return NextResponse.next();
-}
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 export const config = {
-  matcher: ['/api/:path*'],
+  matcher: ['/api/:path*', '/dashboard/:path*', '/admin/:path*'],
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Пример защиты от POST-запросов на GET-only endpoints
+  if (pathname.startsWith('/api') && request.method !== 'GET') {
+    return new NextResponse('Method Not Allowed', { status: 405 })
+  }
+
+  // Пример: ограничение доступа по User-Agent
+  const userAgent = request.headers.get('user-agent') || ''
+  if (userAgent.includes('curl') || userAgent.includes('bot')) {
+    return new NextResponse('Access Denied', { status: 403 })
+  }
+
+  // Можно расширять правила здесь
+
+  return NextResponse.next()
 }
