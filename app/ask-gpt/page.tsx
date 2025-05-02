@@ -30,8 +30,10 @@ export default function AskGPTPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 text-white font-mono">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-white">Ask the Global Park Assistant</h1>
+    <div className="max-w-4xl mx-auto px-6 py-20 font-mono">
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-white">
+        Ask the Global Park Assistant
+      </h1>
       <p className="text-center text-gray-400 mb-10">
         Your personal guide to all documents of the Global Park DAO — White Paper, Constitution, Tokenomics, and more.
         Ask questions in any language. The assistant gives structured and trusted answers based on official sources.
@@ -41,13 +43,24 @@ export default function AskGPTPage() {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`rounded-lg p-4 text-sm whitespace-pre-wrap border transition-all duration-300 ${
+            className={`rounded-xl p-5 shadow-md text-sm whitespace-pre-wrap border transition-all duration-300 ${
               msg.role === 'user'
-                ? 'bg-zinc-800 border-zinc-700'
-                : 'bg-gradient-to-br from-zinc-900 to-zinc-800 border-purple-500'
+                ? 'bg-zinc-900 text-white border-zinc-700'
+                : 'bg-white text-black border-purple-300'
             }`}
           >
-            <ReactMarkdown>{msg.content}</ReactMarkdown>
+            <ReactMarkdown
+              components={{
+                a: ({ node, ...props }) => (
+                  <a {...props} className="text-blue-600 underline hover:text-blue-800" target="_blank" />
+                ),
+                li: ({ node, ...props }) => (
+                  <li className="ml-4 list-disc">{props.children}</li>
+                )
+              }}
+            >
+              {msg.content}
+            </ReactMarkdown>
           </div>
         ))}
       </div>
