@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import GPARK_ABI from './lib/GPARKTokenABI.json';
+import GPARK_ABI from './GPARKTokenABI.json';
 
 const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da';
 
