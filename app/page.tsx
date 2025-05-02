@@ -1,8 +1,29 @@
 'use client'
 
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (typeof window !== 'undefined' && window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+          if (accounts.length > 0) {
+            router.push('/dashboard')
+          }
+        } catch (err) {
+          console.error('Error checking wallet connection', err)
+        }
+      }
+    }
+
+    checkConnection()
+  }, [router])
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-between px-6 py-20 text-center md:text-left max-w-6xl mx-auto">
       {/* Text Section */}
