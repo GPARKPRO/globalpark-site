@@ -6,7 +6,7 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com;
   img-src 'self' data: https://raw.githubusercontent.com;
-  connect-src 'self' https://rpc.ankr.com https://*.infura.io;
+  connect-src 'self' https://rpc.ankr.com https://*.infura.io https://api.openai.com;
   frame-ancestors 'none';
   base-uri 'self';
 `;
