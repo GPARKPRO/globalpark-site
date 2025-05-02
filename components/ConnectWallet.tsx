@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 declare global {
   interface Window {
@@ -12,7 +11,6 @@ declare global {
 export default function ConnectWallet() {
   const [connected, setConnected] = useState(false)
   const [address, setAddress] = useState<string | null>(null)
-  const router = useRouter()
 
   const connect = async () => {
     if (typeof window.ethereum !== 'undefined') {
@@ -41,7 +39,6 @@ export default function ConnectWallet() {
           if (accounts.length > 0) {
             setAddress(accounts[0])
             setConnected(true)
-            router.push('/dashboard')
           }
         } catch (err) {
           console.error('Error checking connection', err)
@@ -49,13 +46,7 @@ export default function ConnectWallet() {
       }
     }
     checkConnection()
-  }, [router])
-
-  useEffect(() => {
-    if (connected) {
-      router.push('/dashboard')
-    }
-  }, [connected, router])
+  }, [])
 
   return (
     <div className="mt-6">
