@@ -1,7 +1,49 @@
+/* styles/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-muted: #a3a3a3;
+}
+
+html,
 body {
+  padding: 0;
+  margin: 0;
   font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Responsive typography */
+h1 {
+  @apply text-3xl md:text-5xl font-bold;
+}
+p {
+  @apply text-base md:text-lg leading-relaxed;
+}
+
+/* Footer layout improvements */
+footer {
+  @apply text-sm text-gray-400 mt-10 border-t border-gray-700 pt-6;
+}
+
+/* Utility: container with max-width */
+.container {
+  @apply w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto;
 }
