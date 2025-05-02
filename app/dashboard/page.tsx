@@ -42,7 +42,7 @@ export default function DashboardPage() {
         const formatted = Number(raw) / 1e18
         setBalance(formatted.toFixed(2))
       } catch (err) {
-        console.error('Ошибка при получении баланса:', err)
+        console.error('Error of balance:', err)
       }
     }
 
@@ -52,7 +52,7 @@ export default function DashboardPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-20 text-white">
       <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">
-        🧭 Welcome to Your Dashboard
+        Welcome to Your Dashboard
       </h1>
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
