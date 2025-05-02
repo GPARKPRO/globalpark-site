@@ -30,30 +30,47 @@ export default function DashboardPage() {
     checkConnection()
   }, [router])
 
+  const modules = [
+    { title: 'NFT Inventory', description: 'View and manage your Global Park NFTs.' },
+    { title: 'DAO Voting', description: 'Vote on key decisions and proposals.' },
+    { title: 'Proof of Presence', description: 'Register your physical presence in the park.' },
+    { title: 'Staking Program', description: 'Earn rewards by staking your tokens.' },
+  ]
+
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold mb-6">Welcome to your Dashboard</h1>
+    <div className="max-w-6xl mx-auto px-6 py-20">
+      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">Welcome to Your Dashboard</h1>
 
-      <div className="bg-zinc-900 rounded-lg p-6 mb-10">
-        <p className="mb-2 text-sm text-gray-400">
-          <span className="font-semibold text-white">Wallet Address:</span> {address}
-        </p>
-
-        <p className="text-sm text-gray-400 mb-2">More modules coming soon:</p>
-        <ul className="list-disc list-inside text-gray-300 text-sm pl-2">
-          <li>NFT Inventory</li>
-          <li>DAO Voting</li>
-          <li>Proof of Presence</li>
-          <li>Staking Program</li>
-        </ul>
+      <div className="bg-zinc-900 rounded-xl p-6 mb-12 text-sm text-gray-300">
+        <p className="mb-1">Connected Wallet:</p>
+        <p className="font-mono text-white">{address}</p>
       </div>
 
-      <Link
-        href="/"
-        className="inline-block bg-white text-black px-4 py-2 rounded font-medium hover:bg-gray-200 transition"
-      >
-        ← Back to Home
-      </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {modules.map((mod, index) => (
+          <div
+            key={index}
+            className="group bg-zinc-900 border border-zinc-800 rounded-xl p-6 transition hover:border-white hover:shadow-xl"
+          >
+            <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
+              {mod.title}
+            </h3>
+            <p className="text-gray-400 group-hover:text-gray-300">{mod.description}</p>
+            <span className="mt-3 inline-block text-xs text-yellow-400 font-medium">
+              Coming soon...
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-12 text-center">
+        <Link
+          href="/"
+          className="inline-block bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
+        >
+          ← Back to Home
+        </Link>
+      </div>
     </div>
   )
 }
