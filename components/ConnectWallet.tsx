@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 
+declare global {
+  interface Window {
+    ethereum?: any
+  }
+}
+
 export default function ConnectWallet() {
   const [connected, setConnected] = useState(false)
   const [address, setAddress] = useState<string | null>(null)
