@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
   const { prompt } = await req.json()
 
   try {
-
     const threadRes = await fetch('https://api.openai.com/v1/threads', {
       method: 'POST',
       headers: {
@@ -15,7 +14,16 @@ export async function POST(req: NextRequest) {
       },
     })
     const thread = await threadRes.json()
-    if (!thread.id) throw new Error('Failed to create thread.')
+
+    if (!thread?.id) {
+      return NextResponse.json(
+        {
+          reply: '❌ Failed to create thread. Full response from OpenAI:',
+          raw: thread,
+        },
+        { status: 500 }
+      )
+    }
 
     await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
       method: 'POST',
@@ -46,7 +54,13 @@ export async function POST(req: NextRequest) {
       }),
     })
     const run = await runRes.json()
-    if (!run.id) throw new Error('Failed to create run.')
+
+    if (!run?.id) {
+      return NextResponse.json(
+        { reply: '❌ Failed to create run.', raw: run },
+        { status: 500 }
+      )
+    }
 
     let status = run.status
     while (status === 'queued' || status === 'in_progress') {
@@ -69,7 +83,10 @@ export async function POST(req: NextRequest) {
     const messagesData = await messagesRes.json()
 
     if (!messagesData?.data || !Array.isArray(messagesData.data)) {
-      throw new Error('Invalid response from OpenAI messages API.')
+      return NextResponse.json({
+        reply: '❌ No messages found from assistant.',
+        raw: messagesData,
+      }, { status: 500 })
     }
 
     const assistantReply = messagesData.data.find(
