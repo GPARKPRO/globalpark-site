@@ -2,69 +2,56 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { getGparkContract } from '@/lib/contract'
 
 interface WallEntry {
   address: string
+  id: number
+  message: string
 }
 
 export default function ParticipationWallPage() {
   const [entries, setEntries] = useState<WallEntry[]>([])
 
   useEffect(() => {
-    const fetchOwners = async () => {
-      const contract = await getGparkContract()
-      if (!contract) return
-
-      try {
-        const owners: WallEntry[] = []
-
-        // !!! (next time: NFT)
-        for (let i = 0; i < 12; i++) {
-          owners.push({
-            address: `0xUSERADDRESS${i.toString().padStart(3, '0')}`,
-          })
-        }
-
-        setEntries(owners)
-      } catch (err) {
-        console.error('Error loading data:', err)
-      }
-    }
-
-    fetchOwners()
+    // Temporary: 120 mock records to show scale
+    const data: WallEntry[] = Array.from({ length: 120 }).map((_, i) => ({
+      address: `0xUSERADDRESS${String(i).padStart(3, '0')}`,
+      id: i + 1,
+      message: 'Together we build the Global Park DAO.',
+    }))
+    setEntries(data)
   }, [])
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20 text-white">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">
-        Participation Wall
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 py-20">
+      <h1 className="text-4xl md:text-5xl font-bold text-center text-white mb-4">Participation Wall</h1>
       <p className="text-center text-gray-400 mb-12">
         A tribute to early supporters of the Global Park DAO. Each tile represents a wallet that holds a Governance NFT.
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {entries.map((entry, index) => (
+      <div className="mb-6 text-center text-sm text-gray-400">
+        🧱 {entries.length} / 1000 Governance Tiles Placed
+      </div>
+
+      <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-4 space-y-4">
+        {entries.map((entry) => (
           <div
-            key={index}
-            className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 text-xs text-center hover:bg-zinc-700 transition"
+            key={entry.id}
+            className="break-inside-avoid rounded-xl bg-zinc-900 border border-zinc-800 p-4 shadow-sm hover:scale-[1.02] transition-transform duration-200"
           >
-            <p className="break-all mb-2">{entry.address}</p>
-            <div className="w-16 h-16 mx-auto">
-              <Image
-                src="/qr-placeholder.png" // replace later with generated QR
-                alt="QR Code"
-                width={64}
-                height={64}
-              />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-bold text-white">#{entry.id}</span>
+              <Image src="/logo.png" alt="Logo" width={20} height={20} className="opacity-60" />
             </div>
+            <div className="text-xs text-green-400 truncate mb-2">{entry.address}</div>
+            <div className="text-xs text-gray-300 italic mb-2">“{entry.message}”</div>
+            <div className="text-center text-gray-500 text-xs">QR (soon)</div>
           </div>
         ))}
       </div>
 
-      <div className="mt-12 text-center">
-        <p className="text-xs text-gray-500">* Data is temporarily mocked and will be replaced with onchain NFT ownership.</p>
+      <div className="mt-10 text-center text-xs text-gray-500">
+        * Data is temporarily mocked and will be replaced with onchain NFT ownership.
       </div>
     </div>
   )
