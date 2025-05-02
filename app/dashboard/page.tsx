@@ -1,11 +1,12 @@
-// app/dashboard/page.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { getGparkContract } from '@/lib/contract'
 
 export default function DashboardPage() {
   const [address, setAddress] = useState<string | null>(null)
+  const [balance, setBalance] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -30,15 +31,38 @@ export default function DashboardPage() {
     checkConnection()
   }, [router])
 
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (!address) return
+      const contract = await getGparkContract()
+      if (!contract) return
+      try {
+        const raw = await contract.balanceOf(address)
+        const formatted = Number(raw) / 1e18
+        setBalance(formatted.toFixed(2))
+      } catch (err) {
+        console.error('Ошибка при получении баланса:', err)
+      }
+    }
+
+    fetchBalance()
+  }, [address])
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-20 text-white">
       <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
         Welcome to Your Dashboard
       </h1>
 
-      <div className="bg-zinc-900 rounded-lg p-4 md:p-6 text-sm md:text-base mb-10 text-center font-mono">
+      <div className="bg-zinc-900 rounded-lg p-4 md:p-6 text-sm md:text-base mb-6 text-center font-mono">
         Connected Wallet: {address}
       </div>
+
+      {balance !== null && (
+        <div className="bg-green-900 rounded-lg p-4 md:p-6 text-sm md:text-base mb-10 text-center font-mono">
+          GPARK Balance: <strong>{balance}</strong>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
