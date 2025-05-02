@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "pages/api/**/*",
+    "lib/server/**/*"
+  ],
+  "exclude": ["node_modules", "app", "components", ".next"]
+}
