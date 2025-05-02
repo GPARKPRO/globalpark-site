@@ -67,6 +67,8 @@ Your purpose is to inspire — and invite — people to join this journey as tok
     res.status(200).json({ reply })
   } catch (error) {
     console.error('GPT API error:', error)
+    console.log('GPT Request:', prompt)
+    console.log('OPENAI_API_KEY present?', !!process.env.OPENAI_API_KEY)
     res.status(500).json({ error: 'Error connecting to GPT API' })
   }
 }
