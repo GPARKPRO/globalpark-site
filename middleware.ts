@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
     return new NextResponse('Access Denied', { status: 403 })
   }
 
-  // Можно расширять правила здесь
+  // for udates
 
   return NextResponse.next()
 }
