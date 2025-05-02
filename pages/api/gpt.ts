@@ -62,6 +62,7 @@ Your purpose is to inspire — and invite — people to join this journey as tok
     })
 
     const json = await apiRes.json()
+    console.log('🧠 OpenAI raw response:', JSON.stringify(json))
     const reply = json.choices?.[0]?.message?.content ?? 'No response.'
 
     res.status(200).json({ reply })
