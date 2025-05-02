@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 declare global {
   interface Window {
@@ -11,6 +13,7 @@ declare global {
 export default function ConnectWallet() {
   const [connected, setConnected] = useState(false)
   const [address, setAddress] = useState<string | null>(null)
+  const router = useRouter()
 
   const connect = async () => {
     if (typeof window.ethereum !== 'undefined') {
@@ -18,6 +21,7 @@ export default function ConnectWallet() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         setAddress(accounts[0])
         setConnected(true)
+        router.push('/dashboard')
       } catch (err) {
         console.error('Connection error', err)
       }
@@ -49,7 +53,7 @@ export default function ConnectWallet() {
   }, [])
 
   return (
-    <div className="mt-6">
+    <div className="flex items-center gap-4 mt-2">
       {!connected ? (
         <button
           onClick={connect}
@@ -58,17 +62,23 @@ export default function ConnectWallet() {
           Connect Wallet
         </button>
       ) : (
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-mono">
+        <>
+          <span className="text-sm font-mono hidden sm:inline">
             {address?.slice(0, 6)}...{address?.slice(-4)}
           </span>
+          <Link
+            href="/dashboard"
+            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 text-sm transition"
+          >
+            Dashboard
+          </Link>
           <button
             onClick={disconnect}
             className="text-red-400 hover:text-red-300 text-sm"
           >
             Disconnect
           </button>
-        </div>
+        </>
       )}
     </div>
   )
