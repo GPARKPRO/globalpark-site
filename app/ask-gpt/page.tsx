@@ -10,44 +10,30 @@ export default function AskGPTPage() {
   const ask = async () => {
     if (!input.trim()) return
     setLoading(true)
-
     try {
       const res = await fetch('/api/gpt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: input })
+        body: JSON.stringify({ prompt: input }),
       })
 
       const data = await res.json()
-
-      if (data.error) {
-        setMessages(prev => [...prev, `🧑 ${input}`, `❗️ Error: ${data.error}`])
-      } else {
-        setMessages(prev => [...prev, `🧑 ${input}`, `🤖 ${data.reply}`])
-      }
+      setMessages((prev) => [...prev, `🧑 ${input}`, `🤖 ${data.reply}`])
     } catch (err) {
-      console.error('Request failed:', err)
-      setMessages(prev => [...prev, `🧑 ${input}`, `❗️ Network error or invalid response.`])
+      setMessages((prev) => [...prev, `⚠️ Failed to connect to GPT.`])
+    } finally {
+      setInput('')
+      setLoading(false)
     }
-
-    setInput('')
-    setLoading(false)
   }
 
   return (
     <div className="max-w-2xl mx-auto p-6 text-white">
-      <h1 className="text-2xl font-bold mb-4 text-center">Ask the Global Park Assistant</h1>
+      <h1 className="text-2xl font-bold mb-4">Ask the Global Park Assistant</h1>
 
       <div className="space-y-2 mb-6">
         {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`p-3 rounded whitespace-pre-wrap ${
-              msg.startsWith('🧑') ? 'bg-zinc-800' : msg.startsWith('🤖') ? 'bg-green-900' : 'bg-red-800'
-            }`}
-          >
-            {msg}
-          </div>
+          <div key={i} className="bg-zinc-800 p-3 rounded whitespace-pre-wrap">{msg}</div>
         ))}
       </div>
 
