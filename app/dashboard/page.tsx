@@ -1,8 +1,8 @@
+// app/dashboard/page.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 
 export default function DashboardPage() {
   const [address, setAddress] = useState<string | null>(null)
@@ -30,46 +30,53 @@ export default function DashboardPage() {
     checkConnection()
   }, [router])
 
-  const modules = [
-    { title: 'NFT Inventory', description: 'View and manage your Global Park NFTs.' },
-    { title: 'DAO Voting', description: 'Vote on key decisions and proposals.' },
-    { title: 'Proof of Presence', description: 'Register your physical presence in the park.' },
-    { title: 'Staking Program', description: 'Earn rewards by staking your tokens.' },
-  ]
-
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">Welcome to Your Dashboard</h1>
+    <div className="max-w-6xl mx-auto px-6 py-20 text-white">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+        Welcome to Your Dashboard
+      </h1>
 
-      <div className="bg-zinc-900 rounded-xl p-6 mb-12 text-sm text-gray-300">
-        <p className="mb-1">Connected Wallet:</p>
-        <p className="font-mono text-white">{address}</p>
+      <div className="bg-zinc-900 rounded-lg p-4 md:p-6 text-sm md:text-base mb-10 text-center font-mono">
+        Connected Wallet: {address}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {modules.map((mod, index) => (
+        {[
+          {
+            title: 'NFT Inventory',
+            description: 'View and manage your Global Park NFTs.',
+          },
+          {
+            title: 'DAO Voting',
+            description: 'Vote on key decisions and proposals.',
+          },
+          {
+            title: 'Proof of Presence',
+            description: 'Register your physical presence in the park.',
+          },
+          {
+            title: 'Staking Program',
+            description: 'Earn rewards by staking your tokens.',
+          },
+        ].map(({ title, description }) => (
           <div
-            key={index}
-            className="group bg-zinc-900 border border-zinc-800 rounded-xl p-6 transition hover:border-white hover:shadow-xl"
+            key={title}
+            className="bg-zinc-800 hover:bg-zinc-700 transition-all duration-200 rounded-lg p-6 shadow-sm border border-zinc-700"
           >
-            <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
-              {mod.title}
-            </h3>
-            <p className="text-gray-400 group-hover:text-gray-300">{mod.description}</p>
-            <span className="mt-3 inline-block text-xs text-yellow-400 font-medium">
-              Coming soon...
-            </span>
+            <h3 className="text-xl font-semibold mb-2">{title}</h3>
+            <p className="text-gray-400 text-sm">{description}</p>
+            <p className="mt-2 text-yellow-500 text-xs">Coming soon…</p>
           </div>
         ))}
       </div>
 
       <div className="mt-12 text-center">
-        <Link
-          href="/"
-          className="inline-block bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
+        <button
+          onClick={() => router.push('/')}
+          className="inline-block bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition"
         >
           ← Back to Home
-        </Link>
+        </button>
       </div>
     </div>
   )
