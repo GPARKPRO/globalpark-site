@@ -1,4 +1,4 @@
-import './globals.css'
+import '../styles/globals.css'
 import type { Metadata } from 'next'
 import Footer from '../components/Footer'
 import ConnectWallet from '../components/ConnectWallet'
