@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
     })
-
     const thread = await threadRes.json()
 
     await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
@@ -46,17 +45,17 @@ export async function POST(req: NextRequest) {
     })
 
     const run = await runRes.json()
-
     let status = run.status
+
     while (status === 'queued' || status === 'in_progress') {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      const checkRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
+      await new Promise((r) => setTimeout(r, 1000))
+      const poll = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
         headers: {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
       })
-      const check = await checkRes.json()
-      status = check.status
+      const pollData = await poll.json()
+      status = pollData.status
     }
 
     const messagesRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
@@ -66,11 +65,18 @@ export async function POST(req: NextRequest) {
     })
 
     const messages = await messagesRes.json()
-    const reply = messages.data?.[0]?.content?.[0]?.text?.value || 'No reply.'
+
+    if (!messages?.data || messages.data.length === 0) {
+      return NextResponse.json({ reply: '⚠️ Empty response from assistant.' })
+    }
+
+    const reply =
+      messages.data[0].content?.[0]?.text?.value ??
+      JSON.stringify(messages.data[0], null, 2) ??
+      '⚠️ Assistant returned an unexpected format.'
 
     return NextResponse.json({ reply })
-  } catch (err) {
-    console.error('❌ GPT Assistant error:', err)
-    return NextResponse.json({ reply: '❌ Error from Assistant.' }, { status: 500 })
+  } catch (err: any) {
+    return NextResponse.json({ reply: '❌ Assistant crashed: ' + err.message }, { status: 500 })
   }
 }
