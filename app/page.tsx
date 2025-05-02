@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import ConnectWallet from '../components/ConnectWallet'
 
 export default function Home() {
   return (
@@ -14,10 +13,6 @@ export default function Home() {
         We’re building a decentralized initiative where every token and action contributes
         to preserving digital and physical heritage.
       </p>
-
-      <div className="mt-6">
-        <ConnectWallet />
-      </div>
 
       <div className="mt-10">
         <Image src="/logo.png" alt="Logo" width={120} height={120} />
