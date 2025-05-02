@@ -1,4 +1,5 @@
 // next.config.js
+
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com;
@@ -41,8 +42,11 @@ const securityHeaders = [
   }
 ];
 
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true 
+  },
   async headers() {
     return [
       {
@@ -52,3 +56,5 @@ module.exports = {
     ];
   }
 };
+
+module.exports = nextConfig;
