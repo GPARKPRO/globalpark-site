@@ -45,16 +45,16 @@ export async function POST(req: NextRequest) {
     })
 
     const run = await runRes.json()
-    let status = run.status
 
+    let status = run.status
     while (status === 'queued' || status === 'in_progress') {
       await new Promise((r) => setTimeout(r, 1000))
-      const poll = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
+      const pollRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
         headers: {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
       })
-      const pollData = await poll.json()
+      const pollData = await pollRes.json()
       status = pollData.status
     }
 
@@ -64,16 +64,15 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const messages = await messagesRes.json()
+    const messagesData = await messagesRes.json()
 
-    if (!messages?.data || messages.data.length === 0) {
-      return NextResponse.json({ reply: '⚠️ Empty response from assistant.' })
-    }
+    const assistantReply = messagesData.data.find(
+      (msg: any) => msg.role === 'assistant'
+    )
 
     const reply =
-      messages.data[0].content?.[0]?.text?.value ??
-      JSON.stringify(messages.data[0], null, 2) ??
-      '⚠️ Assistant returned an unexpected format.'
+      assistantReply?.content?.[0]?.text?.value ??
+      '⚠️ Assistant returned no textual response.'
 
     return NextResponse.json({ reply })
   } catch (err: any) {
