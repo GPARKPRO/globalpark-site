@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
   const { prompt } = await req.json()
 
   try {
+
     const threadRes = await fetch('https://api.openai.com/v1/threads', {
       method: 'POST',
       headers: {
@@ -14,6 +15,7 @@ export async function POST(req: NextRequest) {
       },
     })
     const thread = await threadRes.json()
+    if (!thread.id) throw new Error('Failed to create thread.')
 
     await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
       method: 'POST',
@@ -43,18 +45,18 @@ export async function POST(req: NextRequest) {
         },
       }),
     })
-
     const run = await runRes.json()
+    if (!run.id) throw new Error('Failed to create run.')
 
     let status = run.status
     while (status === 'queued' || status === 'in_progress') {
       await new Promise((r) => setTimeout(r, 1000))
-      const pollRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
+      const poll = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
         headers: {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
       })
-      const pollData = await pollRes.json()
+      const pollData = await poll.json()
       status = pollData.status
     }
 
@@ -66,6 +68,10 @@ export async function POST(req: NextRequest) {
 
     const messagesData = await messagesRes.json()
 
+    if (!messagesData?.data || !Array.isArray(messagesData.data)) {
+      throw new Error('Invalid response from OpenAI messages API.')
+    }
+
     const assistantReply = messagesData.data.find(
       (msg: any) => msg.role === 'assistant'
     )
@@ -76,6 +82,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ reply })
   } catch (err: any) {
-    return NextResponse.json({ reply: '❌ Assistant crashed: ' + err.message }, { status: 500 })
+    return NextResponse.json(
+      { reply: '❌ Assistant crashed: ' + (err.message || 'Unknown error') },
+      { status: 500 }
+    )
   }
 }
