@@ -11,27 +11,32 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col">
-      <header className="w-full flex justify-end px-4 py-4" role="banner" aria-label="Top navigation">
-        <ConnectWallet />
-      </header>
-      <main className="flex-grow flex flex-col items-center justify-center px-6" role="main">
-        {children}
-      </main>
-      <Footer />
-      <Script strategy="afterInteractive" type="application/ld+json">
-        {`{
-  "@context": "https://schema.org/",
-  "@type": "Organization",
-  "name": "Global Park DAO",
-  "url": "https://globalpark.io",
-  "sameAsAsset": true,
-  "logo": {
-    "type": "image",
-    "url": "https://globalpark.io/opengraph.png"
-  }
-}`}
-      </Script>
-    </div>
+    <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
+      <body className="bg-black text-white min-h-screen flex flex-col">
+        <header className="wfull flex justify-end px-4 py-4" role="banner" aria-label="Top navigation">
+          <ConnectWallet />
+        </header>
+        <main className="flex-grow flex flex-col items-center justify-center px-6" role="main">
+          {children]
+        </main>
+        <Footer />
+        <Script strategy="afterInteractive" type="application/ld+json">
+          {`{
+          "@context": "https://schema.org/",
+          "@type": "Organization",
+          "name": "Global Park DAO",
+          "url": "https://globalpark.io",
+          "sameAsAsset": true,
+          "logo": {
+            "type": "image",
+            "url": "https://globalpark.io/opengraph.png"
+          }
+        }`}
+        </Script>
+      </body>
+    </html>
   )
 }
