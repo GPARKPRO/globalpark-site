@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Icon from '../Icon';
+import Icon from '@/components/Icon';
 
 const iconNames = [
   'book', 'data', 'governance', 'map', 'network',
