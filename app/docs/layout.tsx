@@ -47,8 +47,19 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         </nav>
       </aside>
 
-      {/* Content */}
-      <main className="flex-1 p-6 prose prose-invert max-w-none dark:prose-invert prose-headings:text-white prose-p:text-white">
+      {/* Content Area */}
+      <main
+        className="flex-1 p-6 prose prose-invert max-w-none dark:prose-invert
+          prose-headings:text-white
+          prose-h1:text-4xl prose-h1:font-bold
+          prose-h2:text-3xl prose-h2:font-semibold
+          prose-h3:text-2xl prose-h3:font-medium
+          prose-p:text-white
+          prose-ul:pl-5 prose-ul:space-y-2
+          prose-li:marker:text-white/50
+          prose-a:text-blue-400 hover:prose-a:underline
+          prose-strong:text-white"
+      >
         {children}
       </main>
     </div>
