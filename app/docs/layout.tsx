@@ -3,7 +3,7 @@ import Link from 'next/link';
 const links = [
   { href: '/docs/overview', label: 'Overview' },
   { href: '/docs/tokenomics', label: 'Tokenomics' },
-  // Добавь больше ссылок по мере создания .mdx файлов
+  // add more links here
 ];
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
