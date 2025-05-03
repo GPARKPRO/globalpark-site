@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { Metadata } from 'next'
-import Footer from '../components/Footer'
+Import Footer from '../components/Footer'
 Import ConnectWallet from '../components/ConnectWallet'
 import Script from 'next/script'
 
