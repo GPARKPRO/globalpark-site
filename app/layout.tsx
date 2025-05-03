@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
       </main>
       <Footer />
-      <Script strategy="body" type="application/ld+json">
+      <Script strategy="afterInteractive" type="application/ld+json">
         {`{
   "@context": "https://schema.org/",
   "@type": "Organization",
