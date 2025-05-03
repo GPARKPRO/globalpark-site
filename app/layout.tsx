@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/svg+xml" sizes="any" />
         <meta property="og:title" content="Global Park DAO" />
         <meta property="og:description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
         <meta property="og:url" content="https://globalpark.io" />
