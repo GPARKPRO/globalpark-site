@@ -11,7 +11,7 @@ export default function Home() {
       {/* Text Section */}
       <div className="md:w-1/2 space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-          GLOBAL PARK
+          Global Park DAO
         </h1>
         <p className="text-lg md:text-xl font-light">
           A Decentralized Initiative for Art, Technology & Collective Memory
@@ -53,7 +53,7 @@ export default function Home() {
         <div className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]">
           <Image
             src="/logo.png"
-            alt="Logo"
+            alt="Global Park Logo"
             layout="fill"
             objectFit="contain"
             className="animate-pulse drop-shadow-lg"
