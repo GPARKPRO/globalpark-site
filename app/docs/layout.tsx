@@ -1,4 +1,6 @@
+// app/docs/layout.tsx
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 const links = [
   { href: '/docs/overview', label: 'Overview' },
@@ -7,18 +9,18 @@ const links = [
   { href: '/docs/vision', label: 'Vision' },
 ];
 
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
+export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
-      <aside className="md:w-64 w-full md:border-r border-white/10 p-6 space-y-4">
-        <nav className="flex flex-col gap-2">
-          {links.map(link => (
+    <div className="flex min-h-screen bg-black text-white">
+      <aside className="hidden md:block md:w-64 border-r border-white/10 p-6">
+        <nav className="flex flex-col gap-3">
+          {links.map(({ href, label }) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={href}
+              href={href}
               className="text-white/80 hover:text-white transition-colors"
             >
-              {link.label}
+              {label}
             </Link>
           ))}
         </nav>
