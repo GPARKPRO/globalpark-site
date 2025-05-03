@@ -6,11 +6,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Avenir Next', 'Avenir', 'sans-serif'],
-      },
-    }
+    extend: {},
   },
   plugins: [],
 }
