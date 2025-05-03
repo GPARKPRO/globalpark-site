@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <>
       <Head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
         <meta property="og:title" content="Global Park DAO" />
         <meta property="og:description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
         <meta property="og:url" content="https://globalpark.io" />
@@ -38,7 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   "@type": "Organization",
   "name": "Global Park DAO",
   "url": "https://globalpark.io",
-  "sameAsAsset": true,
+  "email": "theglobalpark@gmail.com",
+  "sameAs": [
+    "https://t.me/globalpark_io",
+    "https://twitter.com/GlobalPark_io"
+  ],
   "logo": {
     "type": "image",
     "url": "https://globalpark.io/opengraph.png"
