@@ -11,8 +11,8 @@ const links = [
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-black text-white">
-      <aside className="hidden md:block md:w-64 border-r border-white/10 p-6">
+    <div className="flex w-full max-w-7xl mx-auto">
+      <aside className="hidden md:block w-64 p-6 border-r border-white/10">
         <nav className="flex flex-col gap-3">
           {links.map(({ href, label }) => (
             <Link
@@ -25,9 +25,9 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </aside>
-      <main className="flex-1 p-6">
+      <div className="flex-1 w-full p-6">
         {children}
-      </main>
+      </div>
     </div>
   );
 }
