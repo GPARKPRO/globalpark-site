@@ -14,7 +14,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: sans; // Avenir Next now
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
@@ -26,13 +26,15 @@ a {
   text-decoration: none;
 }
 
-* {
+/* {
   box-sizing: border-box;
 }
 
 /* Responsive typography */
 h1 {
-  @apply text-3xl md:text-5xl font-bold;
+  @apply text-3xl md:text-5xl leading-relaxed;
+  font-family: sans;
+  font-weight: 700;
 }
 p {
   @apply text-base md:text-lg leading-relaxed;
