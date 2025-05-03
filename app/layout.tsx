@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description: 'A Decentralized Initiative for Art, Technology & Collective Memory'
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.png" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
         <meta property="og:title" content="Global Park DAO" />
         <meta property="og:description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
         <meta property="og:url" content="https://globalpark.io" />
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
         <meta name="twitter:image" content="https://globalpark.io/opengraph.png" />
       </head>
-      <body className="bg-black text-white min-hscreen flex flex-col">
+      <body className="bg-black text-white min-h-screen flex flex-col">
         <header className="wfull flex justify-end px-4 py-4" role="banner" aria-label="Top navigation">
           <ConnectWallet />
         </header>
@@ -36,14 +36,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {JSON.stringify({
             "@context": "https://schema.org/",
             "@type": "Organization",
-            "name": "Global Park DAO",
-            "url": "https://globalpark.io",
-            "email": "theglobalpark@gmail.com",
-            "sameAs": [
+            name: "Global Park DAO",
+            url: "https://globalpark.io",
+            email: "theglobalpark@gmail.com",
+            sameAs: [
               "https://t.me/globalpark_io",
               "https://twitter.com/GlobalPark_io"
             ],
-            "logo": {
+            logo: {
               "type": "image",
               "url": "https://globalpark.io/opengraph.png"
             }
