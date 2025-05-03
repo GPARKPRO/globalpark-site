@@ -1,14 +1,14 @@
-import { getMdSlug, getAllMarkdownPages } from '@/lib/mdx';
+import { getMdSlug, getAllMarkdownPages } from '../../../lib/mdx';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import MdxContent from '@/app/components/mdx/MdxContent';
+import MdxContent from '../../components/mdx/MdxContent';
 
 export async function generateStaticParams() {
   const pages = await getAllMarkdownPages();
   return pages.map(({ slug }) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata( { params }: { params: { slug: string } }): Promise<Metadata> {
   return {
     title: `${params.slug} | GPARK Docs`
   };
@@ -22,7 +22,7 @@ export default async function DocsPage({ params }: { params: { slug: string } })
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-16">
+    <main className=\"max-w-5xl mx-auto px-4 py-16\">
       <MdxContent>{content}</MdxContent>
     </main>
   );
