@@ -2,33 +2,35 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Icon from '@/components/Icon';
+import Image from 'next/image';
 
 const iconNames = [
-  'book', 'data', 'governance', 'map', 'network',
-  'shield', 'token', 'vision', 'wallet', 'globe'
+  'book', 'data', 'governance', 'map', 'network', 'node', 'orbit', 'structure', 'token'
 ];
 
-function getRandomIcons(count: number) {
-  const shuffled = iconNames.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+function getRandomIconName() {
+  const index = Math.floor(Math.random() * iconNames.length);
+  return iconNames[index];
 }
 
 export default function DocsIconBlock() {
-  const [icons, setIcons] = useState<string[]>([]);
+  const [icon, setIcon] = useState<string | null>(null);
 
   useEffect(() => {
-    setIcons(getRandomIcons(3));
+    setIcon(getRandomIconName());
   }, []);
 
+  if (!icon) return null;
+
   return (
-    <div className="flex gap-6 justify-center mt-10">
-      {icons.map(name => (
-        <div key={name} className="flex flex-col items-center">
-          <Icon name={name} className="w-12 h-12 text-white/80" />
-          <span className="text-sm mt-2 text-white/70">{name}</span>
-        </div>
-      ))}
+    <div className="w-8 h-8 mb-2">
+      <Image
+        src={`/icons/${icon}.svg`}
+        alt={`${icon} icon`}
+        width={32}
+        height={32}
+        className="opacity-80"
+      />
     </div>
   );
 }
