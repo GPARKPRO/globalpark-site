@@ -1,11 +1,9 @@
-import {React, ReactElement} from 'react';
+import { ReactElement, React } from 'react';
 
-export default function MdxContent({
-  children: ReactElement || void
-}) {
+export default function MdxContent({type: { children: ReactElement }) {
   return (
-    <div className=\"prose space-y4 prose-lg prose-custom max-w-5xl\">
-      {children }
+    <div className=\"prose space-y4 prose-lg custom max-w-5xl\">
+      {type.children]
     </div>
   );
 }
