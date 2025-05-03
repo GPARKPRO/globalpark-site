@@ -1,8 +1,6 @@
 'use client'
 
-import Link from 'next/link';
-import Icon from '@/components/Icon';
-import { getRandomIcon } from '@/lib/getRandomIcon';
+import Link from 'next/link'
 
 export default function DaoPage() {
   const daoDocs = [
@@ -26,7 +24,7 @@ export default function DaoPage() {
       description: 'Full technical and strategic description of the Global Park project.',
       url: 'https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/White_Paper.pdf',
     },
-  ];
+  ]
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20 text-white">
@@ -36,8 +34,8 @@ export default function DaoPage() {
 
       <p className="text-center text-gray-400 max-w-3xl mx-auto mb-10 text-md md:text-lg leading-relaxed font-mono">
         We are building an open, transparent, and community-driven ecosystem. While the DAO is currently
-        coordinated by a small group of passionate contributors, our goal is to fully hand over governance to the
-        community in Phase 2 via Snapshot voting. <br /><br />
+        coordinated by a small group of passionate contributors, our goal is to fully hand over
+        governance to the community in Phase 2 via Snapshot voting. <br /><br />
         If you believe in cultural legacy, Web3 values, and collective intelligence — <span className="text-yellow-400 font-semibold">this is your place.</span>
         Everyone is welcome to join, contribute, and help shape the future of Global Park.
       </p>
@@ -51,15 +49,12 @@ export default function DaoPage() {
             rel="noopener noreferrer"
             className="group bg-zinc-900 border border-zinc-800 rounded-xl p-6 transition hover:border-pink-500 hover:shadow-md hover:shadow-pink-500/10"
           >
-            <div className="flex items-center gap-3 mb-3">
-              <Icon name={getRandomIcon()} className="w-5 h-5 shrink-0" />
-              <h3 className="text-xl font-semibold group-hover:text-white">
-                {doc.title}
-              </h3>
-            </div>
+            <h3 className="text-xl font-semibold mb-2 group-hover:text-white">
+              {doc.title}
+            </h3>
             <p className="text-gray-400 group-hover:text-gray-300">{doc.description}</p>
             <span className="mt-3 inline-block text-xs text-blue-400 font-medium group-hover:underline">
-              View PDF ↗
+              View PDF →
             </span>
           </a>
         ))}
@@ -70,9 +65,9 @@ export default function DaoPage() {
           href="/"
           className="inline-block bg-white text-black px-6 py-2 rounded hover:bg-gray-200 transition font-medium"
         >
-          ↩ Back to Home
+          ← Back to Home
         </Link>
       </div>
     </div>
-  );
+  )
 }
