@@ -11,29 +11,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <htmlLang="en">
-      <body className="bg-black text-white min-hscreen flex flex-col">
-        <div className="wfull flex justify-end px-4 py-4">
-          <ConnectWallet />
-        </div>
-        <main className="flex-grow flex flex-col items-center justify-center px-6">
-          {children}
-        </main>
-        <Footer />
-        <Script strategy="body" type="application/ld+json">
-          {`json}
-            {"@context": "https://schema.org/",
-            "@type": "Organization",
-            "name": "Global Park DAO",
-            "url": "https://globalpark.io",
-            "sameAsAsset": true,
-            "logo": {
-              "type": "image",
-              "url": "https://globalpark.io/opengraph.png"
-            }
-          }
-        </Script>
-      </body>
-    </htmlLang>
+    <body className="bg-black text-white min-hscreen flex flex-col">
+      <div className="wfull flex justify-end px-4 py-4">
+        <ConnectWallet />
+      </div>
+      <main className="flex-grow flex flex-col items-center justify-center px-6">
+        {children}
+      </main>
+      <Footer />
+      <Script strategy="body" type="application/ld+json">
+        {"@context": "https://schema.org/",
+"@type": "Organization","name": "Global Park DAO","url": "https://globalpark.io","sameAsAsset": true,"logo": {"type": "image","url": "https://globalpark.io/opengraph.png"}}
+</Script>
+    </body>
   )
 }
