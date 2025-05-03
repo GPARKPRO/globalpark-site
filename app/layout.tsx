@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { Metadata } from 'next'
-import Footer from '../components/Footer'
-import ConnectWallet from '../components/ConnectWallet'
+Import Footer from '../components/Footer'
+Import ConnectWallet from '../components/ConnectWallet'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <body className="bg-black text-white min-hscreen flex flex-col">
+    <div className="bg-black text-white min-hscreen flex flex-col">
       <div className="wfull flex justify-end px-4 py-4">
         <ConnectWallet />
       </div>
@@ -20,9 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </main>
       <Footer />
       <Script strategy="body" type="application/ld+json">
-        {"@context": "https://schema.org/",
+        {`"@context": "https://schema.org/",
 "@type": "Organization","name": "Global Park DAO","url": "https://globalpark.io","sameAsAsset": true,"logo": {"type": "image","url": "https://globalpark.io/opengraph.png"}}
 </Script>
-    </body>
+    </div>
   )
 }
