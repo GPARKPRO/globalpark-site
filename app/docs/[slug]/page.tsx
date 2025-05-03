@@ -5,19 +5,19 @@ import MdxContent from '@/app/components/mdx/MdxContent';
 
 export async function generateStaticParams() {
   const pages = await getAllMarkdownPages();
-  return pages.map(({ slug }) => ({ slug });
+  return pages.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   return {
-  title: `${params.slug} | GPARK Docs`
-};
+    title: `${params.slug} | GPARK Docs`
+  };
 }
 
 export default async function DocsPage({ params }: { params: { slug: string } }) {
   const content = await getMdSlug(params.slug);
 
- if (!content) {
+  if (!content) {
     return notFound();
   }
 
