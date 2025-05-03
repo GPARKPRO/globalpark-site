@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import { getMdSlug, getAllMarkdownPages } from '../../../lib/mdx';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
