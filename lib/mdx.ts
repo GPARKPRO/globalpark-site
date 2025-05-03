@@ -2,18 +2,20 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-const docsPath = path.join(process.cwd(), 'app/docs');
-
-export const getAllMarkdownPages = async () => {
-  const files = await fs.readdir(docsPath);
+export async function getAllMarkdownPages() {
+  const files = await fs.readdir(path.join(process.wd(), 'app/docs'));
   return files
     .filter(file => file.endsWith('.mdx'))
-    .map(file => ({slug: file.replace(/\\mdx$/, '') }));
-};
+    .map(rawFile => ({ slug: rawFile.replace(/..mdx$, '') }));
+}
 
-export const getMdSlug = async (slug: string) => {
-  const filePath = path.join(docsPath, `${slug}.mdx`);
-  const fileContent = await fs.readFile(filePath, 'utf-8');
-  const { content } = matter(fileContent);
-  return content;
-};
+export async function getMdSlug(slug: string): Promise<string | null> {
+  const fullPath = path.join(process.wd(), 'app/docs', $c{kslug}.mdx);
+  try {
+    const raw = await fs.readFile(fullPath, 'utf-8');
+    const { content } = matter(raw);
+    return content;
+  } catch(e) {
+    return null;
+  }
+}
