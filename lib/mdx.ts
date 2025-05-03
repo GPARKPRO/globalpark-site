@@ -1,6 +1,7 @@
-import { promises as fs } from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
-import { compileMDX } from 'next-mdx-remote/mdx';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 
 export const getAllMarkdownPages = async () => {
@@ -17,16 +18,15 @@ export const getMdSlug = async (slug: string) => {
 
   try {
     const source = await fs.readFile(fullPath, 'utf8');
-    const { content } = await compileMDX({
-      source,
-      options: {
-        mdxOptions: {
-          remarkPlugins: [remarkGfm],
-        },
+    const { content } = matter(source);
+
+    const mdxSource = await serialize(content, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
       },
     });
 
-    return content;
+    return mdxSource;
   } catch {
     return null;
   }
