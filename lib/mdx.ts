@@ -1,8 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { remark } from 'remark';
+import { compileMDX } from 'next-mdx-remote/mdx';
 import remarkGfm from 'remark-gfm';
-import { compile } from 'next-mdx-remote/rsc';
 
 export const getAllMarkdownPages = async () => {
   const files = await fs.readdir(path.join(process.cwd(), 'app/docs'));
@@ -18,7 +17,7 @@ export const getMdSlug = async (slug: string) => {
 
   try {
     const source = await fs.readFile(fullPath, 'utf8');
-    const { content } = await compile({
+    const { content } = await compileMDX({
       source,
       options: {
         mdxOptions: {
