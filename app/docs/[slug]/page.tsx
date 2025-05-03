@@ -2,7 +2,6 @@ import { getAllMarkdownPages, getMdSlug } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import MdxContent from '@/app/components/mdx/MdxContent';
-import DocsLayout from '../layout';
 
 export const dynamicParams = false;
 
@@ -21,9 +20,5 @@ export default async function DocsPage({ params }: { params: { slug: string } })
   const content = await getMdSlug(params.slug);
   if (!content) return notFound();
 
-  return (
-    <DocsLayout>
-      <MdxContent>{content}</MdxContent>
-    </DocsLayout>
-  );
+  return <MdxContent>{content}</MdxContent>;
 }
