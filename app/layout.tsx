@@ -11,20 +11,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-black text-white min-h-screen flex flex-col">
-        {/* Header */}
-        <div className="w-full flex justify-end px-4 py-4">
+    <htmlLang="en">
+      <body className="bg-black text-white min-hscreen flex flex-col">
+        <div className="wfull flex justify-end px-4 py-4">
           <ConnectWallet />
         </div>
-
-        {/* Main Content */}
         <main className="flex-grow flex flex-col items-center justify-center px-6">
-          {children]
+          {children}
         </main>
-
         <Footer />
-        <Script type="json-ld" strategy="body">
+        <Script strategy="body" type="application/ld+json">
           {`json}
             {"@context": "https://schema.org/",
             "@type": "Organization",
@@ -38,6 +34,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }
         </Script>
       </body>
-    </html>
+    </htmlLang>
   )
 }
