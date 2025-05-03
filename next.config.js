@@ -54,11 +54,9 @@ const nextConfig = {
         hostname: 'raw.githubusercontent.com'
       }
     ],
-    // Добавлено:
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    formats: ['image/avif', 'image/webp'],
-    fallback: true
+    formats: ['image/avif', 'image/webp']
   },
   async headers() {
     return [
