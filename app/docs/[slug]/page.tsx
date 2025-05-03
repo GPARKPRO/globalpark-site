@@ -22,10 +22,8 @@ export default async function DocsPage({ params }: { params: { slug: string } })
   }
 
   return (
-    <>
-      <main className=\"max-w-5xl mx-auto px-4 py-16\">
-        <MdxContent>{content}</MdxContent>
-      </main>
-    </>
+    <main className=\"max-w-5xl mx-auto px-4 py-16\">
+      <MdxContent>{content}</MdxContent>
+    </main>
   );
 }
