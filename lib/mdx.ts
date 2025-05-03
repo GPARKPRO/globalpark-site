@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import { compile } from 'xdm';
 import remarkGfm from 'remark-gfm';
 
 export const getAllMarkdownPages = async () => {
