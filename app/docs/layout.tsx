@@ -3,16 +3,21 @@ import Link from 'next/link';
 const links = [
   { href: '/docs/overview', label: 'Overview' },
   { href: '/docs/tokenomics', label: 'Tokenomics' },
-  // add more links here
+  { href: '/docs/governance', label: 'Governance' },
+  { href: '/docs/vision', label: 'Vision' },
 ];
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-64 p-6 border-r">
-        <nav className="space-y-2">
+    <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
+      <aside className="md:w-64 w-full md:border-r border-white/10 p-6 space-y-4">
+        <nav className="flex flex-col gap-2">
           {links.map(link => (
-            <Link key={link.href} href={link.href} className="block text-gray-800 hover:underline">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-white/80 hover:text-white transition-colors"
+            >
               {link.label}
             </Link>
           ))}
