@@ -54,10 +54,13 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           prose-h2:text-3xl prose-h2:font-semibold
           prose-h3:text-2xl prose-h3:font-medium
           prose-p:text-white
+          prose-li:text-white
           prose-ul:pl-5 prose-ul:space-y-2
-          prose-li:marker:text-white/50
-          prose-a:text-blue-400 hover:prose-a:underline
-          prose-strong:text-white"
+          prose-li:marker:text-white
+          prose-a:text-blue-300 hover:text-blue-200 hover:underline
+          prose-strong:text-white
+          prose-code:text-white
+          prose-blockquote:text-white/80"
       >
         {children}
       </main>
