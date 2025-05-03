@@ -16,7 +16,8 @@
     "next-mdx-remote": "3.0.1",
     "remark-gfm": "^3.0.1",
     "remark": "^14.0.2",
-    "recharts": "^2.7.2"
+    "recharts": "^2.7.2",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.2",
