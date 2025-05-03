@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { Metadata } from 'next'
 import Footer from '../components/Footer'
 import ConnectWallet from '../components/ConnectWallet'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Global Park',
@@ -11,34 +12,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <title>KGlobal Park DAO</title>
-        <meta name="description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://globalpark.io/" />
-        <meta property="og:description" content="A cultural, web3-defined park" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Global Park DAO" />
-        <meta property="og:locale" content="en" />
-        <meta property="twitter:card" content="summary" />
-        <meta property="twitter:mage" content="https://globalpark.io/opengraph.png" />
-        <script type="json-ld">
-          {"@context": "https://schema.org/",
-          "@type": "Organization",
-          "name": "Global Park DAO",
-          "url": "https://globalpark.io",
-          "sameAsAsset": true,
-          "logo": {
-            "type": "image",
-            "url": "https://globalpark.io/opengraph.png"
-          }
-        }
-        </script>
-      </head>
-      <body className="bg-black text-white min-hscreen flex flex-col">
+      <body className="bg-black text-white min-h-screen flex flex-col">
         {/* Header */}
-        <div className="w
-          flex justify-end px-4 py-4">
+        <div className="w-full flex justify-end px-4 py-4">
           <ConnectWallet />
         </div>
 
@@ -48,6 +24,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <Footer />
+        <Script type="json-ld" strategy="body">
+          {`json}
+            {"@context": "https://schema.org/",
+            "@type": "Organization",
+            "name": "Global Park DAO",
+            "url": "https://globalpark.io",
+            "sameAsAsset": true,
+            "logo": {
+              "type": "image",
+              "url": "https://globalpark.io/opengraph.png"
+            }
+          }
+        </Script>
       </body>
     </html>
   )
