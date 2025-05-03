@@ -37,7 +37,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             <Link
               key={href}
               href={href}
-              className="text-white/80 hover:text-white transition-colors font-medium"
+              className="text-white/80 hover:text-white transition-colors font-medium no-underline hover:no-underline"
               onClick={() => setOpen(false)}
             >
               {label}
@@ -57,7 +57,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           prose-li:text-white
           prose-ul:pl-5 prose-ul:space-y-2
           prose-li:marker:text-white
-          prose-a:text-blue-300 hover:text-blue-200 hover:underline
+          prose-a:text-blue-300 no-underline hover:no-underline
           prose-strong:text-white
           prose-code:text-white
           prose-blockquote:text-white/80"
