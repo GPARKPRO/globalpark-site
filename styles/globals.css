@@ -14,7 +14,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: sans;
+  font-family: 'Inter', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
@@ -32,9 +32,7 @@ a {
 
 /* Responsive typography */
 h1 {
-  @apply text-3xl md:text-5xl leading-relaxed;
-  font-family: sans;
-  font-weight: 700;
+  @apply text-3xl md:text-5xl font-bold;
 }
 p {
   @apply text-base md:text-lg leading-relaxed;
