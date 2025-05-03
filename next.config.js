@@ -45,7 +45,20 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    appDir: true 
+    appDir: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com'
+      }
+    ],
+    // Добавлено:
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    formats: ['image/avif', 'image/webp'],
+    fallback: true
   },
   async headers() {
     return [
