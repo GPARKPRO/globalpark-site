@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://globalpark.io/</loc>
+    <loc>https://globalpark.io</loc>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/ask-gpt</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/dao</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/dashboard</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/docs</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/participation-wall</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/roadmap</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://globalpark.io/tokenomics</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>
