@@ -13,6 +13,7 @@ export default function AskGPTPage() {
     if (!input.trim()) return
     setLoading(true)
     setMessages((prev) => [...prev, { role: 'user', content: input }])
+
     try {
       const res = await fetch('/api/gpt', {
         method: 'POST',
@@ -22,7 +23,7 @@ export default function AskGPTPage() {
       const data = await res.json()
       setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }])
     } catch (err) {
-      setMessages((prev) => [...prev, { role: 'assistant', content: '❌ Failed to connect to GPT.' }])
+      setMessages((prev) => [...prev, { role: 'assistant', content: '⚠️ Failed to connect to GPT.' }])
     } finally {
       setInput('')
       setLoading(false)
@@ -30,72 +31,86 @@ export default function AskGPTPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 font-mono">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-white">
-        Ask the Global Park Assistant
-      </h1>
-      <p className="text-center text-gray-400 mb-10">
-        Your personal guide to all documents of the Global Park DAO — White Paper, Constitution, Tokenomics, and more.
-        Ask questions in any language. The assistant gives structured and trusted answers based on official sources.
-      </p>
+    <>
+      <div className="max-w-4xl mx-auto px-6 py-20 font-mono">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-white">
+          Ask the Global Park Assistant
+        </h1>
+        <p className="text-center text-gray-400 mb-10">
+          Your personal guide to all documents of the Global Park DAO — White Paper, Constitution, Tokenomics, and more.
+          Ask questions in any language. The assistant gives structured and trusted answers based on official sources.
+        </p>
 
-      <div className="space-y-4 mb-10">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`rounded-xl p-5 shadow-md text-sm whitespace-pre-wrap border transition-all duration-300 ${
-              msg.role === 'user'
-                ? 'bg-zinc-900 text-white border-zinc-700'
-                : 'bg-white text-black border-purple-300'
-            }`}
-          >
-            <ReactMarkdown
-              components={{
-                a: ({ node, ...props }) => (
-                  <a {...props} className="text-blue-600 underline hover:text-blue-800" target="_blank" />
-                ),
-                li: ({ node, ...props }) => (
-                  <li className="ml-4 list-disc">{props.children}</li>
-                )
-              }}
+        <div className="space-y-4 mb-10">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`rounded-xl p-5 shadow-md text-sm whitespace-pre-wrap border transition-all duration-300 ${
+                msg.role === 'user'
+                  ? 'bg-zinc-900 text-white border-zinc-700'
+                  : 'bg-white text-black border-purple-300'
+              }`}
             >
-              {msg.content}
-            </ReactMarkdown>
-          </div>
-        ))}
+              <ReactMarkdown
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a {...props} className="text-blue-600 underline hover:text-blue-800" target="_blank" />
+                  ),
+                  li: ({ node, ...props }) => (
+                    <li className="ml-4 list-disc">{props.children}</li>
+                  ),
+                }}
+              >
+                {msg.content}
+              </ReactMarkdown>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col md:flex-row md:space-x-2 space-y-3 md:space-y-0 items-center justify-center">
+          <input
+            className="flex-1 p-3 text-black rounded w-full md:w-auto"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your question here..."
+          />
+          <button
+            className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
+            onClick={ask}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <Image src="/logo.png" alt="Thinking..." width={20} height={20} className="mr-2 animate-spin" />
+                Thinking...
+              </>
+            ) : (
+              'Ask'
+            )}
+          </button>
+        </div>
+
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => window.location.href = '/'}
+            className="inline-block bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition"
+          >
+            🏠 Back to Home
+          </button>
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row md:space-x-2 space-y-3 md:space-y-0 items-center justify-center">
-        <input
-          className="flex-1 p-3 text-black rounded w-full md:w-auto"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your question here..."
-        />
-        <button
-          className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
-          onClick={ask}
-          disabled={loading}
+      {/* 🎥 Background Video */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          playsInline
+          className="w-full h-full object-cover brightness-[0.15]"
         >
-          {loading ? (
-            <>
-              <Image src="/logo.png" alt="Thinking..." width={20} height={20} className="mr-2 animate-spin" />
-              Thinking...
-            </>
-          ) : (
-            'Ask'
-          )}
-        </button>
+          <source src="/media/intro-loop.mp4" type="video/mp4" />
+        </video>
       </div>
-
-      <div className="mt-16 text-center">
-        <button
-          onClick={() => window.location.href = '/'}
-          className="inline-block bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition"
-        >
-          ← Back to Home
-        </button>
-      </div>
-    </div>
+    </>
   )
 }
