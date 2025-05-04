@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'GPARK Token | GlobalPark',
@@ -113,6 +114,20 @@ export default function TokenPage() {
         All modules follow open standards (IERC20, ITokenomics, etc.). Transparent, scalable, auditable.
         Tech specs will be published on GitHub — contributors welcome.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/governance"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: DAO Governance
+  </Link>
+  <Link
+    href="/docs/white-paper/treasury"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Treasury →
+  </Link>
+</div>
     </main>
   );
 }
