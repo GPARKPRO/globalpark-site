@@ -1,49 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { ethers } from 'ethers'
-
 export default function DaoMintPage() {
-  const [minting, setMinting] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
-  const handleMint = async () => {
-    setError('')
-    setSuccess('')
-    setMinting(true)
-
-    try {
-      if (!window.ethereum) throw new Error('MetaMask not found')
-      await window.ethereum.request({ method: 'eth_requestAccounts' })
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer = provider.getSigner()
-      const contract = new ethers.Contract(
-        '0xYourNFTContractAddress',
-        [
-          {
-            inputs: [],
-            name: 'mint',
-            outputs: [],
-            stateMutability: 'payable',
-            type: 'function',
-          },
-        ],
-        signer
-      )
-      const tx = await contract.mint({
-        value: ethers.utils.parseEther('0.777'), // динамически можно подставлять цену по эпохе
-      })
-      await tx.wait()
-      setSuccess('NFT успешно отчеканен!')
-    } catch (err) {
-      console.error(err)
-      setError('Не удалось произвести чеканку. Проверьте кошелек.')
-    } finally {
-      setMinting(false)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-black text-white px-6 py-20 relative">
       <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-cover bg-center"></div>
@@ -56,15 +13,11 @@ export default function DaoMintPage() {
           Mint your <span className="text-yellow-400 font-semibold">Governance NFT</span> and become 1 of 1000 founding members. A new pricing epoch begins every 100 mints.
         </p>
         <button
-          onClick={handleMint}
-          disabled={minting}
-          className="bg-yellow-400 text-black px-8 py-3 rounded-xl text-lg font-semibold hover:bg-yellow-300 transition"
+          disabled
+          className="bg-yellow-400/30 text-black/50 px-8 py-3 rounded-xl text-lg font-semibold cursor-not-allowed"
         >
-          {minting ? 'Minting...' : 'Mint for 0.777 ETH'}
+          Mint coming soon
         </button>
-
-        {success && <p className="mt-6 text-green-400 font-medium">{success}</p>}
-        {error && <p className="mt-6 text-red-500 font-medium">{error}</p>}
 
         <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-6">
           {[...Array(10)].map((_, i) => (
