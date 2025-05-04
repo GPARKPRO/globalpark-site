@@ -1,5 +1,3 @@
-// next.config.js
-
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
@@ -27,7 +25,7 @@ const securityHeaders = [
   },
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation()'
+    value: 'camera=(), microphone=(), geolocation=()'
   }
 ];
 
@@ -38,18 +36,20 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    remotePatterns: [{
-      protocol: 'https',
-      hostname: 'raw.githubusercontent.com'
-    }],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com'
+      }
+    ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "self",
-    formats: ['image/avif', image/webp']
+    formats: ['image/avif', 'image/webp']
   },
   async headers() {
     return [
       {
-        source: '/(.+)',
+        source: '/(.*)',
         headers: securityHeaders
       }
     ];
