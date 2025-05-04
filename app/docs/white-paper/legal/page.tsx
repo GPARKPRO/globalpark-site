@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Legal & Compliance | GlobalPark',
@@ -66,6 +67,14 @@ export default function LegalPage() {
         This document is informational. It is not legal advice or financial guidance. Readers should conduct independent research
         and consult local legal frameworks before engaging with any aspect of the DAO.
       </p>
+      <div className="mt-16 flex justify-start">
+  <Link
+    href="/docs/white-paper/roadmap"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Roadmap
+  </Link>
+</div>
     </main>
   );
 }
