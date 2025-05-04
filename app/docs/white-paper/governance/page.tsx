@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'DAO Governance Architecture | GlobalPark',
@@ -86,6 +87,20 @@ export default function GovernancePage() {
           https://github.com/GPARKPRO/GlobalPark-DAO
         </a>
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/use-cases"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Use Cases & Ecosystem
+  </Link>
+  <Link
+    href="/docs/white-paper/token"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: GPARK Token →
+  </Link>
+</div>
     </main>
   );
 }
