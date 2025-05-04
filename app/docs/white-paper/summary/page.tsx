@@ -41,6 +41,14 @@ export default function ExecutiveSummaryPage() {
         limitation — it is an invitation to participate <span className="text-pink-500">early, intentionally, and meaningfully</span> 
         in a cultural landmark of the decentralized era.
       </p>
+<div className="mt-16 flex justify-end">
+  <Link
+    href="/docs/white-paper/vision"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Vision & Philosophy →
+  </Link>
+</div>
     </main>
   );
 }
