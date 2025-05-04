@@ -21,8 +21,8 @@ export default function DaoMintPage() {
   const [icons, setIcons] = useState<string[]>([]);
 
   useEffect(() => {
-    const generatedIcons = epochs.map(() => getRandomIcon());
-    setIcons(generatedIcons);
+    const generated = epochs.map(() => getRandomIcon());
+    setIcons(generated);
   }, []);
 
   return (
@@ -41,7 +41,7 @@ export default function DaoMintPage() {
           Each NFT represents one of the 1000 founding seats in our DAO. The earlier you join — the lower the price, and the closer you are to Genesis.
         </p>
         <p className="text-md text-gray-500 mb-10">
-          Epochs increase the mint price by design. This curve rewards early contributors while preserving fairness. All holders will be onboarded into the DAO and included in future snapshots.
+          Epochs increase the mint price by design. This curve rewards early contributors while preserving fairness.
         </p>
 
         <button
@@ -51,18 +51,20 @@ export default function DaoMintPage() {
           Mint coming soon
         </button>
 
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {epochs.map((epoch, i) => (
             <div
               key={epoch.id}
-              className="p-4 border border-zinc-700 rounded-xl bg-black/40 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-500/10 transition text-left"
+              className="bg-zinc-900/70 border border-zinc-700 rounded-2xl p-6 text-center shadow-inner shadow-black/20 hover:border-yellow-400 hover:shadow-yellow-500/10 transition-all duration-300"
             >
               {icons[i] && (
-                <Icon name={icons[i]} size={32} className="mb-2" />
+                <div className="flex justify-center mb-4">
+                  <Icon name={icons[i]} size={64} className="opacity-90" />
+                </div>
               )}
-              <p className="text-lg font-semibold text-white mb-1">Epoch {epoch.id}</p>
+              <h3 className="text-2xl font-bold text-white mb-1">Epoch {epoch.id}</h3>
               <p className="text-sm text-gray-400">{epoch.range}</p>
-              <p className="text-yellow-400 font-medium mt-2">{epoch.price.toFixed(2)} ETH</p>
+              <p className="text-yellow-400 font-semibold text-lg mt-3">{epoch.price.toFixed(2)} ETH</p>
             </div>
           ))}
         </div>
