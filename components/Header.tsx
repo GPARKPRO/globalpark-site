@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client'
 
 import { useState } from 'react'
@@ -11,7 +10,7 @@ export default function Header() {
   const router = useRouter()
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
         {/* Explore menu button */}
         <div className="relative">
