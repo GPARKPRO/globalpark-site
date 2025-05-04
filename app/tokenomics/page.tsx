@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
-const TOKEN_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
-const TREASURY_ADDRESS = '0x4C7635EC1f6870cBBD58c13e3aEB4e43B7EE7183'
+const TOKEN_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1dA'
+const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183'
 
 const erc20Abi = [
   'function totalSupply() view returns (uint256)',
@@ -23,9 +23,6 @@ export default function TokenomicsPage() {
 
         const total = await contract.totalSupply()
         const treasury = await contract.balanceOf(TREASURY_ADDRESS)
-
-        console.log('Total Supply (raw):', total.toString())
-        console.log('Treasury Balance (raw):', treasury.toString())
 
         const totalNum = Number(ethers.formatUnits(total, 18))
         const treasuryNum = Number(ethers.formatUnits(treasury, 18))
@@ -56,8 +53,8 @@ export default function TokenomicsPage() {
       </p>
 
       {/* Circulating Supply */}
-      <div className="bg-zinc-900 rounded-lg p-6 mb-12 border border-zinc-800 text-center">
-        <h2 className="text-xl font-semibold text-gray-300 mb-2">Circulating Supply</h2>
+      <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
+        <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
           {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
@@ -66,8 +63,9 @@ export default function TokenomicsPage() {
         </p>
       </div>
 
-      {/* Chart */}
+      {/* Token Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
+        <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">Supply Breakdown</h2>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -78,8 +76,6 @@ export default function TokenomicsPage() {
               outerRadius={100}
               paddingAngle={2}
               dataKey="value"
-              label={false}
-              labelLine={false}
             >
               {data.map((entry, index) => (
                 <Cell
