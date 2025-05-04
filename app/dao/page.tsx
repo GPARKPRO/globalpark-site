@@ -50,17 +50,16 @@ export default function DaoMintPage() {
               <p className="text-sm text-gray-400">{epoch.range}</p>
               <p className="text-yellow-400 font-medium mt-2">{epoch.price.toFixed(2)} ETH</p>
             </div>
-      
-      <div className="mt-16 text-center">
-  <a
-    href="/"
-    className="inline-block bg-white text-black px-6 py-2 rounded hover:bg-gray-200 transition font-medium"
-  >
-    ← Back to Home
-  </a>
-</div>
-      
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <a
+            href="/"
+            className="inline-block bg-white text-black px-6 py-2 rounded hover:bg-gray-200 transition font-medium"
+          >
+            ← Back to Home
+          </a>
         </div>
       </div>
     </div>
