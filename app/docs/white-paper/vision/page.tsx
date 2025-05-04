@@ -6,8 +6,6 @@ export const metadata: Metadata = {
     'Discover the foundational philosophy and cultural framework of Global Park DAO — where NFTs become architecture, and memory becomes infrastructure.',
 };
 
-const iconStyle = 'w-5 h-5';
-
 export default function VisionPage() {
   return (
     <main className="max-w-3xl mx-auto px-6 py-16">
@@ -31,10 +29,8 @@ export default function VisionPage() {
 
         {/* Block 1 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 p-2 bg-yellow-400 text-black rounded flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className={iconStyle} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L3 10.25l1.5-1.5L9.75 14l10.5-10.5 1.5 1.5L9.75 17z" />
-            </svg>
+          <div className="w-10 h-10 rounded bg-yellow-400 p-1">
+            <img src="/icons/Scheme-3.svg" alt="Art icon" className="w-full h-full" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Art as Infrastructure</h3>
@@ -47,10 +43,8 @@ export default function VisionPage() {
 
         {/* Block 2 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 p-2 bg-pink-500 text-black rounded flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className={iconStyle} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-            </svg>
+          <div className="w-10 h-10 rounded bg-pink-500 p-1">
+            <img src="/icons/Scheme-7.svg" alt="Tech icon" className="w-full h-full" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Technology as Transparency</h3>
@@ -63,10 +57,8 @@ export default function VisionPage() {
 
         {/* Block 3 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 p-2 bg-gray-500 text-white rounded flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className={iconStyle} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7h18M3 12h18M3 17h18" />
-            </svg>
+          <div className="w-10 h-10 rounded bg-gray-500 p-1">
+            <img src="/icons/Scheme-5.svg" alt="Memory icon" className="w-full h-full" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Memory as Coordination</h3>
