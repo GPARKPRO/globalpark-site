@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 import Footer from '../components/Footer'
-import ConnectWallet from '../components/ConnectWallet'
+import Header from '../components/Header'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -24,18 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
         <meta name="twitter:image" content="https://globalpark.io/opengraph.png" />
       </head>
-      <body className="relative bg-black text-white min-h-screen flex flex-col">
-        <header
-          className="w-full flex justify-end px-4 py-4"
-          role="banner"
-          aria-label="Top navigation"
-        >
-          <ConnectWallet />
-        </header>
-        <main
-          className="flex-grow flex flex-col items-center justify-center px-6"
-          role="main"
-        >
+      <body className="bg-black text-white min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow flex flex-col items-center justify-center px-6">
           {children}
         </main>
         <Footer />
