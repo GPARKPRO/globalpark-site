@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ConnectWallet />
         </header>
         <main
-          className="pt-20 flex-grow flex flex-col items-center justify-center px-6"
+          className="flex-grow flex flex-col items-center justify-center px-6"
           role="main"
         >
           {children}
