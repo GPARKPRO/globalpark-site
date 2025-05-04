@@ -1,72 +1,80 @@
 'use client'
 
-import Link from 'next/link'
+import { useState } from 'react'
+import { ethers } from 'ethers'
 
-export default function DaoPage() {
-  const daoDocs = [
-    {
-      title: 'DAO Constitution',
-      description: 'The foundational principles and values of Global Park DAO.',
-      url: 'https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/Constitution_DAO.pdf',
-    },
-    {
-      title: 'DAO Declaration',
-      description: 'Public statement outlining the purpose and goals of the DAO.',
-      url: 'https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/Declaration_DAO.pdf',
-    },
-    {
-      title: 'Tokenomics & Economic Model',
-      description: 'Distribution logic, deflationary mechanics, and incentives.',
-      url: 'https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/Tokenomics_&_Economic_Model.pdf',
-    },
-    {
-      title: 'White Paper',
-      description: 'Full technical and strategic description of the Global Park project.',
-      url: 'https://github.com/GPARKPRO/GlobalPark-DAO/blob/main/docs/White_Paper.pdf',
-    },
-  ]
+export default function DaoMintPage() {
+  const [minting, setMinting] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  const handleMint = async () => {
+    setError('')
+    setSuccess('')
+    setMinting(true)
+
+    try {
+      if (!window.ethereum) throw new Error('MetaMask not found')
+      await window.ethereum.request({ method: 'eth_requestAccounts' })
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(
+        '0xYourNFTContractAddress',
+        [
+          {
+            inputs: [],
+            name: 'mint',
+            outputs: [],
+            stateMutability: 'payable',
+            type: 'function',
+          },
+        ],
+        signer
+      )
+      const tx = await contract.mint({
+        value: ethers.utils.parseEther('0.777'), // динамически можно подставлять цену по эпохе
+      })
+      await tx.wait()
+      setSuccess('NFT успешно отчеканен!')
+    } catch (err) {
+      console.error(err)
+      setError('Не удалось произвести чеканку. Проверьте кошелек.')
+    } finally {
+      setMinting(false)
+    }
+  }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20 text-white">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-        Global Park DAO
-      </h1>
+    <div className="min-h-screen bg-black text-white px-6 py-20 relative">
+      <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-cover bg-center"></div>
 
-      <p className="text-center text-gray-400 max-w-3xl mx-auto mb-10 text-md md:text-lg leading-relaxed font-mono">
-        We are building an open, transparent, and community-driven ecosystem. While the DAO is currently
-        coordinated by a small group of passionate contributors, our goal is to fully hand over
-        governance to the community in Phase 2 via Snapshot voting. <br /><br />
-        If you believe in cultural legacy, Web3 values, and collective intelligence — <span className="text-yellow-400 font-semibold">this is your place.</span>
-        Everyone is welcome to join, contribute, and help shape the future of Global Park.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-        {daoDocs.map((doc, i) => (
-          <a
-            key={i}
-            href={doc.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-zinc-900 border border-zinc-800 rounded-xl p-6 transition hover:border-pink-500 hover:shadow-md hover:shadow-pink-500/10"
-          >
-            <h3 className="text-xl font-semibold mb-2 group-hover:text-white">
-              {doc.title}
-            </h3>
-            <p className="text-gray-400 group-hover:text-gray-300">{doc.description}</p>
-            <span className="mt-3 inline-block text-xs text-blue-400 font-medium group-hover:underline">
-              View PDF →
-            </span>
-          </a>
-        ))}
-      </div>
-
-      <div className="mt-16 text-center">
-        <Link
-          href="/"
-          className="inline-block bg-white text-black px-6 py-2 rounded hover:bg-gray-200 transition font-medium"
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-purple-400">
+          Join the Global Park DAO
+        </h1>
+        <p className="text-lg text-gray-400 mb-10">
+          Mint your <span className="text-yellow-400 font-semibold">Governance NFT</span> and become 1 of 1000 founding members. A new pricing epoch begins every 100 mints.
+        </p>
+        <button
+          onClick={handleMint}
+          disabled={minting}
+          className="bg-yellow-400 text-black px-8 py-3 rounded-xl text-lg font-semibold hover:bg-yellow-300 transition"
         >
-          ← Back to Home
-        </Link>
+          {minting ? 'Minting...' : 'Mint for 0.777 ETH'}
+        </button>
+
+        {success && <p className="mt-6 text-green-400 font-medium">{success}</p>}
+        {error && <p className="mt-6 text-red-500 font-medium">{error}</p>}
+
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-6">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="p-4 border border-zinc-700 rounded-xl bg-black/40">
+              <p className="text-lg font-semibold text-white mb-1">Epoch {i + 1}</p>
+              <p className="text-sm text-gray-400">NFTs {i * 100 + 1}–{(i + 1) * 100}</p>
+              <p className="text-yellow-400 font-medium mt-2">{(0.5 + i * 0.05).toFixed(3)} ETH</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
