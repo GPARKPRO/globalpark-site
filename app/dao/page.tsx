@@ -1,5 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react';
+import Icon from '@/components/Icon';
+import { getRandomIcon } from '@/lib/getRandomIcon';
+
 export default function DaoMintPage() {
   const epochs = [
     { id: 1, range: '#1–100', price: 0.33 },
@@ -12,7 +16,14 @@ export default function DaoMintPage() {
     { id: 8, range: '#701–800', price: 1.11 },
     { id: 9, range: '#801–900', price: 1.23 },
     { id: 10, range: '#901–1000', price: 1.44 },
-  ]
+  ];
+
+  const [icons, setIcons] = useState<string[]>([]);
+
+  useEffect(() => {
+    const generatedIcons = epochs.map(() => getRandomIcon());
+    setIcons(generatedIcons);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white px-6 py-20 relative">
@@ -41,11 +52,14 @@ export default function DaoMintPage() {
         </button>
 
         <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-6">
-          {epochs.map((epoch) => (
+          {epochs.map((epoch, i) => (
             <div
               key={epoch.id}
-              className="p-4 border border-zinc-700 rounded-xl bg-black/40 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-500/10 transition"
+              className="p-4 border border-zinc-700 rounded-xl bg-black/40 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-500/10 transition text-left"
             >
+              {icons[i] && (
+                <Icon name={icons[i]} size={32} className="mb-2" />
+              )}
               <p className="text-lg font-semibold text-white mb-1">Epoch {epoch.id}</p>
               <p className="text-sm text-gray-400">{epoch.range}</p>
               <p className="text-yellow-400 font-medium mt-2">{epoch.price.toFixed(2)} ETH</p>
@@ -63,5 +77,5 @@ export default function DaoMintPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
