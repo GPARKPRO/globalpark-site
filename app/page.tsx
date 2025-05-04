@@ -50,14 +50,12 @@ export default function Home() {
               AI Assistant
             </button>
 
-            <a
-              href="https://github.com/GPARKPRO/GlobalPark-DAO"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => router.push('/docs')}
               className="border border-gray-500 text-gray-300 px-4 py-2 rounded hover:bg-white hover:text-black transition duration-200"
             >
-              GitHub
-            </a>
+              Docs
+            </button>
 
             <button
               onClick={() => router.push('/dao')}
