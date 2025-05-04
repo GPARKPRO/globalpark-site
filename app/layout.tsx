@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
         <meta name="twitter:image" content="https://globalpark.io/opengraph.png" />
       </head>
-      <body className="bg-black text-white min-h-screen flex flex-col">
+      <body className="relative bg-black text-white min-h-screen flex flex-col">
         <header
           className="w-full flex justify-end px-4 py-4"
           role="banner"
