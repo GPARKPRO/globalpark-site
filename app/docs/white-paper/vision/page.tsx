@@ -2,63 +2,74 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Vision & Philosophy | GlobalPark',
-  description:
-    'Discover the foundational philosophy and cultural framework of Global Park DAO — where NFTs become architecture, and memory becomes infrastructure.',
+  description: 'Explore the philosophical and cultural foundation of Global Park DAO — from decentralized space to long-term memory systems.',
 };
 
 export default function VisionPage() {
   return (
     <main className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="text-4xl font-bold text-white mb-6">Vision & Philosophy</h1>
+      <h1 className="text-4xl font-bold text-white mb-6">2. Vision and Philosophical Foundation</h1>
+
+      <h2 className="text-2xl text-yellow-400 font-semibold mb-4">2.1 Vision: Decentralized Cultural Landscape</h2>
 
       <p className="text-gray-300 mb-4">
         <span className="text-yellow-400 font-medium">Global Park DAO</span> is a next-generation cultural system in which
-        digital artifacts (NFTs) become the foundation for creating physical installations, public spaces, and
-        architectural expressions of memory.
+        digital artifacts (NFTs) become the foundation for creating physical installations, public spaces, and architectural expressions of memory.
       </p>
 
-      <p className="text-gray-300 mb-6">
-        We are building more than just a <span className="text-pink-500">token ecosystem</span> — we’re designing a
-        living cultural landscape, where each unit of digital heritage is anchored in space, tied to coordinates,
-        and brought to life.
-      </p>
-
-      <h2 className="text-2xl text-yellow-400 font-semibold mb-4">Three Core Pillars</h2>
-
-      <h3 className="text-lg text-white font-bold mb-2">Art as Infrastructure</h3>
       <p className="text-gray-300 mb-4">
-        Not decoration, but the backbone of public architecture. Every block is a message — and every message, a building element.
+        We are building more than just a token ecosystem — we’re designing a living cultural landscape,
+        where each unit of digital heritage is anchored in space, tied to coordinates, and brought to life.
       </p>
 
-      <h3 className="text-lg text-white font-bold mb-2">Technology as Transparency</h3>
       <p className="text-gray-300 mb-4">
-        Every proposal, transaction, and object is <span className="text-yellow-400">visible on-chain</span>.
-        Governance is open. Control is distributed.
+        This park exists in three parallel dimensions:
       </p>
 
-      <h3 className="text-lg text-white font-bold mb-2">Memory as Coordination</h3>
+      <ul className="text-gray-300 list-disc list-inside mb-4 space-y-1">
+        <li><span className="text-white font-medium">Physically</span> — as an evolving, walkable terrain of architecture, sculptures, and curated spaces.</li>
+        <li><span className="text-white font-medium">On-chain</span> — as a DAO-managed structure of governance, token utility, and NFT provenance.</li>
+        <li><span className="text-white font-medium">Culturally</span> — as a long-term initiative that safeguards, co-creates, and archives collective memory.</li>
+      </ul>
+
       <p className="text-gray-300 mb-4">
-        Physical and digital memory objects work as infrastructure — not only static records,
-        but <span className="text-pink-500">dynamic anchors</span> of interaction.
+        The ultimate goal of <span className="text-yellow-400">GPARK</span> is to create the world’s first decentralized cultural landscape — 
+        not governed by centralized institutions or private interests, but by a transparent, token-based protocol of participation and presence.
       </p>
 
-      <div className="mt-16 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <a
-          href="/docs/white-paper/governance"
-          className="border border-yellow-500 text-yellow-400 px-6 py-3 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
-        >
-          → Next: Governance Structure
-        </a>
+      <p className="text-gray-300 mb-8">
+        Each NFT is not just a collectible — it’s a programmable coordinate, a signal of contribution, and a permanent fixture in a shared spatial narrative.
+      </p>
 
-        <a
-          href="/docs/White_Paper.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-gray-500 hover:text-gray-300 transition"
-        >
-          View full White Paper (PDF)
-        </a>
-      </div>
+      <h2 className="text-2xl text-yellow-400 font-semibold mb-4">2.2 Philosophy: Art, Transparency, Memory</h2>
+
+      <p className="text-gray-300 mb-4">
+        Global Park DAO arises from a simple yet vital idea: <span className="text-pink-500">culture, art, and memory deserve decentralized foundations</span>.
+      </p>
+
+      <p className="text-gray-300 mb-4">
+        We envision a future in which both physical and digital spaces are not owned or exploited, but co-created, protected, and activated by the communities that inhabit them.
+      </p>
+
+      <p className="text-gray-300 mb-4">
+        While institutions and cities are often shaped by invisible hierarchies, <span className="text-yellow-400">GPARK</span> offers an alternative — a programmable space where rules, access, and growth are defined not by private control, but by consensus.
+      </p>
+
+      <p className="text-gray-300 mb-4">
+        Our philosophical base rests on three pillars:
+      </p>
+
+      <ul className="text-gray-300 list-disc list-inside mb-4 space-y-1">
+        <li><span className="text-white font-medium">Art as infrastructure</span> – not decoration, but the backbone of public architecture.</li>
+        <li><span className="text-white font-medium">Technology as transparency</span> – every decision, transaction, and permission is recorded on-chain.</li>
+        <li><span className="text-white font-medium">Memory as coordination</span> – every object is not just a file or sculpture, but a fragment of shared significance.</li>
+      </ul>
+
+      <p className="text-gray-300">
+        Aligned with long-term cultural frameworks such as <span className="text-yellow-400">Dubai 2040</span>,
+        the project is not speculative — it is architectural. Every coordinate, every participant, every block on-chain
+        is a building block in a decentralized cultural future.
+      </p>
     </main>
   );
 }
