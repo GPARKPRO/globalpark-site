@@ -8,6 +8,7 @@ import { getRandomIcon } from '@/lib/getRandomIcon'
 export default function Home() {
   const router = useRouter()
   const [backgroundIcon, setBackgroundIcon] = useState<string | null>(null)
+  const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
     setBackgroundIcon(getRandomIcon())
@@ -48,7 +49,7 @@ export default function Home() {
           </p>
 
           {/* Button Section */}
-          <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
+          <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start items-center relative">
             <button
               onClick={() => router.push('/ask-gpt')}
               className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
@@ -71,6 +72,38 @@ export default function Home() {
             >
               Join DAO
             </button>
+
+            {/* Minimal More Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition duration-200"
+              >
+                ⋯
+              </button>
+              {showMenu && (
+                <div className="absolute top-full right-0 mt-2 bg-black border border-gray-700 rounded shadow-lg z-10 w-40 text-left">
+                  <button
+                    onClick={() => {
+                      setShowMenu(false)
+                      router.push('/tokenomics')
+                    }}
+                    className="block w-full px-4 py-2 hover:bg-gray-800 text-sm"
+                  >
+                    Tokenomics
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowMenu(false)
+                      router.push('/roadmap')
+                    }}
+                    className="block w-full px-4 py-2 hover:bg-gray-800 text-sm"
+                  >
+                    Roadmap
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
