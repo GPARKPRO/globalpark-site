@@ -35,7 +35,7 @@ export default function TokenomicsPage() {
   }, [])
 
   const data = [
-    { name: 'Treasury', value: 21000000 },
+    { name: 'Treasury', value: circulating ? 21000000 - Number(circulating) : 21000000 },
     { name: 'Circulating', value: Number(circulating ?? 0) },
   ]
 
@@ -48,16 +48,18 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
+      {/* Supply Overview */}
       <div className="bg-zinc-900 rounded-lg p-6 mb-12 border border-zinc-800 text-center">
         <h2 className="text-xl font-semibold text-gray-300 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
-          {circulating ? `${circulating} GPARK` : 'Loading...'}
+          {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
           Data fetched from Ethereum Mainnet via public RPC.
         </p>
       </div>
 
+      {/* Pie Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -83,6 +85,7 @@ export default function TokenomicsPage() {
         </ResponsiveContainer>
       </div>
 
+      {/* Legend */}
       <div className="flex justify-center gap-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
