@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'A Decentralized Initiative for Art, Technology & Collective Memory'
 }
 
-export default function RootLayout({ children }: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -25,27 +25,34 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
         <meta name="twitter:image" content="https://globalpark.io/opengraph.png" />
       </head>
       <body className="bg-black text-white min-h-screen flex flex-col">
-        <header className="wfull flex justify-end px-4 py-4" role="banner" aria-label="Top navigation">
+        <header
+          className="w-full flex justify-end px-4 py-4"
+          role="banner"
+          aria-label="Top navigation"
+        >
           <ConnectWallet />
         </header>
-        <main className="flex-grow flex flex-col items-center justify-center px-6" role="main">
+        <main
+          className="pt-20 flex-grow flex flex-col items-center justify-center px-6"
+          role="main"
+        >
           {children}
         </main>
         <Footer />
         <Script strategy="afterInteractive" type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "Organization",
-            name: "Global Park DAO",
-            url: "https://globalpark.io",
-            email: "theglobalpark@gmail.com",
+            '@context': 'https://schema.org/',
+            '@type': 'Organization',
+            name: 'Global Park DAO',
+            url: 'https://globalpark.io',
+            email: 'theglobalpark@gmail.com',
             sameAs: [
-              "https://t.me/globalpark_io",
-              "https://twitter.com/GlobalPark_io"
+              'https://t.me/globalpark_io',
+              'https://twitter.com/GlobalPark_io'
             ],
             logo: {
-              "type": "image",
-              "url": "https://globalpark.io/opengraph.png"
+              type: 'image',
+              url: 'https://globalpark.io/opengraph.png'
             }
           })}
         </Script>
