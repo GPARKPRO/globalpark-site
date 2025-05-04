@@ -13,8 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta property="og:title" content="Global Park DAO" />
         <meta property="og:description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
         <meta property="og:url" content="https://globalpark.io" />
@@ -30,23 +33,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
-        <Script strategy="afterInteractive" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org/',
-            '@type': 'Organization',
-            name: 'Global Park DAO',
-            url: 'https://globalpark.io',
-            email: 'theglobalpark@gmail.com',
-            sameAs: [
-              'https://t.me/globalpark_io',
-              'https://twitter.com/GlobalPark_io'
-            ],
-            logo: {
-              type: 'image',
-              url: 'https://globalpark.io/opengraph.png'
-            }
-          })}
-        </Script>
+        <Script
+          strategy="afterInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org/',
+              '@type': 'Organization',
+              name: 'Global Park DAO',
+              url: 'https://globalpark.io',
+              email: 'theglobalpark@gmail.com',
+              sameAs: [
+                'https://t.me/globalpark_io',
+                'https://twitter.com/GlobalPark_io'
+              ],
+              logo: {
+                type: 'image',
+                url: 'https://globalpark.io/opengraph.png'
+              }
+            })
+          }}
+        />
       </body>
     </html>
   )
