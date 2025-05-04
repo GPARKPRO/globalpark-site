@@ -1,35 +1,29 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ethers } from 'ethers'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
-import { getGparkContract } from '@/lib/contract'
+
+const TOKEN_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
+const TREASURY_ADDRESS = '0x4C7635EC1f6870cBBD58c13e3aEB4e43B7EE7183'
+
+const erc20Abi = [
+  'function totalSupply() view returns (uint256)',
+  'function balanceOf(address account) view returns (uint256)',
+]
 
 export default function TokenomicsPage() {
   const [circulating, setCirculating] = useState<string | null>(null)
-  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setIsClient(typeof window !== 'undefined')
-
     const fetchData = async () => {
       try {
-        const isSafe =
-          typeof window !== 'undefined' &&
-          typeof window.ethereum !== 'undefined'
+        const provider = new ethers.JsonRpcProvider('https://eth.llamarpc.com')
+        const contract = new ethers.Contract(TOKEN_ADDRESS, erc20Abi, provider)
 
-        if (!isSafe) {
-          console.warn('Web3 provider not available on this device.')
-          return
-        }
-
-        const contract = await getGparkContract()
-        if (!contract || typeof contract.balanceOf !== 'function') {
-          console.warn('Contract not ready or balanceOf not defined')
-          return
-        }
-
-        const treasury = await contract.balanceOf('0x4C7635EC1f6870cBBD58c13e3aEB4e43B7EE7183')
         const total = await contract.totalSupply()
+        const treasury = await contract.balanceOf(TREASURY_ADDRESS)
+
         const circulatingValue = Number(total - treasury) / 1e18
         setCirculating(circulatingValue.toFixed(2))
       } catch (err) {
@@ -54,46 +48,41 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
-      {/* Stats */}
       <div className="bg-zinc-900 rounded-lg p-6 mb-12 border border-zinc-800 text-center">
         <h2 className="text-xl font-semibold text-gray-300 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
           {circulating ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
-          Data fetched from the blockchain via Etherscan.
+          Data fetched from Ethereum Mainnet via public RPC.
         </p>
       </div>
 
-      {/* Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
-        {isClient && (
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={2}
-                dataKey="value"
-                label={false}
-                labelLine={false}
-              >
-                {data.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-        )}
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+              label={false}
+              labelLine={false}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
 
-      {/* Legend */}
       <div className="flex justify-center gap-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
