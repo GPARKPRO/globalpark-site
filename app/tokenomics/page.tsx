@@ -13,13 +13,24 @@ export default function TokenomicsPage() {
 
     const fetchData = async () => {
       try {
+        const isSafe =
+          typeof window !== 'undefined' &&
+          typeof window.ethereum !== 'undefined'
+
+        if (!isSafe) {
+          console.warn('Web3 provider not available on this device.')
+          return
+        }
+
         const contract = await getGparkContract()
-        if (!contract) return
+        if (!contract || typeof contract.balanceOf !== 'function') {
+          console.warn('Contract not ready or balanceOf not defined')
+          return
+        }
 
         const treasury = await contract.balanceOf('0x4C7635EC1f6870cBBD58c13e3aEB4e43B7EE7183')
         const total = await contract.totalSupply()
         const circulatingValue = Number(total - treasury) / 1e18
-
         setCirculating(circulatingValue.toFixed(2))
       } catch (err) {
         console.error('Error fetching token data:', err)
