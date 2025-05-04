@@ -1,6 +1,19 @@
 'use client'
 
 export default function DaoMintPage() {
+  const epochs = [
+    { id: 1, range: '#1–100', price: 0.33 },
+    { id: 2, range: '#101–200', price: 0.44 },
+    { id: 3, range: '#201–300', price: 0.55 },
+    { id: 4, range: '#301–400', price: 0.66 },
+    { id: 5, range: '#401–500', price: 0.77 },
+    { id: 6, range: '#501–600', price: 0.88 },
+    { id: 7, range: '#601–700', price: 0.99 },
+    { id: 8, range: '#701–800', price: 1.11 },
+    { id: 9, range: '#801–900', price: 1.23 },
+    { id: 10, range: '#901–1000', price: 1.44 },
+  ]
+
   return (
     <div className="min-h-screen bg-black text-white px-6 py-20 relative">
       <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-cover bg-center"></div>
@@ -20,11 +33,14 @@ export default function DaoMintPage() {
         </button>
 
         <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-6">
-          {[...Array(10)].map((_, i) => (
-            <div key={i} className="p-4 border border-zinc-700 rounded-xl bg-black/40">
-              <p className="text-lg font-semibold text-white mb-1">Epoch {i + 1}</p>
-              <p className="text-sm text-gray-400">NFTs {i * 100 + 1}–{(i + 1) * 100}</p>
-              <p className="text-yellow-400 font-medium mt-2">{(0.5 + i * 0.05).toFixed(3)} ETH</p>
+          {epochs.map((epoch) => (
+            <div
+              key={epoch.id}
+              className="p-4 border border-zinc-700 rounded-xl bg-black/40 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-500/10 transition"
+            >
+              <p className="text-lg font-semibold text-white mb-1">Epoch {epoch.id}</p>
+              <p className="text-sm text-gray-400">{epoch.range}</p>
+              <p className="text-yellow-400 font-medium mt-2">{epoch.price.toFixed(2)} ETH</p>
             </div>
           ))}
         </div>
