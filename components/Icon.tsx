@@ -7,17 +7,15 @@ type IconProps = {
   size?: number;
 };
 
-export default function Icon({ name, alt = '', className = '', size = 48 }: IconProps) {
+export default function Icon({ name, alt = '', className = '', size = 64 }: IconProps) {
   return (
-    <div className={`relative w-[${size}px] h-[${size}px] ${className}`}>
-      <Image
-        src={`/icons/${name}.svg`}
-        alt={alt}
-        fill
-        className="object-contain"
-        sizes={`${size}px`}
-        priority
-      />
-    </div>
+    <Image
+      src={`/icons/${name}.svg`}
+      alt={alt || name}
+      width={size}
+      height={size}
+      className={className}
+      priority
+    />
   );
 }
