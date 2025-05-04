@@ -51,25 +51,25 @@ export default function DaoPage() {
           Mint coming soon
         </button>
 
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-3 gap-6">
           {epochs.map((epoch, i) => (
             <div
               key={epoch.id}
-              className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/80 px-6 py-8 text-center shadow-inner hover:border-yellow-400 transition-all duration-300"
+              className="relative overflow-hidden rounded-2xl shadow-lg group border border-zinc-800 bg-zinc-900"
             >
               {icons[i] && (
                 <Image
                   src={`/icons/${icons[i]}.svg`}
-                  alt=""
-                  width={200}
-                  height={200}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 grayscale blur-sm object-contain mix-blend-luminosity pointer-events-none"
+                  alt={`Epoch ${epoch.id}`}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition duration-300"
                 />
               )}
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-white mb-1">Epoch {epoch.id}</h3>
-                <p className="text-sm text-gray-400">{epoch.range}</p>
-                <p className="text-yellow-400 font-semibold text-lg mt-3">{epoch.price.toFixed(2)} ETH</p>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+                <h3 className="text-xl font-bold text-white drop-shadow mb-1">Epoch {epoch.id}</h3>
+                <p className="text-sm text-gray-300 drop-shadow">{epoch.range}</p>
+                <p className="text-yellow-400 font-semibold text-lg mt-2 drop-shadow">{epoch.price.toFixed(2)} ETH</p>
               </div>
             </div>
           ))}
