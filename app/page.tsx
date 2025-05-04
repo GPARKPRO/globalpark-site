@@ -1,10 +1,17 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { getRandomIcon } from '@/lib/getRandomIcon'
 
 export default function Home() {
   const router = useRouter()
+  const [backgroundIcon, setBackgroundIcon] = useState<string | null>(null)
+
+  useEffect(() => {
+    setBackgroundIcon(getRandomIcon())
+  }, [])
 
   return (
     <>
@@ -16,12 +23,13 @@ export default function Home() {
         {/* Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30" />
 
-        {/* Icon as Background */}
-        <div
-  className="absolute top-0 right-0 w-[800px] h-[800px] 
-  bg-[url('/icons/Scheme-2.svg')] bg-contain bg-no-repeat bg-right-top 
-  opacity-25 brightness-150 mix-blend-overlay"
-/>
+        {/* Dynamic Background Icon */}
+        {backgroundIcon && (
+          <div
+            className="absolute top-0 right-0 w-[800px] h-[800px] bg-no-repeat bg-contain bg-right-top opacity-25 brightness-150 mix-blend-overlay"
+            style={{ backgroundImage: `url(/icons/${backgroundIcon}.svg)` }}
+          />
+        )}
       </div>
 
       {/* Main Content */}
