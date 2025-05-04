@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import ConnectWallet from './ConnectWallet'
@@ -34,24 +32,23 @@ export default function Header() {
   }, [])
 
   const menuItems = [
-    { label: 'Home', icon: <HomeIcon className="w-4 h-4 mr-2" />, path: '/' },
-    { label: 'Join DAO', icon: <UserGroupIcon className="w-4 h-4 mr-2" />, path: '/dao' },
-    { label: 'AI Assistant', icon: <CpuChipIcon className="w-4 h-4 mr-2" />, path: '/ask-gpt' },
-    { label: 'Tokenomics', icon: <ChartBarIcon className="w-4 h-4 mr-2" />, path: '/tokenomics' },
-    { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
-    { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/wall' },
+    { label: 'Home', icon: <HomeIcon className="wm-4 h-4 mr-2" />, path: '/' },
+    { label: 'Join DAO', icon: <UserGroupIcon className="wm-4 h-4 mr-2" />, path: '/dao' },
+    { label: 'AI Assistant', icon: <CpuChipIcon className="wm-4 h-4 mr-2" />, path: '/ask-gpt' },
+    { label: 'Tokenomics', icon: <ChartBarIcon className="wm-4 h-4 mr-2" />, path: '/tokenomics' },
+    { label: 'Roadmap', icon: <MapIcon className="wm-4 h-4 mr-2" />, path: '/roadmap' },
+    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/wall' }
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
-      {/* Left: Menu */}
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
           className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
           aria-label="Explore"
         >
-          ⋯
+            ⋯
         </button>
         {showMenu && (
           <div className="absolute mt-2 bg-black border border-gray-700 rounded shadow-lg z-50 w-56">
@@ -83,7 +80,6 @@ export default function Header() {
         )}
       </div>
 
-      {/* Right: Wallet */}
       <div className="flex items-center space-x-4">
         <ConnectWallet />
       </div>
