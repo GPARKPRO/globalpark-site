@@ -9,20 +9,20 @@ export default function Home() {
   return (
     <>
       {/* Background Visual Layer */}
-      <div className="absolute inset-0 z-0">
-        {/* Grid Layer */}
+      <div className="fixed inset-0 z-0">
+        {/* Grid */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10 pointer-events-none" />
-
+        
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30 pointer-events-none" />
 
-        {/* Background Icon */}
+        {/* SVG Background */}
         <Image
           src="/icons/Scheme-2.svg"
           alt="Visual Scheme"
-          width={900}
-          height={900}
-          className="absolute top-[-150px] right-[-100px] opacity-5 blur-[2px] grayscale mix-blend-overlay pointer-events-none"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-5 blur-sm grayscale mix-blend-overlay pointer-events-none"
         />
       </div>
 
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Image Section */}
+        {/* Logo Section */}
         <div className="mt-10 md:mt-0 md:w-1/2 flex justify-center md:justify-end">
           <div className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]">
             <Image
