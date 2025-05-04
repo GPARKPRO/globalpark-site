@@ -24,10 +24,17 @@ export default function TokenomicsPage() {
         const total = await contract.totalSupply()
         const treasury = await contract.balanceOf(TREASURY_ADDRESS)
 
-        const circulatingValue = Number(total - treasury) / 1e18
+        console.log('Total Supply (raw):', total.toString())
+        console.log('Treasury Balance (raw):', treasury.toString())
+
+        const totalNum = Number(ethers.formatUnits(total, 18))
+        const treasuryNum = Number(ethers.formatUnits(treasury, 18))
+
+        const circulatingValue = Math.max(totalNum - treasuryNum, 0)
         setCirculating(circulatingValue.toFixed(2))
       } catch (err) {
         console.error('Error fetching token data:', err)
+        setCirculating('0.00')
       }
     }
 
@@ -48,7 +55,7 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
-      {/* Supply Overview */}
+      {/* Circulating Supply */}
       <div className="bg-zinc-900 rounded-lg p-6 mb-12 border border-zinc-800 text-center">
         <h2 className="text-xl font-semibold text-gray-300 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
@@ -59,7 +66,7 @@ export default function TokenomicsPage() {
         </p>
       </div>
 
-      {/* Pie Chart */}
+      {/* Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
