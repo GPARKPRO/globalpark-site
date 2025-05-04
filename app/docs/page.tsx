@@ -20,7 +20,7 @@ export default function DocsIndexPage() {
   return (
     <main className="relative max-w-4xl mx-auto px-6 py-16">
       {/* Decorative Background Icon */}
-      <div className="absolute top-8 right-8 opacity-20 w-40 h-40 pointer-events-none select-none brightness-125 rotate-12">
+      <div className="absolute right-[-4rem] top-[6rem] opacity-20 w-[380px] h-[380px] pointer-events-none select-none">
   <img src="/icons/Scheme-2.svg" alt="" className="w-full h-full" />
 </div>
 
