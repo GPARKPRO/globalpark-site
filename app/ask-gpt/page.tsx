@@ -73,7 +73,7 @@ export default function AskGPTPage() {
           placeholder="Type your question here..."
         />
         <button
-          className="bg-blue-500 px-6 py-2 rounded text-white font-medium w-full md:w-auto flex items-center justify-center"
+          className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
           onClick={ask}
           disabled={loading}
         >
