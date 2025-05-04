@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Use Cases & Ecosystem | GlobalPark',
@@ -100,6 +101,20 @@ export default function UseCasesPage() {
         <span className="text-yellow-400 font-medium">GPARK</span> is a place where every contribution is anchored in space and time.
         Where every participant becomes a builder of the cultural future.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/digital-heritage"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Digital Heritage
+  </Link>
+  <Link
+    href="/docs/white-paper/governance"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: DAO Governance →
+  </Link>
+</div>
     </main>
   );
 }
