@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Treasury & Financial Design | GlobalPark',
@@ -58,6 +59,20 @@ export default function TreasuryPage() {
         The treasury exists not to accumulate wealth, but to sustain, activate, and grow a living cultural ecosystem.
         Every token, every ETH spent, is a form of participation in a shared legacy.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/token"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: GPARK Token
+  </Link>
+  <Link
+    href="/docs/white-paper/roadmap"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Roadmap →
+  </Link>
+</div>
     </main>
   );
 }
