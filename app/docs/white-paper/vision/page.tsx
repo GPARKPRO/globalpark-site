@@ -27,10 +27,12 @@ export default function VisionPage() {
 
       <div className="space-y-10">
 
-        {/* Block 1 */}
+        {/* Pillar 1 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded bg-yellow-400 p-1">
-            <img src="/icons/Scheme-3.svg" alt="Art icon" className="w-full h-full" />
+          <div className="w-10 h-10 p-2 bg-yellow-400 text-black rounded flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Art as Infrastructure</h3>
@@ -41,10 +43,12 @@ export default function VisionPage() {
           </div>
         </div>
 
-        {/* Block 2 */}
+        {/* Pillar 2 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded bg-pink-500 p-1">
-            <img src="/icons/Scheme-7.svg" alt="Tech icon" className="w-full h-full" />
+          <div className="w-10 h-10 p-2 bg-pink-500 text-black rounded flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Technology as Transparency</h3>
@@ -55,10 +59,12 @@ export default function VisionPage() {
           </div>
         </div>
 
-        {/* Block 3 */}
+        {/* Pillar 3 */}
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded bg-gray-500 p-1">
-            <img src="/icons/Scheme-5.svg" alt="Memory icon" className="w-full h-full" />
+          <div className="w-10 h-10 p-2 bg-gray-500 text-white rounded flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7h18M3 12h18M3 17h18" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Memory as Coordination</h3>
@@ -70,12 +76,22 @@ export default function VisionPage() {
         </div>
       </div>
 
-      <div className="mt-16 flex justify-center">
+      {/* Bottom Buttons */}
+      <div className="mt-16 border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between gap-4">
         <a
           href="/docs/white-paper/governance"
           className="border border-yellow-500 text-yellow-400 px-6 py-3 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
         >
           → Next: Governance Structure
+        </a>
+
+        <a
+          href="/docs/White_Paper.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-gray-500 text-gray-300 px-6 py-3 rounded hover:bg-white hover:text-black transition duration-200"
+        >
+          ⬇ Download Full White Paper
         </a>
       </div>
     </main>
