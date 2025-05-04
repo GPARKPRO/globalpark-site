@@ -26,7 +26,7 @@ export default function Home() {
         {/* Dynamic Background Icon */}
         {backgroundIcon && (
           <div
-            className="absolute top-0 right-0 w-[800px] h-[800px] bg-no-repeat bg-contain bg-right-top opacity-25 brightness-150 mix-blend-overlay"
+            className="absolute top-0 right-0 w-[80vw] max-w-[800px] h-[80vw] max-h-[800px] bg-no-repeat bg-contain bg-right-top opacity-25 brightness-150 mix-blend-overlay"
             style={{ backgroundImage: `url(/icons/${backgroundIcon}.svg)` }}
           />
         )}
