@@ -22,9 +22,17 @@ export default function DaoMintPage() {
         <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-purple-400">
           Join the Global Park DAO
         </h1>
-        <p className="text-lg text-gray-400 mb-10">
-          Mint your <span className="text-yellow-400 font-semibold">Governance NFT</span> and become 1 of 1000 founding members. A new pricing epoch begins every 100 mints.
+
+        <p className="text-lg text-gray-400 mb-4">
+          The <span className="text-yellow-400 font-semibold">Governance NFT</span> is your exclusive key to Global Park's decentralized future.
         </p>
+        <p className="text-md text-gray-500 mb-4">
+          Each NFT represents one of the 1000 founding seats in our DAO. The earlier you join — the lower the price, and the closer you are to Genesis.
+        </p>
+        <p className="text-md text-gray-500 mb-10">
+          Epochs increase the mint price by design. This curve rewards early contributors while preserving fairness. All holders will be onboarded into the DAO and included in future snapshots.
+        </p>
+
         <button
           disabled
           className="bg-yellow-400/30 text-black/50 px-8 py-3 rounded-xl text-lg font-semibold cursor-not-allowed"
