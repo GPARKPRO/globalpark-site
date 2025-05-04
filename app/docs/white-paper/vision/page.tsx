@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Vision & Philosophy | GlobalPark',
@@ -70,6 +71,20 @@ export default function VisionPage() {
         the project is not speculative — it is architectural. Every coordinate, every participant, every block on-chain
         is a building block in a decentralized cultural future.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/summary"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Executive Summary
+  </Link>
+  <Link
+    href="/docs/white-paper/digital-heritage"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Digital Heritage →
+  </Link>
+</div>
     </main>
   );
 }
