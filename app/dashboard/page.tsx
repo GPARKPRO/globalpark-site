@@ -56,11 +56,11 @@ export default function DashboardPage() {
       </h1>
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
-        <span className="bg-gradient-to-r from-green-700 to-emerald-500 text-black font-mono px-5 py-2 rounded-full">
-          {address ? `🟢 Wallet Connected: ${address.slice(0, 6)}...${address.slice(-4)}` : '🔴 Not Connected'}
+        <span className="border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
+          {address ? `🟡 Wallet Connected: ${address.slice(0, 6)}...${address.slice(-4)}` : '🔴 Not Connected'}
         </span>
         {balance !== null && (
-          <span className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-mono px-5 py-2 rounded-full">
+          <span className="border border-pink-500 text-pink-500 font-mono px-5 py-2 rounded-full">
             GPARK Balance: {balance}
           </span>
         )}
@@ -87,11 +87,11 @@ export default function DashboardPage() {
         ].map(({ title, description }) => (
           <div
             key={title}
-            className="relative bg-gradient-to-br from-zinc-900 to-indigo-900 hover:from-zinc-800 hover:to-indigo-800 transition-all duration-300 rounded-xl p-6 border border-indigo-600 shadow-md"
+            className="relative bg-gradient-to-br from-zinc-900 to-black hover:from-zinc-800 hover:to-zinc-900 transition-all duration-300 rounded-xl p-6 border border-white shadow-md"
           >
             <h3 className="text-2xl font-semibold mb-2 text-white">{title}</h3>
             <p className="text-gray-300 text-sm">{description}</p>
-            <p className="mt-2 text-indigo-300 text-xs italic">Coming soon…</p>
+            <p className="mt-2 text-yellow-400 text-xs italic">Coming soon…</p>
           </div>
         ))}
       </div>
