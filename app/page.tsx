@@ -9,20 +9,18 @@ export default function Home() {
   return (
     <>
       {/* Background Visual Layer */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Grid */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10 pointer-events-none" />
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10" />
 
-        {/* SVG Background */}
-        <Image
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30" />
+
+        {/* Background Icon as IMG */}
+        <img
           src="/icons/Scheme-2.svg"
           alt="Visual Scheme"
-          layout="fill"
-          objectFit="cover"
-          className="opacity-5 blur-sm grayscale mix-blend-overlay pointer-events-none"
+          className="absolute top-0 right-0 w-[800px] opacity-5 blur-sm grayscale mix-blend-overlay"
         />
       </div>
 
