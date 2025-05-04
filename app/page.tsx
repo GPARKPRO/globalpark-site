@@ -16,11 +16,9 @@ export default function Home() {
         {/* Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30" />
 
-        {/* Background Icon as IMG */}
-        <img
-          src="/icons/Scheme-2.svg"
-          alt="Visual Scheme"
-          className="absolute top-0 right-0 w-[800px] opacity-5 blur-sm grayscale mix-blend-overlay"
+        {/* Icon as Background */}
+        <div
+          className="absolute top-0 right-0 w-[800px] h-[800px] bg-[url('/icons/Scheme-2.svg')] bg-contain bg-no-repeat bg-right-top opacity-10 brightness-125 contrast-125"
         />
       </div>
 
