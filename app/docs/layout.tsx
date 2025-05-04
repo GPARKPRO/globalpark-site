@@ -9,9 +9,15 @@ const navigation = [
     title: 'White Paper',
     basePath: '/docs/white-paper',
     pages: [
-      { label: 'Vision', path: 'vision' },
-      { label: 'Governance', path: 'governance' },
-      { label: 'Tokenomics', path: 'tokenomics' },
+      { label: 'Executive Summary', path: 'executive-summary' },
+      { label: 'Vision & Philosophy', path: 'vision' },
+      { label: 'Digital Heritage', path: 'digital-heritage' },
+      { label: 'Use Cases & Ecosystem', path: 'use-cases' },
+      { label: 'DAO Governance', path: 'governance' },
+      { label: 'GPARK Token', path: 'token' },
+      { label: 'Treasury', path: 'treasury' },
+      { label: 'Roadmap', path: 'roadmap' },
+      { label: 'Legal & Compliance', path: 'legal' },
     ],
   },
   {
@@ -48,7 +54,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         </button>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar Navigation */}
       <aside
         className={`${
           open ? 'block' : 'hidden'
@@ -82,7 +88,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         </nav>
       </aside>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main className="flex-1 p-6 prose prose-invert max-w-none">
         {children}
       </main>
