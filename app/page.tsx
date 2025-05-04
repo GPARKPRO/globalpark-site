@@ -8,7 +8,6 @@ import { getRandomIcon } from '@/lib/getRandomIcon'
 export default function Home() {
   const router = useRouter()
   const [backgroundIcon, setBackgroundIcon] = useState<string | null>(null)
-  const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
     setBackgroundIcon(getRandomIcon())
@@ -18,13 +17,8 @@ export default function Home() {
     <>
       {/* Background Visual Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* Grid */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10" />
-
-        {/* Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30" />
-
-        {/* Dynamic Background Icon */}
         {backgroundIcon && (
           <div
             className="absolute top-0 right-0 w-[80vw] max-w-[800px] h-[80vw] max-h-[800px] bg-no-repeat bg-contain bg-right-top opacity-25 brightness-150 mix-blend-overlay"
@@ -35,7 +29,6 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-6 py-20 text-center md:text-left max-w-6xl mx-auto text-white">
-        {/* Text Section */}
         <div className="md:w-1/2 space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
             Global Park DAO
@@ -49,7 +42,7 @@ export default function Home() {
           </p>
 
           {/* Button Section */}
-          <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start items-center relative">
+          <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start items-center">
             <button
               onClick={() => router.push('/ask-gpt')}
               className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
@@ -72,38 +65,6 @@ export default function Home() {
             >
               Join DAO
             </button>
-
-            {/* Minimal More Menu */}
-            <div className="relative">
-              <button
-                onClick={() => setShowMenu(!showMenu)}
-                className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition duration-200"
-              >
-                ⋯
-              </button>
-              {showMenu && (
-                <div className="absolute top-full right-0 mt-2 bg-black border border-gray-700 rounded shadow-lg z-10 w-40 text-left">
-                  <button
-                    onClick={() => {
-                      setShowMenu(false)
-                      router.push('/tokenomics')
-                    }}
-                    className="block w-full px-4 py-2 hover:bg-gray-800 text-sm"
-                  >
-                    Tokenomics
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowMenu(false)
-                      router.push('/roadmap')
-                    }}
-                    className="block w-full px-4 py-2 hover:bg-gray-800 text-sm"
-                  >
-                    Roadmap
-                  </button>
-                </div>
-              )}
-            </div>
           </div>
         </div>
 
