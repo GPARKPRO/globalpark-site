@@ -61,8 +61,9 @@ export default function DaoPage() {
                 <Image
                   src={`/icons/${icons[i]}.svg`}
                   alt=""
-                  fill
-                  className="absolute inset-0 opacity-10 grayscale blur-sm object-contain mix-blend-luminosity pointer-events-none"
+                  width={200}
+                  height={200}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 grayscale blur-sm object-contain mix-blend-luminosity pointer-events-none"
                 />
               )}
               <div className="relative z-10">
