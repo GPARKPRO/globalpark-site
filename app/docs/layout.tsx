@@ -9,7 +9,7 @@ const navigation = [
     title: 'White Paper',
     basePath: '/docs/white-paper',
     pages: [
-      { label: 'Executive Summary', path: 'executive-summary' },
+      { label: 'Executive Summary', path: 'summary' },
       { label: 'Vision & Philosophy', path: 'vision' },
       { label: 'Digital Heritage', path: 'digital-heritage' },
       { label: 'Use Cases & Ecosystem', path: 'use-cases' },
