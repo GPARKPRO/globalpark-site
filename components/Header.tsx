@@ -39,7 +39,7 @@ export default function Header() {
     { label: 'AI Assistant', icon: <CpuChipIcon className="wm-4 h-4 mr-2" />, path: '/ask-gpt' },
     { label: 'Tokenomics', icon: <ChartBarIcon className="wm-4 h-4 mr-2" />, path: '/tokenomics' },
     { label: 'Roadmap', icon: <MapIcon className="wm-4 h-4 mr-2" />, path: '/roadmap' },
-    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/wall' }
+    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/participation-wall' }
   ]
 
   return (
