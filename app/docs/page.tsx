@@ -40,22 +40,13 @@ export default function DocsIndexPage() {
             <li key={page.path}>
               <Link
                 href={`${whitePaper.basePath}/${page.path}`}
-                className="text-gray-400 hover:text-white transition"
+                className="text-yellow-400 hover:text-yellow-300 transition duration-200"
               >
                 {page.label}
               </Link>
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="mt-16 flex justify-center">
-        <Link
-          href="/docs/white-paper/executive-summary"
-          className="border border-yellow-500 text-yellow-400 px-6 py-3 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
-        >
-          Start Reading →
-        </Link>
       </div>
     </main>
   );
