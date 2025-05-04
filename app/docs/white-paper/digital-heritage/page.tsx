@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Digital Heritage | GlobalPark',
@@ -49,6 +50,20 @@ export default function DigitalHeritagePage() {
         Each NFT will be linked to ENS metadata and registered on IPFS to ensure decentralization and long-term verifiability.
         Ownership of an NFT does not guarantee rights or profit, but offers cultural presence and optional access within a limited, shared domain.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/vision"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Vision & Philosophy
+  </Link>
+  <Link
+    href="/docs/white-paper/use-cases"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Use Cases & Ecosystem →
+  </Link>
+</div>
     </main>
   );
 }
