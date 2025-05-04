@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import Icon from '@/components/Icon';
+import Image from 'next/image';
 import { getRandomIcon } from '@/lib/getRandomIcon';
 
-export default function DaoMintPage() {
+export default function DaoPage() {
   const epochs = [
     { id: 1, range: '#1–100', price: 0.33 },
     { id: 2, range: '#101–200', price: 0.44 },
@@ -27,7 +27,7 @@ export default function DaoMintPage() {
 
   return (
     <div className="min-h-screen bg-black text-white px-6 py-20 relative">
-      <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-cover bg-center" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-purple-400">
@@ -55,16 +55,21 @@ export default function DaoMintPage() {
           {epochs.map((epoch, i) => (
             <div
               key={epoch.id}
-              className="bg-zinc-900/70 border border-zinc-700 rounded-2xl p-6 text-center shadow-inner shadow-black/20 hover:border-yellow-400 hover:shadow-yellow-500/10 transition-all duration-300"
+              className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/80 px-6 py-8 text-center shadow-inner hover:border-yellow-400 transition-all duration-300"
             >
               {icons[i] && (
-                <div className="flex justify-center mb-4">
-                  <Icon name={icons[i]} size={64} className="opacity-90" />
-                </div>
+                <Image
+                  src={`/icons/${icons[i]}.svg`}
+                  alt=""
+                  fill
+                  className="absolute inset-0 opacity-10 grayscale blur-sm object-contain mix-blend-luminosity pointer-events-none"
+                />
               )}
-              <h3 className="text-2xl font-bold text-white mb-1">Epoch {epoch.id}</h3>
-              <p className="text-sm text-gray-400">{epoch.range}</p>
-              <p className="text-yellow-400 font-semibold text-lg mt-3">{epoch.price.toFixed(2)} ETH</p>
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold text-white mb-1">Epoch {epoch.id}</h3>
+                <p className="text-sm text-gray-400">{epoch.range}</p>
+                <p className="text-yellow-400 font-semibold text-lg mt-3">{epoch.price.toFixed(2)} ETH</p>
+              </div>
             </div>
           ))}
         </div>
