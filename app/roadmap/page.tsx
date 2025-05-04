@@ -5,6 +5,7 @@ import Link from 'next/link'
 const roadmap = [
   {
     phase: 'Phase 1: DAO Genesis',
+    current: true,
     items: [
       'Deploy GPARK Token & DAO Contracts',
       'Form Multisig DAO Council',
@@ -47,12 +48,16 @@ export default function RoadMapPage() {
         {roadmap.map((section, idx) => (
           <div
             key={idx}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-white transition group"
+            className={`rounded-xl p-6 group transition border ${
+              section.current
+                ? 'border-yellow-500 bg-yellow-900/10'
+                : 'border-zinc-800 bg-zinc-900'
+            }`}
           >
             <h2 className="text-2xl font-semibold mb-4 group-hover:text-white">
               {section.phase}
             </h2>
-            <ul className="list-disc list-inside text-gray-400 group-hover:text-gray-200 space-y-1">
+            <ul className="list-disc list-inside text-gray-400 group-hover:text-gray-200 space-y-1 pl-2">
               {section.items.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
@@ -66,7 +71,7 @@ export default function RoadMapPage() {
           href="/"
           className="inline-block bg-white text-black px-5 py-2 rounded font-medium hover:bg-gray-200 transition"
         >
-          ← Back to Home
+          ⬅ Back to Home
         </Link>
       </div>
     </div>
