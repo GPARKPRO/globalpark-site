@@ -38,6 +38,14 @@ export default function DocsIndexPage() {
           ))}
         </ul>
       </div>
+      <div className="mt-16 flex justify-center">
+  <Link
+    href="/docs/white-paper/summary"
+    className="border border-yellow-500 text-yellow-400 px-6 py-3 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
+  >
+    Start Reading White Paper →
+  </Link>
+</div>
     </main>
   );
 }
