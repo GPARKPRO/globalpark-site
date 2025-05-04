@@ -20,9 +20,9 @@ export default function DocsIndexPage() {
   return (
     <main className="relative max-w-4xl mx-auto px-6 py-16">
       {/* Decorative Background Icon */}
-      <div className="absolute top-8 right-8 opacity-10 w-24 h-24 pointer-events-none select-none">
-        <img src="/icons/Scheme-2.svg" alt="" className="w-full h-full" />
-      </div>
+      <div className="absolute top-8 right-8 opacity-20 w-40 h-40 pointer-events-none select-none brightness-125 rotate-12">
+  <img src="/icons/Scheme-2.svg" alt="" className="w-full h-full" />
+</div>
 
       <h1 className="text-3xl font-bold mb-6 text-white">Documentation</h1>
 
