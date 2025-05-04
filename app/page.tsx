@@ -18,8 +18,10 @@ export default function Home() {
 
         {/* Icon as Background */}
         <div
-          className="absolute top-0 right-0 w-[800px] h-[800px] bg-[url('/icons/Scheme-2.svg')] bg-contain bg-no-repeat bg-right-top opacity-10 brightness-125 contrast-125"
-        />
+  className="absolute top-0 right-0 w-[800px] h-[800px] 
+  bg-[url('/icons/Scheme-2.svg')] bg-contain bg-no-repeat bg-right-top 
+  opacity-25 brightness-150 mix-blend-overlay"
+/>
       </div>
 
       {/* Main Content */}
