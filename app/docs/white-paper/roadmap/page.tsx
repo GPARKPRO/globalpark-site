@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Roadmap | GlobalPark',
@@ -62,6 +63,20 @@ export default function RoadmapPage() {
         This roadmap is intentionally adaptive. The DAO may vote to accelerate, pause, or reorient phases
         as context and community evolve. What matters is not how fast we move — but how meaningfully we build.
       </p>
+      <div className="mt-16 flex justify-between items-center gap-4 text-sm">
+  <Link
+    href="/docs/white-paper/treasury"
+    className="text-gray-400 hover:text-white border border-white/20 px-4 py-2 rounded"
+  >
+    ← Previous: Treasury
+  </Link>
+  <Link
+    href="/docs/white-paper/legal"
+    className="text-yellow-400 hover:bg-yellow-400 hover:text-black border border-yellow-500 px-4 py-2 rounded transition"
+  >
+    Next: Legal & Compliance →
+  </Link>
+</div>
     </main>
   );
 }
