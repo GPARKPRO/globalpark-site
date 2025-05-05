@@ -45,13 +45,14 @@ const navigation = [
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <>
+      {/* Мобильные кнопки */}
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
-        <MobileDocsNav />
+        <MobileDocSectionNav />
         <MobileAllDocsNav />
       </div>
 
       <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
-        {/* Боковая навигация — только на десктопе */}
+        {/* Боковая навигация (десктоп) */}
         <aside className="hidden md:block w-64 p-6 border-r border-white/10 bg-black sticky top-24 self-start max-h-screen overflow-auto">
           <nav className="flex flex-col gap-6">
             {navigation.map((section) => (
@@ -79,6 +80,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </nav>
         </aside>
 
+        {/* Контент */}
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
         </main>
