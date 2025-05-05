@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 const sections = [
-  { id: 'overview', label: 'Introduction' },
+  { id: 'introduction', label: 'Introduction' },
   { id: 'utility', label: 'Token Utility' },
   { id: 'distribution', label: 'Distribution' },
   { id: 'governance', label: 'Governance' },
@@ -15,7 +16,7 @@ export default function TokenomicsNav() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const handler = () => {
+    const handleScroll = () => {
       const offsets = sections.map(({ id }) => {
         const el = document.getElementById(id);
         if (!el) return { id, top: Infinity };
@@ -26,20 +27,21 @@ export default function TokenomicsNav() {
       setActiveId(visible.id);
     };
 
-    window.addEventListener('scroll', handler);
-    return () => window.removeEventListener('scroll', handler);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav className="sticky top-24 text-sm font-medium w-48 hidden lg:block">
+    <nav className="sticky top-24 text-sm font-medium space-y-3">
       <ul className="space-y-2 border-l border-neutral-700 pl-4">
         {sections.map(({ id, label }) => (
           <li key={id}>
             <a
               href={`#${id}`}
-              className={`block hover:text-yellow-500 transition-colors ${
-                activeId === id ? 'text-yellow-500' : 'text-neutral-400'
-              }`}
+              className={clsx(
+                'block transition-colors hover:text-yellow-400',
+                activeId === id ? 'text-yellow-400' : 'text-neutral-500'
+              )}
             >
               {label}
             </a>
