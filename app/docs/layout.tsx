@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-import MobileDocsNav from '@/components/docs/common/MobileDocsNav';
+import MobileDocSectionNav from '@/components/docs/common/MobileDocSectionNav';
 import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
 
 const navigation = [
