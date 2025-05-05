@@ -33,7 +33,7 @@ export default function DocumentationLayout({ children, nav }: Props) {
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
 
-        <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
+        <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-20 flex justify-between pointer-events-auto">
           {!isWhitepaper && <MobileDocSectionNav />}
           <MobileAllDocsNav />
         </div>
