@@ -45,7 +45,6 @@ const navigation = [
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      {/* Мобильные кнопки */}
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
         <MobileDocsNav />
         <MobileAllDocsNav />
@@ -80,7 +79,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </nav>
         </aside>
 
-        {/* Контент */}
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
         </main>
