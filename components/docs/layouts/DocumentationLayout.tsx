@@ -14,10 +14,9 @@ export default function DocumentationLayout({ children, nav }: Props) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 pt-20 pb-32 prose dark:prose-invert max-w-none">
-        {/* Mobile Navigation */}
+      <main className="flex-1 pt-20 pb-32 max-w-none">
         <MobileDocsNav />
-        {children}
+        <div className="prose dark:prose-invert">{children}</div>
       </main>
     </div>
   );
