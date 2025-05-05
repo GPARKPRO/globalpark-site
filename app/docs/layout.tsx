@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
@@ -10,7 +10,7 @@ import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
 const navigation = [
   {
     title: 'White Paper',
-    basePath: '/docs/white-paper',
+    basePath: '/docs/whitepaper',
     pages: [
       { label: 'Executive Summary', path: 'summary' },
       { label: 'Vision & Philosophy', path: 'vision' },
@@ -43,17 +43,17 @@ const navigation = [
 ];
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
   return (
     <>
-      {/* Мобильные кнопки */}
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
-        <MobileDocSectionNav />
+        {!pathname?.startsWith('/docs/whitepaper') && <MobileDocSectionNav />}
         <MobileAllDocsNav />
       </div>
 
       <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
-        {/* Боковая навигация (десктоп) */}
-        <aside className="hidden md:block w-64 p-6 border-r border-white/10 bg-black sticky top-24 self-start max-h-screen overflow-auto">
+        <aside className="hidden md:block w-64 p-6 border-r border-white/10 sticky top-24 self-start max-h-screen overflow-auto">
           <nav className="flex flex-col gap-6">
             {navigation.map((section) => (
               <div key={section.title}>
@@ -80,7 +80,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </nav>
         </aside>
 
-        {/* Контент */}
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
         </main>
