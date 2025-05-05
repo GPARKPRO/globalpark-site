@@ -1,12 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function MobileDocsNav() {
   const [open, setOpen] = useState(false);
-  const firstLinkRef = useRef<HTMLAnchorElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -20,15 +18,21 @@ export default function MobileDocsNav() {
     return () => document.removeEventListener('click', handleClick);
   }, [open]);
 
-  useEffect(() => {
-    if (open && firstLinkRef.current) {
-      firstLinkRef.current.focus();
-    }
-  }, [open]);
+  const links = [
+    { id: 'introduction', label: 'Introduction' },
+    { id: 'utility', label: 'Token Utility' },
+    { id: 'supply', label: 'Total Supply' },
+    { id: 'allocation', label: 'Token Allocation' },
+    { id: 'vesting', label: 'Vesting' },
+    { id: 'use-cases', label: 'Utility & Use Cases' },
+    { id: 'growth', label: 'Demand & Growth' },
+    { id: 'modules', label: 'Future Modules' },
+  ];
 
   return (
-    <div className="lg:hidden relative z-50 scroll-smooth">
-      <div className="fixed top-32 left-4 z-40">
+    <div className="lg:hidden fixed top-32 left-4 z-40 w-full pr-4">
+      <div className="relative w-full max-w-screen-lg">
+
         <button
           onClick={() => setOpen(!open)}
           className="flex items-center gap-2 text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-300 transition-colors border border-yellow-400 rounded-md px-4 py-2 shadow-md"
@@ -45,37 +49,22 @@ export default function MobileDocsNav() {
             </>
           )}
         </button>
-      </div>
 
-      <div
-        ref={menuRef}
-        className={`absolute top-24 left-4 w-64 transition-all duration-200 transform ${
-          open
-            ? 'scale-100 opacity-100 pointer-events-auto'
-            : 'scale-95 opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg space-y-2">
-          {[
-            { id: 'introduction', label: 'Introduction' },
-            { id: 'utility', label: 'Token Utility' },
-            { id: 'supply', label: 'Total Supply' },
-            { id: 'allocation', label: 'Token Allocation' },
-            { id: 'vesting', label: 'Vesting' },
-            { id: 'use-cases', label: 'Utility & Use Cases' },
-            { id: 'growth', label: 'Demand & Growth' },
-            { id: 'modules', label: 'Future Modules' },
-          ].map(({ id, label }, index) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              ref={index === 0 ? firstLinkRef : undefined}
-              className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
-            >
-              {label}
-            </a>
-          ))}
-        </div>
+        {open && (
+          <div className="absolute top-full left-0 mt-2 w-full max-w-screen-lg border border-neutral-700 rounded bg-neutral-900 p-6 shadow-lg">
+            <div className="grid grid-cols-2 gap-4">
+              {links.map(({ id, label }, index) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
+                >
+                  {`${index + 1}. ${label}`}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
