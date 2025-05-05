@@ -29,8 +29,9 @@ export default function MobileDocSectionNav() {
     { id: 'modules', label: 'Future Modules' },
   ];
 
-  const column1 = links.filter((_, i) => i % 2 === 0);
-  const column2 = links.filter((_, i) => i % 2 !== 0);
+  const halfway = Math.ceil(links.length / 2);
+  const column1 = links.slice(0, halfway);
+  const column2 = links.slice(halfway);
 
   return (
     <div className="relative">
@@ -61,7 +62,7 @@ export default function MobileDocSectionNav() {
                   href={`#${link.id}`}
                   className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
                 >
-                  {`${index * 2 + 1}. ${link.label}`}
+                  {`${index + 1}. ${link.label}`}
                 </a>
               ))}
             </div>
@@ -72,7 +73,7 @@ export default function MobileDocSectionNav() {
                   href={`#${link.id}`}
                   className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
                 >
-                  {`${index * 2 + 2}. ${link.label}`}
+                  {`${index + column1.length + 1}. ${link.label}`}
                 </a>
               ))}
             </div>
