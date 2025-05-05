@@ -1,11 +1,28 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import MobileDocSectionNav from '@/components/docs/common/MobileDocSectionNav';
+import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
 
 interface Props {
-  children: React.ReactNode;
-  nav?: React.ReactNode;
+  children: ReactNode;
+  nav?: ReactNode;
 }
 
 export default function DocumentationLayout({ children, nav }: Props) {
+  const pathname = usePathname();
+  const [isWhitepaper, setIsWhitepaper] = useState(false);
+
+  useEffect(() => {
+    if (pathname && pathname.startsWith('/docs/whitepaper')) {
+      setIsWhitepaper(true);
+    } else {
+      setIsWhitepaper(false);
+    }
+  }, [pathname]);
+
   return (
     <div className="relative flex flex-col lg:flex-row w-full max-w-screen-xl mx-auto px-6 lg:px-12 xl:px-20">
       {/* Desktop Navigation */}
@@ -15,7 +32,12 @@ export default function DocumentationLayout({ children, nav }: Props) {
 
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
-        <MobileDocSectionNav />
+
+        <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
+          {!isWhitepaper && <MobileDocSectionNav />}
+          <MobileAllDocsNav />
+        </div>
+
         <div className="prose dark:prose-invert">{children}</div>
       </main>
     </div>
