@@ -10,7 +10,7 @@ export default function MobileDocsNav() {
   return (
     <div className="lg:hidden">
       {/* Sticky toggle button */}
-      <div className="sticky top-20 z-10 bg-neutral-900 border-b border-neutral-700 px-4 py-2 mb-4">
+      <div className="sticky top-20 z-30 px-4 py-2 mb-4">
         <button
           onClick={() => setOpen(!open)}
           className="flex items-center gap-2 text-sm font-medium text-yellow-400 border border-yellow-400 rounded px-4 py-2"
@@ -31,7 +31,7 @@ export default function MobileDocsNav() {
 
       {/* Collapsible menu */}
       {open && (
-        <div className="border border-neutral-700 rounded mx-4 p-4 bg-neutral-900 mb-6">
+        <div className="mx-4 mb-6">
           <TokenomicsNav />
         </div>
       )}
