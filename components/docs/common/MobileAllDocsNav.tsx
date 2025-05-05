@@ -29,11 +29,11 @@ export default function MobileAllDocsNav() {
   ];
 
   return (
-    <div className="lg:hidden fixed top-32 right-4 z-40">
-      <div className="relative">
+    <div className="lg:hidden fixed top-32 right-4 z-50">
+      <div className="relative z-50">
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center gap-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 transition-colors border border-white/30 rounded-md px-4 py-2 shadow-md backdrop-blur"
+          className="flex items-center gap-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 transition-colors border border-white/30 rounded-md px-4 py-2 shadow-md backdrop-blur focus:outline-none focus:ring-2 focus:ring-yellow-400"
         >
           {open ? (
             <>
