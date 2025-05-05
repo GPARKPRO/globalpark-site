@@ -1,15 +1,13 @@
 import dynamic from 'next/dynamic';
+import DocumentationLayout from '@/components/docs/layouts/DocumentationLayout';
 import TokenomicsNav from '@/components/docs/TokenomicsNav';
 
-const Overview = dynamic(() => import('@/components/docs/tokenomics/Introduction'));
+const Introduction = dynamic(() => import('@/components/docs/tokenomics/Introduction'));
 
 export default function TokenomicsPage() {
   return (
-    <div className="flex gap-10">
-      <TokenomicsNav />
-      <div className="prose dark:prose-invert flex-1 py-10">
-        <Overview />
-      </div>
-    </div>
+    <DocumentationLayout nav={<TokenomicsNav />}>
+      <Introduction />
+    </DocumentationLayout>
   );
 }
