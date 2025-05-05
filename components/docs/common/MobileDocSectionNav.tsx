@@ -30,7 +30,7 @@ export default function MobileDocSectionNav() {
   ];
 
   return (
-    <div className="lg:hidden fixed top-[160px] left-4 z-20 w-full pr-4 pointer-events-auto">
+    <div className="lg:hidden fixed top-[160px] left-4 z-10 w-auto mr-[120px] pointer-events-auto">
       <div className="relative w-full max-w-screen-lg">
         <button
           onClick={() => setOpen(!open)}
