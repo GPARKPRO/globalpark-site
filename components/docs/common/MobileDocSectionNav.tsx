@@ -1,31 +1,10 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function MobileDocSectionNav() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  if (
-  !pathname ||
-  pathname === '/docs' ||
-  pathname.startsWith('/docs/white-paper')
-) {
-  return null;
-}
-
-  const links = [
-    { id: 'introduction', label: 'Introduction' },
-    { id: 'utility', label: 'Token Utility' },
-    { id: 'supply', label: 'Total Supply' },
-    { id: 'allocation', label: 'Token Allocation' },
-    { id: 'vesting', label: 'Vesting' },
-    { id: 'use-cases', label: 'Utility & Use Cases' },
-    { id: 'growth', label: 'Demand & Growth' },
-    { id: 'modules', label: 'Future Modules' },
-  ];
 
   useEffect(() => {
     if (!open) return;
@@ -39,8 +18,19 @@ export default function MobileDocSectionNav() {
     return () => document.removeEventListener('click', handleClick);
   }, [open]);
 
+  const links = [
+    { id: 'introduction', label: 'Introduction' },
+    { id: 'utility', label: 'Token Utility' },
+    { id: 'supply', label: 'Total Supply' },
+    { id: 'allocation', label: 'Token Allocation' },
+    { id: 'vesting', label: 'Vesting' },
+    { id: 'use-cases', label: 'Utility & Use Cases' },
+    { id: 'growth', label: 'Demand & Growth' },
+    { id: 'modules', label: 'Future Modules' },
+  ];
+
   return (
-    <div className="lg:hidden fixed top-32 left-4 z-40 w-full pr-4">
+    <div className="lg:hidden fixed top-36 left-4 z-30 w-full pr-4">
       <div className="relative w-full max-w-screen-lg">
         <button
           onClick={() => setOpen(!open)}
