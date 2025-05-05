@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -44,6 +44,15 @@ export default function DaoPage() {
           Epochs increase the mint price by design. This curve rewards early contributors while preserving fairness.
         </p>
 
+        <video
+          src="/videos/NFT_GOV(3.9).mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full max-w-3xl mx-auto mb-10 rounded-lg shadow-lg"
+        />
+
         <button
           disabled
           className="bg-yellow-400/30 text-black/50 px-8 py-3 rounded-xl text-lg font-semibold cursor-not-allowed"
@@ -80,7 +89,7 @@ export default function DaoPage() {
             href="/"
             className="inline-block bg-white text-black px-6 py-2 rounded hover:bg-gray-200 transition font-medium"
           >
-            ← Back to Home
+            🔙 Back to Home
           </a>
         </div>
       </div>
