@@ -10,7 +10,7 @@ import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
 const navigation = [
   {
     title: 'White Paper',
-    basePath: '/docs/whitepaper',
+    basePath: '/docs/white-paper',
     pages: [
       { label: 'Executive Summary', path: 'summary' },
       { label: 'Vision & Philosophy', path: 'vision' },
@@ -48,7 +48,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
-        {!pathname?.startsWith('/docs/whitepaper') && <MobileDocSectionNav />}
+        {!pathname?.startsWith('/docs/white-paper') && <MobileDocSectionNav />}
         <MobileAllDocsNav />
       </div>
 
