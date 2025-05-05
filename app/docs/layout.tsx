@@ -4,9 +4,6 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-import MobileDocSectionNav from '@/components/docs/common/MobileDocSectionNav';
-import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
-
 const navigation = [
   {
     title: 'White Paper',
@@ -34,13 +31,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
-        {!pathname?.startsWith('/docs/white-paper') && !pathname?.startsWith('/docs') && (
-          <MobileDocSectionNav />
-        )}
-        <MobileAllDocsNav />
-      </div>
-
       <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
         <aside className="hidden md:block w-64 p-6 border-r border-white/10 sticky top-24 self-start max-h-screen overflow-auto">
           <nav className="flex flex-col gap-6">
