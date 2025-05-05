@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { getRandomIcon } from '@/lib/getRandomIcon'
@@ -15,6 +16,28 @@ export default function Home() {
 
   return (
     <>
+      {/* Structured Data for Google */}
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Global Park DAO",
+              url: "https://globalpark.io",
+              logo: "https://globalpark.io/logo.png",
+              description:
+                "A decentralized initiative for art, technology and collective memory preservation.",
+              sameAs: [
+                "https://twitter.com/GlobalPark_io",
+                "https://github.com/GPARKPRO/globalpark-site"
+              ]
+            })
+          }}
+        />
+      </Head>
+
       {/* Background Visual Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10" />
@@ -27,58 +50,70 @@ export default function Home() {
         )}
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-6 py-20 text-center md:text-left max-w-6xl mx-auto text-white">
-        <div className="md:w-1/2 space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-white">
+        {/* Header */}
+        <header className="mb-12 text-center md:text-left">
+          <h1
+            id="main-heading"
+            className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
+          >
             Global Park DAO
           </h1>
-          <p className="text-lg md:text-xl font-light">
+          <p className="mt-4 text-lg md:text-xl font-light max-w-2xl">
             A Decentralized Initiative for Art, Technology & Collective Memory
           </p>
-          <p className="text-sm text-gray-400 max-w-md md:max-w-full font-mono">
-            We’re building a decentralized initiative where every token and action contributes
-            to preserving digital and physical heritage.
+        </header>
+
+        {/* CTA Section */}
+        <section aria-labelledby="main-heading" className="mb-16">
+          <p className="text-sm text-gray-400 max-w-2xl font-mono mb-6">
+            We’re building a decentralized initiative where every token and action contributes to preserving digital and physical heritage.
           </p>
 
-          {/* Button Section */}
-          <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start items-center">
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <button
               onClick={() => router.push('/ask-gpt')}
-              className="border border-pink-500 text-pink-500 px-4 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
+              className="border border-pink-500 text-pink-500 px-5 py-2 rounded hover:bg-pink-500 hover:text-black transition duration-200 animate-pulse"
+              aria-label="Ask AI Assistant"
             >
               AI Assistant
             </button>
-
             <button
               onClick={() => router.push('/docs')}
-              className="border border-gray-500 text-gray-300 px-4 py-2 rounded hover:bg-white hover:text-black transition duration-200"
+              className="border border-gray-500 text-gray-300 px-5 py-2 rounded hover:bg-white hover:text-black transition duration-200"
+              aria-label="Read Documentation"
             >
               Docs
             </button>
-
             <button
               onClick={() => router.push('/dao')}
-              className="border border-yellow-500 text-yellow-400 px-4 py-2 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
+              className="border border-yellow-500 text-yellow-400 px-5 py-2 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
+              aria-label="Join the DAO"
             >
               Join DAO
             </button>
           </div>
-        </div>
+        </section>
 
         {/* Logo Section */}
-        <div className="mt-10 md:mt-0 md:w-1/2 flex justify-center md:justify-end">
+        <aside className="flex justify-center md:justify-end">
           <div className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]">
             <Image
               src="/logo.png"
-              alt="Global Park Logo"
+              alt="Global Park DAO Logo"
               layout="fill"
               objectFit="contain"
               className="animate-pulse drop-shadow-lg"
+              priority
             />
           </div>
-        </div>
-      </div>
+        </aside>
+
+        {/* Footer */}
+        <footer className="mt-16 text-center text-xs text-gray-500">
+          © {new Date().getFullYear()} Global Park DAO — All rights reserved.
+        </footer>
+      </main>
     </>
   )
 }
