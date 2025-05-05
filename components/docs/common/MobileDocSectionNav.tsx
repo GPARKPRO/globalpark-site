@@ -8,7 +8,7 @@ export default function MobileDocSectionNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  if (pathname.includes('/docs/whitepaper')) return null;
+  if (!pathname || pathname.startsWith('/docs/whitepaper')) return null;
 
   const links = [
     { id: 'introduction', label: 'Introduction' },
