@@ -30,7 +30,7 @@ export default function MobileDocSectionNav() {
   ];
 
   return (
-    <div className="lg:hidden fixed top-36 left-4 z-30 w-full pr-4">
+    <div className="lg:hidden fixed top-[160px] left-4 z-10 w-full pr-4 pointer-events-auto">
       <div className="relative w-full max-w-screen-lg">
         <button
           onClick={() => setOpen(!open)}
@@ -50,7 +50,7 @@ export default function MobileDocSectionNav() {
         </button>
 
         {open && (
-          <div className="absolute top-full left-0 mt-2 w-[22rem] border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg">
+          <div className="absolute top-full left-0 mt-2 w-[22rem] border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg z-30">
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
               {links.map(({ id, label }, index) => (
                 <a
