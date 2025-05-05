@@ -6,10 +6,12 @@ import clsx from 'clsx';
 const sections = [
   { id: 'introduction', label: 'Introduction' },
   { id: 'TokenUtility', label: 'Token Utility' },
-  { id: 'distribution', label: 'Distribution' },
-  { id: 'governance', label: 'Governance' },
-  { id: 'deflation', label: 'Deflation' },
-  { id: 'compliance', label: 'Compliance' },
+  { id: 'supply', label: 'Total Supply' },
+  { id: 'distribution', label: 'Token Allocation' },
+  { id: 'vesting', label: 'Vesting' },
+  { id: 'use-cases', label: 'Utility & Use Cases' },
+  { id: 'growth', label: 'Demand & Growth' },
+  { id: 'modules', label: 'Future Modules' }
 ];
 
 export default function TokenomicsNav() {
