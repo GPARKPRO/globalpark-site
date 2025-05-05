@@ -25,7 +25,7 @@ const navigation = [
   },
   {
     title: 'Tokenomics',
-    basePath: 'docs/tokenomics',
+    basePath: '/docs/tokenomics',
   },
 ];
 
@@ -35,7 +35,9 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-[9999] flex justify-between pointer-events-auto">
-        {!pathname?.startsWith('/docs/white-paper') && <MobileDocSectionNav />}
+        {!pathname?.startsWith('/docs/white-paper') && !pathname?.startsWith('/docs') && (
+          <MobileDocSectionNav />
+        )}
         <MobileAllDocsNav />
       </div>
 
@@ -50,18 +52,20 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                 >
                   {section.title}
                 </Link>
-                <ul className="ml-4 space-y-1">
-                  {section.pages.map((page) => (
-                    <li key={page.path}>
-                      <Link
-                        href={`${section.basePath}/${page.path}`}
-                        className="text-gray-400 hover:text-white text-sm"
-                      >
-                        {page.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {section.pages && (
+                  <ul className="ml-4 space-y-1">
+                    {section.pages.map((page) => (
+                      <li key={page.path}>
+                        <Link
+                          href={`${section.basePath}/${page.path}`}
+                          className="text-gray-400 hover:text-white text-sm"
+                        >
+                          {page.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </nav>
