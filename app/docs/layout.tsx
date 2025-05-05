@@ -56,9 +56,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
 
       {/* Sidebar Navigation */}
       <aside
-        className={`${
-          open ? 'block' : 'hidden'
-        } md:block w-full md:w-64 p-6 border-r border-white/10 bg-black md:static absolute z-10`}
+        className={`${open ? 'block' : 'hidden'} md:block w-full md:w-64 p-6 border-r border-white/10 bg-black md:static absolute z-10`}
       >
         <nav className="flex flex-col gap-6">
           {navigation.map((section) => (
