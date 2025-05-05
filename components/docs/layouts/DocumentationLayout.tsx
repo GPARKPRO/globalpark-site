@@ -33,10 +33,10 @@ export default function DocumentationLayout({ children, nav }: Props) {
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
         {/* Мобильные кнопки */}
-        <div className="lg:hidden sticky top-20 left-0 w-full px-4 z-30 flex justify-between gap-2 bg-black pb-2">
-          {!isWhitepaper && <MobileDocSectionNav />}
-          <MobileAllDocsNav />
-        </div>
+        <div className="lg:hidden fixed top-[76px] left-0 w-full px-4 z-30 flex justify-between items-center pointer-events-auto">
+  {!isWhitepaper && <MobileDocSectionNav />}
+  <MobileAllDocsNav />
+</div>
 
         <div className="prose dark:prose-invert">{children}</div>
       </main>
