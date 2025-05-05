@@ -29,6 +29,9 @@ export default function MobileDocSectionNav() {
     { id: 'modules', label: 'Future Modules' },
   ];
 
+  const column1 = links.filter((_, i) => i % 2 === 0);
+  const column2 = links.filter((_, i) => i % 2 !== 0);
+
   return (
     <div className="relative">
       <button
@@ -50,16 +53,29 @@ export default function MobileDocSectionNav() {
 
       {open && (
         <div className="absolute top-full left-0 mt-2 w-72 border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg z-30">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-            {links.map(({ id, label }, index) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
-              >
-                {`${index + 1}. ${label}`}
-              </a>
-            ))}
+          <div className="flex gap-x-4">
+            <div className="flex flex-col space-y-2">
+              {column1.map((link, index) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
+                >
+                  {`${index * 2 + 1}. ${link.label}`}
+                </a>
+              ))}
+            </div>
+            <div className="flex flex-col space-y-2">
+              {column2.map((link, index) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
+                >
+                  {`${index * 2 + 2}. ${link.label}`}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}
