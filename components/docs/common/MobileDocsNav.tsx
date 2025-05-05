@@ -1,15 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import TokenomicsNav from '@/components/docs/tokenomics/TokenomicsNav';
+import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function MobileDocsNav() {
   const [open, setOpen] = useState(false);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Автозакрытие при клике на якорь
   useEffect(() => {
     if (!open) return;
     const handleClick = (e: MouseEvent) => {
@@ -22,7 +20,6 @@ export default function MobileDocsNav() {
     return () => document.removeEventListener('click', handleClick);
   }, [open]);
 
-  // Автофокус на первом пункте
   useEffect(() => {
     if (open && firstLinkRef.current) {
       firstLinkRef.current.focus();
@@ -31,8 +28,7 @@ export default function MobileDocsNav() {
 
   return (
     <div className="lg:hidden relative z-50 scroll-smooth">
-      {/* Прямоугольная кнопка слева сверху под Header */}
-      <div className="fixed top-20 left-4 z-40">
+      <div className="fixed top-32 left-4 z-40">
         <button
           onClick={() => setOpen(!open)}
           className="flex items-center gap-2 text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-300 transition-colors border border-yellow-400 rounded-md px-4 py-2 shadow-md"
@@ -44,14 +40,13 @@ export default function MobileDocsNav() {
             </>
           ) : (
             <>
-              <Bars3Icon className="h-5 w-5" />
-              Sections
+              <ChevronDownIcon className="h-5 w-5" />
+              Doc Navigation
             </>
           )}
         </button>
       </div>
 
-      {/* Выпадающее меню под кнопкой */}
       <div
         ref={menuRef}
         className={`absolute top-24 left-4 w-64 transition-all duration-200 transform ${
@@ -61,7 +56,6 @@ export default function MobileDocsNav() {
         }`}
       >
         <div className="border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg space-y-2">
-          {/* Навигация (можно заменить на <TokenomicsNav />) */}
           {[
             { id: 'introduction', label: 'Introduction' },
             { id: 'utility', label: 'Token Utility' },
