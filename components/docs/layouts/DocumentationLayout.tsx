@@ -1,27 +1,18 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
 import MobileDocSectionNav from '@/components/docs/common/MobileDocSectionNav';
 import MobileAllDocsNav from '@/components/docs/common/MobileAllDocsNav';
 
 interface Props {
-  children: ReactNode;
-  nav?: ReactNode;
+  children: React.ReactNode;
+  nav?: React.ReactNode;
 }
 
 export default function DocumentationLayout({ children, nav }: Props) {
   const pathname = usePathname();
-  const [isWhitepaper, setIsWhitepaper] = useState(false);
 
-  useEffect(() => {
-    if (pathname && pathname.startsWith('/docs/whitepaper')) {
-      setIsWhitepaper(true);
-    } else {
-      setIsWhitepaper(false);
-    }
-  }, [pathname]);
+  const showDocNav = !pathname?.startsWith('/docs/white-paper') && !pathname?.startsWith('/docs');
 
   return (
     <div className="relative flex flex-col lg:flex-row w-full max-w-screen-xl mx-auto px-6 lg:px-12 xl:px-20">
@@ -32,9 +23,9 @@ export default function DocumentationLayout({ children, nav }: Props) {
 
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
-
-        <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-20 flex justify-between pointer-events-auto">
-          {!isWhitepaper && <MobileDocSectionNav />}
+        {/* Мобильные кнопки */}
+        <div className="lg:hidden sticky top-16 left-0 w-full px-4 z-30 flex justify-between gap-2">
+          {showDocNav && <MobileDocSectionNav />}
           <MobileAllDocsNav />
         </div>
 
