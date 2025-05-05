@@ -44,7 +44,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
-      {/* Mobile Toggle Button */}
+      {/* Мобильная кнопка */}
       <div className="md:hidden p-4 flex justify-between items-center border-b border-white/10">
         <button
           onClick={() => setOpen(!open)}
@@ -54,9 +54,11 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         </button>
       </div>
 
-      {/* Sidebar Navigation */}
+      {/* Боковая колонка */}
       <aside
-        className={`${open ? 'block' : 'hidden'} md:block w-full md:w-64 p-6 border-r border-white/10 bg-black md:static absolute z-10`}
+        className={`${
+          open ? 'block' : 'hidden'
+        } md:block w-full md:w-64 p-6 border-r border-white/10 bg-black md:static absolute z-10 sticky top-24 self-start max-h-screen overflow-auto`}
       >
         <nav className="flex flex-col gap-6">
           {navigation.map((section) => (
@@ -86,7 +88,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         </nav>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Контент */}
       <main className="flex-1 p-6 prose prose-invert max-w-none">
         {children}
       </main>
