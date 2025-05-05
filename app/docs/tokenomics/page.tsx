@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import TokenomicsNav from '@/components/docs/TokenomicsNav';
 
-const Overview = dynamic(() => import('@/components/docs/tokenomics/Overview'));
+const Overview = dynamic(() => import('@/components/docs/tokenomics/Introduction'));
 
 export default function TokenomicsPage() {
   return (
