@@ -1,4 +1,4 @@
-import MobileDocsNav from '@/components/docs/common/MobileDocsNav';
+import MobileDocSectionNav from '@/components/docs/common/MobileDocSectionNav';
 
 interface Props {
   children: React.ReactNode;
