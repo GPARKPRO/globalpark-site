@@ -53,7 +53,7 @@ export default function Header() {
             ⋯
         </button>
         {showMenu && (
-          <div className="absolute mt-2 w-56 rounded bg-black shadow-lg z-50">
+          <div className="absolute top-full left-0 mt-2 w-56 rounded bg-black shadow-lg z-[9999]">
             {menuItems.map(({ label, icon, path }) => (
               <button
                 key={label}
