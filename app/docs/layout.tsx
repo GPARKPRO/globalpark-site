@@ -43,40 +43,21 @@ const navigation = [
 ];
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
-  const [open, setOpen] = useState(false);
-
   return (
     <>
-      {/* Мобильные кнопки */}
       <div className="lg:hidden fixed top-32 left-0 w-full px-4 z-40 flex justify-between">
         <MobileDocsNav />
         <MobileAllDocsNav />
       </div>
 
       <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row">
-        {/* Кнопка для мобильного сайдбара */}
-        <div className="md:hidden p-4 flex justify-between items-center border-b border-white/10">
-          <button
-            onClick={() => setOpen(!open)}
-            className="text-white text-sm border border-white/30 px-3 py-1 rounded"
-          >
-            {open ? 'Close Menu' : 'Open Menu'}
-          </button>
-        </div>
-
-        {/* Боковое меню по ключевым документам */}
-        <aside
-          className={`${
-            open ? 'block' : 'hidden'
-          } md:block w-full md:w-64 p-6 border-r border-white/10 bg-black md:static absolute z-10 sticky top-24 self-start max-h-screen overflow-auto`}
-        >
+        <aside className="hidden md:block w-64 p-6 border-r border-white/10 bg-black sticky top-24 self-start max-h-screen overflow-auto">
           <nav className="flex flex-col gap-6">
             {navigation.map((section) => (
               <div key={section.title}>
                 <Link
                   href={section.basePath}
                   className="font-semibold text-white hover:underline block mb-1"
-                  onClick={() => setOpen(false)}
                 >
                   {section.title}
                 </Link>
@@ -86,7 +67,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                       <Link
                         href={`${section.basePath}/${page.path}`}
                         className="text-gray-400 hover:text-white text-sm"
-                        onClick={() => setOpen(false)}
                       >
                         {page.label}
                       </Link>
@@ -98,7 +78,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </nav>
         </aside>
 
-        {/* Основной контент */}
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
         </main>
