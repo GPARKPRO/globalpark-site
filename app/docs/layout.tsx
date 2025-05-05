@@ -24,21 +24,8 @@ const navigation = [
     ],
   },
   {
-    title: 'Constitution',
-    basePath: '/docs/constitution',
-    pages: [
-      { label: 'Mission', path: 'mission' },
-      { label: 'Rights', path: 'rights' },
-      { label: 'Values', path: 'values' },
-    ],
-  },
-  {
-    title: 'Onboarding',
-    basePath: '/docs/onboarding',
-    pages: [
-      { label: 'How to Join', path: 'how-to-join' },
-      { label: 'Roles', path: 'roles' },
-    ],
+    title: 'Tokenomics',
+    basePath: 'docs/tokenomics',
   },
 ];
 
