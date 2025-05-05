@@ -24,7 +24,7 @@ export default function MobileDocSectionNav() {
     { id: 'supply', label: 'Total Supply' },
     { id: 'allocation', label: 'Token Allocation' },
     { id: 'vesting', label: 'Vesting' },
-    { id: 'use-cases', label: 'Utility & Use Cases' },
+    { id: 'use-cases', label: 'Use Cases' },
     { id: 'growth', label: 'Demand & Growth' },
     { id: 'modules', label: 'Future Modules' },
   ];
