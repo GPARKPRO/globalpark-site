@@ -1,6 +1,6 @@
 interface Props {
   children: React.ReactNode;
-  nav?: React.ReactNode; // можно передавать любую навигацию
+  nav?: React.ReactNode; // any navigation here
 }
 
 export default function DocumentationLayout({ children, nav }: Props) {
