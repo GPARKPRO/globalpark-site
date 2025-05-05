@@ -7,7 +7,7 @@ const sections = [
   { id: 'introduction', label: 'Introduction' },
   { id: 'TokenUtility', label: 'Token Utility' },
   { id: 'supply', label: 'Total Supply' },
-  { id: 'distribution', label: 'Token Allocation' },
+  { id: 'TokenAllocation', label: 'Token Allocation' },
   { id: 'vesting', label: 'Vesting' },
   { id: 'use-cases', label: 'Utility & Use Cases' },
   { id: 'growth', label: 'Demand & Growth' },
