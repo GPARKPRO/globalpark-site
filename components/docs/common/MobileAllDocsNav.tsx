@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export default function MobileAllDocsNav() {
@@ -29,7 +29,7 @@ export default function MobileAllDocsNav() {
   ];
 
   return (
-    <div className="lg:hidden fixed top-32 right-4 z-40 w-full pr-4 flex justify-end">
+    <div className="lg:hidden fixed top-32 right-4 z-40">
       <div className="relative">
         <button
           onClick={() => setOpen(!open)}
@@ -41,10 +41,7 @@ export default function MobileAllDocsNav() {
               Close
             </>
           ) : (
-            <>
-              <ChevronDownIcon className="h-5 w-5" />
-              All Docs
-            </>
+            <>All Docs</>
           )}
         </button>
 
