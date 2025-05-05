@@ -33,7 +33,7 @@ export default function DocumentationLayout({ children, nav }: Props) {
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
         {/* Мобильные кнопки */}
-        <div className="lg:hidden fixed top-[76px] left-0 w-full px-4 z-30 flex justify-between items-center pointer-events-auto">
+        <div className="lg:hidden fixed top-[96px] left-0 w-full px-4 z-30 flex justify-between items-center pointer-events-auto">
   {!isWhitepaper && <MobileDocSectionNav />}
   <MobileAllDocsNav />
 </div>
