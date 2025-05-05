@@ -1,6 +1,6 @@
 export default function TokenUtility() {
   return (
-    <section id="utility" className="scroll-mt-24">
+    <section id="TokenUtility" className="scroll-mt-24">
       <h2 className="text-2xl font-semibold text-white mb-6">
         2. Purpose and Nature of the GPARK Token
       </h2>
