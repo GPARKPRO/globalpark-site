@@ -1,15 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import TokenomicsNav from '@/components/docs/tokenomics/TokenomicsNav';
 
 export default function MobileDocsNav() {
   const [open, setOpen] = useState(false);
 
+  // Закрытие меню при клике по якорю
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, [open]);
+
   return (
     <div className="lg:hidden">
-      {/* Sticky toggle button */}
       <div className="sticky top-20 z-30 px-4 py-2 mb-4">
         <button
           onClick={() => setOpen(!open)}
@@ -29,7 +43,6 @@ export default function MobileDocsNav() {
         </button>
       </div>
 
-      {/* Collapsible menu */}
       {open && (
         <div className="mx-4 mb-6">
           <TokenomicsNav />
