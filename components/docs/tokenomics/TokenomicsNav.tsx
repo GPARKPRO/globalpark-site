@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 const sections = [
   { id: 'introduction', label: 'Introduction' },
-  { id: 'TokenUtility', label: 'Token Utility' },
+  { id: 'allocation', label: 'Token Utility' },
   { id: 'supply', label: 'Total Supply' },
   { id: 'TokenAllocation', label: 'Token Allocation' },
   { id: 'vesting', label: 'Vesting' },
