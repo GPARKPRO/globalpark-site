@@ -7,7 +7,7 @@ export default function WhitepaperLayout({ children }: { children: ReactNode }) 
   return (
     <>
       {/* Только кнопка All Docs */}
-      <div className="lg:hidden fixed top-[76px] left-0 w-full px-4 z-30 flex justify-end pointer-events-auto">
+      <div className="lg:hidden fixed top-[96px] left-0 w-full px-4 z-30 flex justify-end pointer-events-auto">
         <MobileAllDocsNav />
       </div>
 
