@@ -15,7 +15,7 @@ export default function DocumentationLayout({ children, nav }: Props) {
 
       {/* Main Content */}
       <main className="flex-1 pt-20 pb-32 max-w-none">
-        <MobileDocsNav />
+        <MobileDocSectionNav />
         <div className="prose dark:prose-invert">{children}</div>
       </main>
     </div>
