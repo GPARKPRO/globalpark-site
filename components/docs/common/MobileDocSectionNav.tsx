@@ -8,8 +8,13 @@ export default function MobileDocSectionNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // ❗ Обновлённая проверка пути с дефисом
-  if (!pathname || pathname.startsWith('/docs/white-paper')) return null;
+  if (
+  !pathname ||
+  pathname === '/docs' ||
+  pathname.startsWith('/docs/white-paper')
+) {
+  return null;
+}
 
   const links = [
     { id: 'introduction', label: 'Introduction' },
