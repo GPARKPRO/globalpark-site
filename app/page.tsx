@@ -16,7 +16,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Structured Data for Google */}
       <Head>
         <script
           type="application/ld+json"
@@ -30,7 +29,7 @@ export default function Home() {
               description:
                 "A decentralized initiative for art, technology and collective memory preservation.",
               sameAs: [
-                "https://twitter.com/GlobalPark_io",
+                "https://twitter.com/GlobalParkDAO",
                 "https://github.com/GPARKPRO/globalpark-site"
               ]
             })
@@ -38,7 +37,7 @@ export default function Home() {
         />
       </Head>
 
-      {/* Background Visual Layer */}
+      {/* Background Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover bg-center opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-black opacity-30" />
@@ -50,23 +49,19 @@ export default function Home() {
         )}
       </div>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-white">
-        {/* Header */}
-        <header className="mb-12 text-center md:text-left">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 py-24 text-white flex flex-col md:flex-row items-center justify-between gap-10">
+        {/* Text Content */}
+        <section className="md:w-1/2 text-center md:text-left space-y-6">
           <h1
             id="main-heading"
             className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
           >
             Global Park DAO
           </h1>
-          <p className="mt-4 text-lg md:text-xl font-light max-w-2xl">
+          <p className="text-lg md:text-xl font-light">
             A Decentralized Initiative for Art, Technology & Collective Memory
           </p>
-        </header>
-
-        {/* CTA Section */}
-        <section aria-labelledby="main-heading" className="mb-16">
-          <p className="text-sm text-gray-400 max-w-2xl font-mono mb-6">
+          <p className="text-sm text-gray-400 max-w-xl font-mono">
             We’re building a decentralized initiative where every token and action contributes to preserving digital and physical heritage.
           </p>
 
@@ -95,9 +90,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Logo Section */}
-        <aside className="flex justify-center md:justify-end">
-          <div className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]">
+        {/* Logo Image */}
+        <aside className="md:w-1/2 flex justify-center md:justify-end">
+          <div className="relative w-[200px] h-[200px] md:w-[280px] md:h-[280px]">
             <Image
               src="/logo.png"
               alt="Global Park DAO Logo"
@@ -108,11 +103,6 @@ export default function Home() {
             />
           </div>
         </aside>
-
-        {/* Footer */}
-        <footer className="mt-16 text-center text-xs text-gray-500">
-          © {new Date().getFullYear()} Global Park DAO — All rights reserved.
-        </footer>
       </main>
     </>
   )
