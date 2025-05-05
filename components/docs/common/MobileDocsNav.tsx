@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import TokenomicsNav from '@/components/docs/tokenomics/TokenomicsNav';
 
 export default function MobileDocsNav() {
   const [open, setOpen] = useState(false);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  // Автозакрытие при клике на якорь
+  // Автозакрытие по якорю
   useEffect(() => {
     if (!open) return;
 
@@ -22,10 +24,17 @@ export default function MobileDocsNav() {
     return () => document.removeEventListener('click', handleClick);
   }, [open]);
 
+  // Фокус на первом пункте
+  useEffect(() => {
+    if (open && firstLinkRef.current) {
+      firstLinkRef.current.focus();
+    }
+  }, [open]);
+
   return (
-    <div className="lg:hidden">
-      {/* Плавающая кнопка */}
-      <div className="fixed bottom-6 right-6 z-50">
+    <div className="lg:hidden relative z-50 scroll-smooth">
+      {/* Кнопка в правом верхнем углу */}
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={() => setOpen(!open)}
           className="flex items-center gap-2 text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-300 transition-colors border border-yellow-400 rounded-full px-4 py-2 shadow-lg"
@@ -45,13 +54,37 @@ export default function MobileDocsNav() {
       </div>
 
       {/* Выпадающее меню */}
-      {open && (
-        <div className="fixed inset-0 z-40 bg-black bg-opacity-90 px-6 py-10 overflow-y-auto">
-          <div className="max-w-md mx-auto border border-neutral-700 rounded bg-neutral-900 p-6">
-            <TokenomicsNav />
-          </div>
+      <div
+        ref={menuRef}
+        className={`absolute top-16 right-4 w-64 transition-all duration-200 transform ${
+          open
+            ? 'scale-100 opacity-100 pointer-events-auto'
+            : 'scale-95 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="border border-neutral-700 rounded bg-neutral-900 p-4 shadow-lg space-y-2">
+          {/* Кастомный TokenomicsNav */}
+          {[
+            { id: 'introduction', label: 'Introduction' },
+            { id: 'utility', label: 'Token Utility' },
+            { id: 'supply', label: 'Total Supply' },
+            { id: 'allocation', label: 'Token Allocation' },
+            { id: 'vesting', label: 'Vesting' },
+            { id: 'use-cases', label: 'Utility & Use Cases' },
+            { id: 'growth', label: 'Demand & Growth' },
+            { id: 'modules', label: 'Future Modules' },
+          ].map(({ id, label }, index) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              ref={index === 0 ? firstLinkRef : undefined}
+              className="block text-neutral-300 hover:text-yellow-400 transition-colors text-sm"
+            >
+              {label}
+            </a>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
