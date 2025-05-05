@@ -20,7 +20,7 @@ export default function MobileDocSectionNav() {
 
   const links = [
     { id: 'introduction', label: 'Introduction' },
-    { id: 'utility', label: 'Token Utility' },
+    { id: 'TokenUtility', label: 'Token Utility' },
     { id: 'supply', label: 'Total Supply' },
     { id: 'allocation', label: 'Token Allocation' },
     { id: 'vesting', label: 'Vesting' },
