@@ -21,11 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:title" content="Global Park DAO" />
         <meta property="og:description" content="A Decentralized Initiative for Art, Technology & Collective Memory" />
         <meta property="og:url" content="https://globalpark.io" />
-        <meta property="og:image" content="https://globalpark.io/opengraph-v2.png" />
+        <meta property="og:image" content="https://globalpark.io/OG.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Global Park DAO" />
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
-        <meta name="twitter:image" content="https://globalpark.io/opengraph-v2.png" />
+        <meta name="twitter:image" content="https://globalpark.io/OG.png" />
       </head>
       <body className="bg-black text-white min-h-screen flex flex-col">
         <Header />
