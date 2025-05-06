@@ -1,24 +1,40 @@
 'use client'
 
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import TopicCard from './TopicCard'
+import { fetchTopics } from '@/lib/forum/api'
 
-interface TopicCardProps {
+interface Topic {
   id: string
   title: string
-  replies: number
+  created_at: string
 }
 
-export default function TopicCard({ id, title, replies }: TopicCardProps) {
+export default function TopicList() {
+  const [topics, setTopics] = useState<Topic[]>([])
+
+  useEffect(() => {
+    async function load() {
+      const data = await fetchTopics()
+      setTopics(data)
+    }
+    load()
+  }, [])
+
   return (
-    <Link
-      href={`/forum/${id}`}
-      className="block bg-white/5 border border-white/10 hover:border-pink-500 rounded-xl p-5 transition duration-200 hover:shadow-lg hover:bg-white/10"
-    >
-      <div className="flex items-center justify-between mb-1">
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-        <span className="text-sm text-pink-400">{replies} replies</span>
-      </div>
-      <p className="text-sm text-gray-400">Topic ID: {id.slice(0, 8)}...</p>
-    </Link>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {topics.length === 0 ? (
+        <p className="text-gray-400">No topics yet.</p>
+      ) : (
+        topics.map((topic) => (
+          <TopicCard
+            key={topic.id}
+            id={topic.id}
+            title={topic.title}
+            replies={0} // placeholder
+          />
+        ))
+      )}
+    </div>
   )
 }
