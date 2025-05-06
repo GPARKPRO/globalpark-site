@@ -8,7 +8,7 @@ const client = createPublicClient({
 })
 
 const CACHE_KEY = 'ensCache'
-const CACHE_TTL_MS = 1000 * 60 * 60 * 24 // 24 hours
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 7 // 7 days
 
 function getCache(): Record<string, { name: string; expires: number }> {
   if (typeof window === 'undefined') return {}
