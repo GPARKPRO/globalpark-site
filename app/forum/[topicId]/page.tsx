@@ -39,7 +39,6 @@ export default function TopicPage() {
       if (topic) setTitle(topic.title)
       if (posts) setPosts(posts)
 
-      // Get wallet address if connected
       if (typeof window !== 'undefined' && window.ethereum) {
         const accounts = await window.ethereum.request({ method: 'eth_accounts' })
         if (accounts && accounts.length > 0) {
@@ -66,18 +65,19 @@ export default function TopicPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12 text-white">
-      <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+    <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 py-12 text-white">
+      <h1 className="text-4xl font-extrabold mb-10 text-white/90 tracking-tight">
         {title}
       </h1>
 
       <div className="space-y-6 mb-12">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <PostItem
             key={post.id}
             author={post.author}
             content={post.content}
             createdAt={new Date(post.created_at).toLocaleString()}
+            isFirst={index === 0} // выделяем первый пост
           />
         ))}
       </div>
