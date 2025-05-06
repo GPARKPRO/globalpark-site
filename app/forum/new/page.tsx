@@ -15,14 +15,14 @@ export default function NewTopicPage() {
   const isAdmin = address?.toLowerCase() === ADMIN_ADDRESS
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.ethereum) {
-      window.ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
-        if (accounts && accounts.length > 0) {
-          setAddress(accounts[0])
-        }
-      })
-    }
-  }, [])
+  if (typeof window !== 'undefined' && window.ethereum) {
+    window.ethereum.request({ method: 'eth_accounts' }).then((accounts: string[]) => {
+      if (accounts && accounts.length > 0) {
+        setAddress(accounts[0])
+      }
+    })
+  }
+}, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
