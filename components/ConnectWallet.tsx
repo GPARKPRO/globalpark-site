@@ -21,7 +21,7 @@ export default function ConnectWallet() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         setAddress(accounts[0])
         setConnected(true)
-        router.push('/dashboard')
+        // router.push('/dashboard') // Автоматический редирект удалён
       } catch (err) {
         console.error('Connection error', err)
       }
