@@ -2,17 +2,26 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabaseClient'
 
 export default function NewTopicPage() {
   const [title, setTitle] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!title.trim()) return
 
-    console.log('New topic:', title)
-    router.push('/forum') // placeholder: redirect after save
+    setLoading(true)
+    const { error } = await supabase.from('forum_topics').insert({ title })
+
+    setLoading(false)
+    if (error) {
+      alert('Error creating topic: ' + error.message)
+    } else {
+      router.push('/forum')
+    }
   }
 
   return (
@@ -33,9 +42,10 @@ export default function NewTopicPage() {
 
         <button
           type="submit"
+          disabled={loading}
           className="px-5 py-2 border border-pink-500 text-pink-500 rounded hover:bg-pink-500 hover:text-black transition duration-200"
         >
-          Publish
+          {loading ? 'Creating...' : 'Publish'}
         </button>
       </form>
     </div>
