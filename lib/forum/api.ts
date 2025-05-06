@@ -1,17 +1,22 @@
-// lib/forum/api.ts
-
-import { supabase } from '../supabaseClient'
+import { supabase } from '@/lib/supabaseClient'
 
 export async function fetchTopics() {
   const { data, error } = await supabase
     .from('forum_topics')
-    .select('*')
-    .order('created_at', { ascending: false })
+    .select(`
+      id,
+      title,
+      forum_posts ( id )
+    `)
 
   if (error) {
-    console.error('Error fetching topics:', error.message)
+    console.error(error)
     return []
   }
 
-  return data
+  return data.map((topic) => ({
+    id: topic.id,
+    title: topic.title,
+    replies: Array.isArray(topic.forum_posts) ? topic.forum_posts.length : 0,
+  }))
 }
