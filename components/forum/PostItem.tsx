@@ -27,7 +27,7 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
           <div className="w-10 h-10 rounded-full bg-white/10" />
         )}
         <div className="flex-1">
-          <div className="text-sm text-gray-400 mb-1">
+          <div className="text-sm text-neutral-300 mb-1">
             {ensName ?? shortenAddress(author)} · {createdAt}
           </div>
           <div className="text-white whitespace-pre-line">{content}</div>
