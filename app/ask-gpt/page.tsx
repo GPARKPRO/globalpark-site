@@ -36,7 +36,7 @@ export default function AskGPTPage() {
       </h1>
       <p className="text-center text-gray-400 mb-10">
         Your personal guide to all documents of the Global Park DAO — White Paper, Constitution, Tokenomics, and more.
-        Ask questions in any language. The assistant gives structured and trusted answers based on official sources.
+        Ask questions in <span className="text-pink-500 font-semibold">any language</span>. The assistant gives structured and trusted answers based on official sources.
       </p>
 
       <div className="space-y-4 mb-10">
