@@ -10,13 +10,15 @@ export default function TopicCard({ id, title, replies }: TopicCardProps) {
   return (
     <Link
       href={`/forum/${id}`}
-      className="grid grid-cols-12 items-center py-4 px-2 border-b border-white/5 hover:bg-white/5 transition"
+      className="flex items-center justify-between px-4 py-4 border-b border-white/10 hover:bg-white/5 transition"
     >
-      <div className="col-span-7 truncate">
-        <span className="text-white font-medium">{title}</span>
+      <div className="flex-1 min-w-0">
+        <span className="text-white font-medium truncate block">{title}</span>
       </div>
-      <div className="col-span-2 text-sm text-gray-400">{replies}</div>
-      <div className="col-span-3 text-right text-sm text-gray-500">→</div>
+      <div className="flex items-center gap-3 text-sm text-gray-400 pl-4 flex-shrink-0">
+        <span className="text-white">{replies}</span>
+        <span className="text-gray-500">→</span>
+      </div>
     </Link>
   )
 }
