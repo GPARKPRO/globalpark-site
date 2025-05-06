@@ -32,13 +32,13 @@ export default function ReplyBox({ onSubmit, address }: ReplyBoxProps) {
         placeholder={
           address
             ? isAdmin
-              ? 'Write your reply…'
+              ? 'Write your reply using Markdown (e.g., **bold**, [link](url))'
               : 'Only the admin can reply at this stage.'
             : 'Connect wallet to reply'
         }
         disabled={!address || !isAdmin}
-        rows={5}
-        className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-pink-500"
+        rows={6}
+        className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-pink-500 font-mono"
         required
       />
 
