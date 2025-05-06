@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     url: 'https://globalpark.io/dao',
     images: [
       {
-        url: 'https://globalpark.io/OG',
+        url: 'https://globalpark.io/og',
         width: 1200,
         height: 630,
         alt: 'Global Park DAO'
@@ -21,6 +21,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Global Park DAO',
     description: 'Own a piece of decentralized legacy. Govern space, culture, and permanence on-chain.',
-    images: ['https://globalpark.io/OG.png']
+    images: ['https://globalpark.io/og.png']
   }
 }
