@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ],
               logo: {
                 type: 'image',
-                url: 'https://globalpark.io/opengraph-v2.png'
+                url: 'https://globalpark.io/OG.png'
               }
             })
           }}
