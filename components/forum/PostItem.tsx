@@ -1,4 +1,11 @@
-import { useEnsName } from '@/lib/hooks/useEnsName'
+const { ensName, avatarUrl } = useEnsProfile(author)
+
+<span className="flex items-center gap-2">
+  {avatarUrl && (
+    <img src={avatarUrl} alt="avatar" className="w-5 h-5 rounded-full" />
+  )}
+  {ensName ?? shortenAddress(author)}
+</span>
 
 interface PostItemProps {
   author: string
