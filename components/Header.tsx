@@ -39,7 +39,8 @@ export default function Header() {
     { label: 'AI Assistant', icon: <CpuChipIcon className="wm-4 h-4 mr-2" />, path: '/ask-gpt' },
     { label: 'Tokenomics', icon: <ChartBarIcon className="wm-4 h-4 mr-2" />, path: '/tokenomics' },
     { label: 'Roadmap', icon: <MapIcon className="wm-4 h-4 mr-2" />, path: '/roadmap' },
-    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/participation-wall' }
+    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/participation-wall' },
+    { label: 'Forum', icon: <DocumentTextIcon className="w-4 h-4 mr-2" />, path: '/forum' },
   ]
 
   return (
@@ -50,7 +51,7 @@ export default function Header() {
           className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
           aria-label="Explore"
         >
-            ⋯
+          ⋯
         </button>
         {showMenu && (
           <div className="absolute top-full left-0 mt-2 w-56 rounded bg-black shadow-lg z-[9999]">
