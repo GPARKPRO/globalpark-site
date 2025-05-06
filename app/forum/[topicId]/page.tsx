@@ -1,9 +1,8 @@
-// app/forum/[topicId]/page.tsx
-
 'use client'
 
 import { useParams } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabaseClient'
 import PostItem from '@/components/forum/PostItem'
 import ReplyBox from '@/components/forum/ReplyBox'
 
@@ -11,49 +10,60 @@ interface Post {
   id: string
   author: string
   content: string
-  createdAt: string
+  created_at: string
 }
 
 export default function TopicPage() {
   const { topicId } = useParams()
-  const [posts, setPosts] = useState<Post[]>([
-    {
-      id: '1',
-      author: '0x123...abc',
-      content: 'Welcome to the forum!',
-      createdAt: 'Today',
-    },
-    {
-      id: '2',
-      author: '0x456...def',
-      content: 'How do I join the DAO?',
-      createdAt: 'Today',
-    },
-  ])
+  const [posts, setPosts] = useState<Post[]>([])
+  const [title, setTitle] = useState('Loading...')
 
-  const handleNewReply = (message: string) => {
-    const newPost: Post = {
-      id: Date.now().toString(),
-      author: 'you.eth',
-      content: message,
-      createdAt: 'Now',
+  useEffect(() => {
+    async function load() {
+      const { data: topic } = await supabase
+        .from('forum_topics')
+        .select('title')
+        .eq('id', topicId)
+        .single()
+
+      const { data: posts } = await supabase
+        .from('forum_posts')
+        .select('*')
+        .eq('topic_id', topicId)
+        .order('created_at', { ascending: true })
+
+      if (topic) setTitle(topic.title)
+      if (posts) setPosts(posts)
     }
-    setPosts([...posts, newPost])
+
+    load()
+  }, [topicId])
+
+  const handleNewReply = async (message: string) => {
+    const { data, error } = await supabase.from('forum_posts').insert({
+      topic_id: topicId,
+      author: 'you.eth', // static for now
+      content: message,
+    })
+
+    if (!error && data) {
+      setPosts((prev) => [...prev, data[0]])
+    }
   }
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 text-white">
       <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-        Topic #{topicId}
+        {title}
       </h1>
 
-      <div className="space-y-6 mb-10">
+      <div className="space-y-6 mb-12">
         {posts.map((post) => (
           <PostItem
             key={post.id}
             author={post.author}
             content={post.content}
-            createdAt={post.createdAt}
+            createdAt={new Date(post.created_at).toLocaleString()}
           />
         ))}
       </div>
