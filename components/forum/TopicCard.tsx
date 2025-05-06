@@ -1,27 +1,22 @@
-'use client'
-
 import Link from 'next/link'
-import { FC } from 'react'
 
-export interface TopicCardProps {
+interface TopicCardProps {
   id: string
   title: string
   replies: number
 }
 
-const TopicCard: FC<TopicCardProps> = ({ id, title, replies }) => {
+export default function TopicCard({ id, title, replies }: TopicCardProps) {
   return (
     <Link
       href={`/forum/${id}`}
-      className="block bg-white/5 border border-white/10 hover:border-pink-500 rounded-xl p-5 transition duration-200 hover:shadow-lg hover:bg-white/10"
+      className="grid grid-cols-12 items-center py-4 px-2 border-b border-white/5 hover:bg-white/5 transition"
     >
-      <div className="flex items-center justify-between mb-1">
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-        <span className="text-sm text-pink-400">{replies} replies</span>
+      <div className="col-span-7 truncate">
+        <span className="text-white font-medium">{title}</span>
       </div>
-      <p className="text-sm text-gray-400">Topic ID: {id.slice(0, 8)}...</p>
+      <div className="col-span-2 text-sm text-gray-400">{replies}</div>
+      <div className="col-span-3 text-right text-sm text-gray-500">→</div>
     </Link>
   )
 }
-
-export default TopicCard
