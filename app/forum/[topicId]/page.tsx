@@ -17,6 +17,7 @@ export default function TopicPage() {
   const { topicId } = useParams()
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('Loading...')
+  const [address, setAddress] = useState<string | null>(null)
 
   useEffect(() => {
     async function load() {
@@ -34,15 +35,25 @@ export default function TopicPage() {
 
       if (topic) setTitle(topic.title)
       if (posts) setPosts(posts)
+
+      // Get wallet address if connected
+      if (typeof window !== 'undefined' && window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+        if (accounts && accounts.length > 0) {
+          setAddress(accounts[0])
+        }
+      }
     }
 
     load()
   }, [topicId])
 
   const handleNewReply = async (message: string) => {
+    if (!address) return
+
     const { data, error } = await supabase.from('forum_posts').insert({
       topic_id: topicId,
-      author: 'you.eth', // static for now
+      author: address,
       content: message,
     })
 
