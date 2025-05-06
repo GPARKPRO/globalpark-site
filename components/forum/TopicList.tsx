@@ -21,20 +21,20 @@ export default function TopicList() {
     load()
   }, [])
 
+  if (topics.length === 0) {
+    return <p className="text-gray-400 mt-8">No topics yet.</p>
+  }
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {topics.length === 0 ? (
-        <p className="text-gray-400">No topics yet.</p>
-      ) : (
-        topics.map((topic) => (
-          <TopicCard
-            key={topic.id}
-            id={topic.id}
-            title={topic.title}
-            replies={topic.replies}
-          />
-        ))
-      )}
+    <div className="divide-y divide-white/5">
+      {topics.map((topic) => (
+        <TopicCard
+          key={topic.id}
+          id={topic.id}
+          title={topic.title}
+          replies={topic.replies}
+        />
+      ))}
     </div>
   )
 }
