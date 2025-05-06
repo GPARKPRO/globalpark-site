@@ -68,7 +68,7 @@ export default function TopicPage() {
         ))}
       </div>
 
-      <ReplyBox onSubmit={handleNewReply} />
+      <ReplyBox onSubmit={handleNewReply} address={address} />
     </div>
   )
 }
