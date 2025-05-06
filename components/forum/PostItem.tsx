@@ -1,4 +1,6 @@
 import { useEnsProfile } from '@/lib/hooks/useEnsProfile'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface PostItemProps {
   author: string
@@ -27,10 +29,15 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
           <div className="w-10 h-10 rounded-full bg-white/10" />
         )}
         <div className="flex-1">
-          <div className="text-sm text-neutral-300 mb-1">
+          <div className="text-sm text-neutral-300 mb-2">
             {ensName ?? shortenAddress(author)} · {createdAt}
           </div>
-          <div className="text-white whitespace-pre-line">{content}</div>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            className="prose prose-invert prose-sm max-w-none"
+          >
+            {content}
+          </ReactMarkdown>
         </div>
       </div>
     </div>
