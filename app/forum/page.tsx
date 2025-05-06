@@ -16,6 +16,10 @@ export default function ForumHomePage() {
         </Link>
       </div>
 
+      <p className="mb-6 px-4 py-3 bg-yellow-500/10 border border-yellow-400 text-yellow-300 text-sm rounded">
+        ⚠️ This forum is currently in <strong className="text-yellow-200">alpha version</strong>. Only the project administrator can create or reply to topics.
+      </p>
+
       <TopicList />
     </div>
   )
