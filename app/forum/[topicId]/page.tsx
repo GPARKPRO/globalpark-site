@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import PostItem from '@/components/forum/PostItem'
 import ReplyBox from '@/components/forum/ReplyBox'
+import { useStoreEnsProfile } from '@/lib/hooks/useStoreEnsProfile'
 
 interface Post {
   id: string
@@ -18,6 +19,8 @@ export default function TopicPage() {
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('Loading...')
   const [address, setAddress] = useState<string | null>(null)
+
+  useStoreEnsProfile(address)
 
   useEffect(() => {
     async function load() {
