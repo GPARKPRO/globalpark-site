@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import PostItem from '@/components/forum/PostItem'
 import ReplyBox from '@/components/forum/ReplyBox'
@@ -66,7 +67,13 @@ export default function TopicPage() {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 py-12 text-white">
-      <h1 className="text-4xl font-extrabold mb-10 text-white/90 tracking-tight">
+      <div className="mb-6">
+        <Link href="/forum" className="text-sm text-pink-400 hover:underline">
+          ← Back to Forum
+        </Link>
+      </div>
+
+      <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
         {title}
       </h1>
 
@@ -77,7 +84,7 @@ export default function TopicPage() {
             author={post.author}
             content={post.content}
             createdAt={new Date(post.created_at).toLocaleString()}
-            isFirst={index === 0} // выделяем первый пост
+            isFirst={index === 0}
           />
         ))}
       </div>
