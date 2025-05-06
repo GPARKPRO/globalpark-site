@@ -22,23 +22,26 @@ export default function ReplyBox({ onSubmit, address }: ReplyBoxProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 mt-10">
+    <form onSubmit={handleSubmit} className="mt-10 space-y-4">
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder={address ? 'Write your reply...' : 'Connect wallet to reply'}
+        placeholder={address ? 'Write your reply…' : 'Connect wallet to reply'}
         disabled={!address}
-        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-pink-500"
-        rows={4}
+        rows={5}
+        className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-pink-500"
         required
       />
-      <button
-        type="submit"
-        disabled={loading || !address}
-        className="px-5 py-2 border border-pink-500 text-pink-400 rounded hover:bg-pink-500 hover:text-black transition duration-200"
-      >
-        {loading ? 'Sending...' : 'Reply'}
-      </button>
+
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          disabled={loading || !address}
+          className="px-5 py-2 bg-pink-500 hover:bg-pink-600 text-black rounded transition disabled:opacity-40"
+        >
+          {loading ? 'Sending…' : 'Reply'}
+        </button>
+      </div>
     </form>
   )
 }
