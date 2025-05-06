@@ -10,7 +10,7 @@ type SeoProps = {
 export default function SEO({
   title = 'Global Park DAO',
   description = 'A decentralized initiative for art, technology, and collective memory.',
-  image = '/opengraph-v2.png',
+  image = '/OG.png',
   url = 'https://globalpark.io',
 }: SeoProps) {
   return (
