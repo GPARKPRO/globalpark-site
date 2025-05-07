@@ -1,3 +1,5 @@
+'use client'
+
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -85,3 +87,4 @@ export default function TopicPage() {
     </div>
   )
 }
+
