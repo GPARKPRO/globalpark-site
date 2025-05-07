@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Script from 'next/script'
 import Web3Provider from '../components/Web3Provider'
-import WalletModalPortal from '../components/WalletModalPortal'
 
 export const metadata: Metadata = {
   title: 'Global Park',
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <Footer />
         </Web3Provider>
-        <WalletModalPortal />
         <Script
           strategy="afterInteractive"
           type="application/ld+json"
