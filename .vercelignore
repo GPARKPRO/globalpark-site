@@ -1,6 +1,0 @@
-# Страницы, использующие Web3
-app/dashboard/page.tsx
-app/forum/[topicId]/page.tsx
-app/forum/new/page.tsx
-
-
