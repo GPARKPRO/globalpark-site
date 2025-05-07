@@ -30,3 +30,5 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
     </WagmiConfig>
   )
 }
+
+
