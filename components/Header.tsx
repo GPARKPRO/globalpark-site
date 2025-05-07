@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-// import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
   UserGroupIcon,
@@ -85,7 +84,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
-      //  <ConnectWallet />
+      {/* <ConnectWallet /> */} //
       </div>
     </header>
   )
