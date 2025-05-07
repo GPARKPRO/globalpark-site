@@ -15,7 +15,11 @@ export default function WalletModalPortal() {
 
   return createPortal(
     <div className="fixed z-[9999] inset-0 pointer-events-none">
-      <div className="absolute right-4 top-4 pointer-events-auto">
+      <div
+        className="absolute right-4 top-4 pointer-events-auto"
+        role="dialog"
+        aria-modal="true"
+      >
         <ConnectWallet />
       </div>
     </div>,
