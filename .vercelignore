@@ -1,4 +1,2 @@
-app/forum/new/page.tsx
 app/forum/[topicId]/page.tsx
-app/forum/new/_page.tsx
 app/forum/[topicId]/_page.tsx
