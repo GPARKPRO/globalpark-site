@@ -3,8 +3,7 @@
 
 # Но включаем необходимые для запуска файлы
 
-!tsconfig.json
-!public/**
+
 
 # Включаем необходимые компоненты
 !components/ConnectWallet.tsx
