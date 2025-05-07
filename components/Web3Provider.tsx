@@ -24,7 +24,7 @@ const config = createConfig({
 export default function Web3Provider({ children }: { children: ReactNode }) {
   return (
     <WagmiConfig config={config}>
-      <RainbowKitProvider locale="en-US" chains={chains}>
+      <RainbowKitProvider chains={chains}>
         {children}
       </RainbowKitProvider>
     </WagmiConfig>
