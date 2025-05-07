@@ -1,3 +1,5 @@
+const path = require('path');
+
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
@@ -56,8 +58,11 @@ const nextConfig = {
         headers: securityHeaders
       }
     ];
+  },
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    return config;
   }
 };
 
 module.exports = nextConfig;
-
