@@ -4,11 +4,9 @@ app/dashboard/page.tsx
 app/forum/[topicId]/page.tsx
 app/forum/new/page.tsx
 components/Header.tsx
-app/layout.tsx
 components/_ConnectWallet.tsx
 components/_Web3Provider.tsx
 app/dashboard/_page.tsx
 app/forum/[topicId]/_page.tsx
 app/forum/new/_page.tsx
 components/_Header.tsx
-app/_layout.tsx
