@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import PostItem from '@/components/forum/PostItem'
 import ReplyBox from '@/components/forum/ReplyBox'
+import { useAccount } from 'wagmi'
 import { useStoreEnsProfile } from '@/lib/hooks/useStoreEnsProfile'
 
 interface Post {
@@ -19,12 +20,12 @@ export default function TopicPage() {
   const { topicId } = useParams()
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('Loading...')
-  const [address, setAddress] = useState<string | null>(null)
+  const { address, isConnected } = useAccount()
 
-  useStoreEnsProfile(address)
+  useStoreEnsProfile(address || null)
 
   useEffect(() => {
-    async function load() {
+    const load = async () => {
       const { data: topic } = await supabase
         .from('forum_topics')
         .select('title')
@@ -39,20 +40,13 @@ export default function TopicPage() {
 
       if (topic) setTitle(topic.title)
       if (posts) setPosts(posts)
-
-      if (typeof window !== 'undefined' && window.ethereum) {
-        const accounts = await window.ethereum.request({ method: 'eth_accounts' })
-        if (accounts && accounts.length > 0) {
-          setAddress(accounts[0])
-        }
-      }
     }
 
     load()
   }, [topicId])
 
   const handleNewReply = async (message: string) => {
-    if (!address) return
+    if (!isConnected || !address) return
 
     const { data, error } = await supabase.from('forum_posts').insert({
       topic_id: topicId,
@@ -69,7 +63,7 @@ export default function TopicPage() {
     <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 py-12 text-white">
       <div className="mb-6">
         <Link href="/forum" className="text-sm text-pink-400 hover:underline">
-          ← Back to Forum
+          🧠 Back to Forum
         </Link>
       </div>
 
@@ -89,7 +83,7 @@ export default function TopicPage() {
         ))}
       </div>
 
-      <ReplyBox onSubmit={handleNewReply} address={address} />
+      <ReplyBox onSubmit={handleNewReply} address={address ?? null} />
     </div>
   )
 }
