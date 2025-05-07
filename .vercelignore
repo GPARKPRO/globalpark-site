@@ -1,10 +1,21 @@
-components/ConnectWallet.tsx
-components/Web3Provider.tsx
-app/dashboard/page.tsx
-app/forum/[topicId]/page.tsx
-app/forum/new/page.tsx
-components/_ConnectWallet.tsx
-components/_Web3Provider.tsx
-app/dashboard/_page.tsx
-app/forum/[topicId]/_page.tsx
-app/forum/new/_page.tsx
+# Исключаем всё
+*
+
+# Но включаем необходимые для запуска файлы
+!package.json
+!tsconfig.json
+!next.config.js
+!.env.local
+!public/**
+
+# Включаем необходимые компоненты
+!components/ConnectWallet.tsx
+!components/Web3Provider.tsx
+!components/Header.tsx
+
+# Включаем основной layout
+!app/layout.tsx
+
+# Включаем важные страницы (можно расширить позже)
+!app/page.tsx
+!app/tokenomics/page.tsx
