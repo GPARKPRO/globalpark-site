@@ -4,25 +4,16 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 import { ADMIN_ADDRESS } from '@/lib/permissions'
+import { useAccount } from 'wagmi'
 
 export default function NewTopicPage() {
   const router = useRouter()
-  const [address, setAddress] = useState<string | null>(null)
+  const { address, isConnected } = useAccount()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
 
   const isAdmin = address?.toLowerCase() === ADMIN_ADDRESS
-
-  useEffect(() => {
-  if (typeof window !== 'undefined' && window.ethereum) {
-    window.ethereum.request({ method: 'eth_accounts' }).then((accounts: string[]) => {
-      if (accounts && accounts.length > 0) {
-        setAddress(accounts[0])
-      }
-    })
-  }
-}, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
