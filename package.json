@@ -23,7 +23,8 @@
     "xdm": "^3.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@heroicons/react": "^2.0.18",
-    "clsx": "^2.1.0"
+    "clsx": "^2.1.0",
+    "@rainbow-me/rainbowkit": "1.0.6"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.2",
@@ -39,5 +40,3 @@
     "node": "22.x"
   }
 }
-
-
