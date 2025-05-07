@@ -80,8 +80,6 @@ export default function Header() {
           </div>
         )}
       </div>
-
-      {/* WalletConnect temporarily removed */}
     </header>
   )
 }
