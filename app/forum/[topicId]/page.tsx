@@ -2,11 +2,9 @@
 
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import PostItem from '@/components/forum/PostItem'
 import ReplyBox from '@/components/forum/ReplyBox'
-import { useAccount } from 'wagmi'
 import { useStoreEnsProfile } from '@/lib/hooks/useStoreEnsProfile'
 
 interface Post {
@@ -20,12 +18,12 @@ export default function TopicPage() {
   const { topicId } = useParams()
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('Loading...')
-  const { address, isConnected } = useAccount()
+  const [address, setAddress] = useState<string | null>(null)
 
-  useStoreEnsProfile(address || null)
+  useStoreEnsProfile(address)
 
   useEffect(() => {
-    const load = async () => {
+    async function load() {
       const { data: topic } = await supabase
         .from('forum_topics')
         .select('title')
@@ -40,13 +38,21 @@ export default function TopicPage() {
 
       if (topic) setTitle(topic.title)
       if (posts) setPosts(posts)
+
+      // Get wallet address if connected
+      if (typeof window !== 'undefined' && window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+        if (accounts && accounts.length > 0) {
+          setAddress(accounts[0])
+        }
+      }
     }
 
     load()
   }, [topicId])
 
   const handleNewReply = async (message: string) => {
-    if (!isConnected || !address) return
+    if (!address) return
 
     const { data, error } = await supabase.from('forum_posts').insert({
       topic_id: topicId,
@@ -60,30 +66,23 @@ export default function TopicPage() {
   }
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 py-12 text-white">
-      <div className="mb-6">
-        <Link href="/forum" className="text-sm text-pink-400 hover:underline">
-          🧠 Back to Forum
-        </Link>
-      </div>
-
+    <div className="max-w-3xl mx-auto px-4 py-12 text-white">
       <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
         {title}
       </h1>
 
       <div className="space-y-6 mb-12">
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <PostItem
             key={post.id}
             author={post.author}
             content={post.content}
             createdAt={new Date(post.created_at).toLocaleString()}
-            isFirst={index === 0}
           />
         ))}
       </div>
 
-      <ReplyBox onSubmit={handleNewReply} address={address ?? null} />
+      <ReplyBox onSubmit={handleNewReply} address={address} />
     </div>
   )
 }
