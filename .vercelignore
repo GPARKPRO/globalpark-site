@@ -2,7 +2,7 @@
 *
 
 # Но включаем необходимые для запуска файлы
-!package.json
+
 !tsconfig.json
 !next.config.js
 !.env.local
