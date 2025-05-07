@@ -19,3 +19,4 @@ export const wagmiConfig = createConfig({
   connectors,
   publicClient,
 })
+
