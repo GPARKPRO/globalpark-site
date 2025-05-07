@@ -8,9 +8,11 @@ import { ReactNode } from 'react'
 
 const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
 
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
+
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
-  projectId: 'YOUR_PROJECT_ID', // замените на свой
+  projectId,
   chains,
 })
 
