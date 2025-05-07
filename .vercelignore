@@ -6,9 +6,9 @@
 
 
 # Включаем необходимые компоненты
-!components/ConnectWallet.tsx
+
 !components/Web3Provider.tsx
-!components/Header.tsx
+
 
 # Включаем основной layout
 
