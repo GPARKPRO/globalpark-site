@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
         <meta name="twitter:image" content="https://globalpark.io/og.png" />
       </head>
-      <body className="bg-black text-white min-h-screen flex flex-col">
+      <body className="relative bg-black text-white min-h-screen flex flex-col">
         <Web3Provider>
           <Header />
           <main className="flex-grow flex flex-col items-center justify-center px-6">
