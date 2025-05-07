@@ -1,13 +1,9 @@
-'use client'
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Script from 'next/script'
-
-import { WagmiConfig } from 'wagmi'
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { wagmiConfig, chains } from '../lib/wagmi'
+import Web3Provider from '../components/Web3Provider'
 
 export const metadata: Metadata = {
   title: 'Global Park',
@@ -40,15 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:image" content="https://globalpark.io/og.png" />
       </head>
       <body className="bg-black text-white min-h-screen flex flex-col">
-        <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider chains={chains}>
-            <Header />
-            <main className="flex-grow flex flex-col items-center justify-center px-6">
-              {children}
-            </main>
-            <Footer />
-          </RainbowKitProvider>
-        </WagmiConfig>
+        <Web3Provider>
+          <Header />
+          <main className="flex-grow flex flex-col items-center justify-center px-6">
+            {children}
+          </main>
+          <Footer />
+        </Web3Provider>
         <Script
           strategy="afterInteractive"
           type="application/ld+json"
