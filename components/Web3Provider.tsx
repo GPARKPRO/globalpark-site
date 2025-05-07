@@ -1,5 +1,6 @@
 'use client'
 
+import '@rainbow-me/rainbowkit/styles.css'
 import { WagmiConfig, createConfig, configureChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { mainnet } from 'wagmi/chains'
@@ -8,11 +9,9 @@ import { ReactNode } from 'react'
 
 const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
 
-const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!
-
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
-  projectId,
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID as string,
   chains,
 })
 
