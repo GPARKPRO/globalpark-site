@@ -1,1 +1,8 @@
+# RainbowKit и Web3
+components/Web3Provider.tsx
+components/ConnectWallet.tsx
 
+# Страницы, использующие Web3
+app/dashboard/page.tsx
+app/forum/[topicId]/page.tsx
+app/forum/new/page.tsx
