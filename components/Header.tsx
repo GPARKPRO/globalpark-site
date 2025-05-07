@@ -11,7 +11,6 @@ import {
   MapIcon,
   RectangleStackIcon,
   DocumentTextIcon,
-  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline'
 
 export default function Header() {
@@ -35,13 +34,12 @@ export default function Header() {
   }, [])
 
   const menuItems = [
-    { label: 'Home', icon: <HomeIcon className="w-4 h-4 mr-2" />, path: '/' },
-    { label: 'Join DAO', icon: <UserGroupIcon className="w-4 h-4 mr-2" />, path: '/dao' },
-    { label: 'AI Assistant', icon: <CpuChipIcon className="w-4 h-4 mr-2" />, path: '/ask-gpt' },
-    { label: 'Tokenomics', icon: <ChartBarIcon className="w-4 h-4 mr-2" />, path: '/tokenomics' },
-    { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
-    { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/participation-wall' },
-    { label: 'Forum', icon: <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />, path: '/forum' },
+    { label: 'Home', icon: <HomeIcon className="wm-4 h-4 mr-2" />, path: '/' },
+    { label: 'Join DAO', icon: <UserGroupIcon className="wm-4 h-4 mr-2" />, path: '/dao' },
+    { label: 'AI Assistant', icon: <CpuChipIcon className="wm-4 h-4 mr-2" />, path: '/ask-gpt' },
+    { label: 'Tokenomics', icon: <ChartBarIcon className="wm-4 h-4 mr-2" />, path: '/tokenomics' },
+    { label: 'Roadmap', icon: <MapIcon className="wm-4 h-4 mr-2" />, path: '/roadmap' },
+    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/participation-wall' }
   ]
 
   return (
@@ -52,7 +50,7 @@ export default function Header() {
           className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
           aria-label="Explore"
         >
-          ⋯
+            ⋯
         </button>
         {showMenu && (
           <div className="absolute top-full left-0 mt-2 w-56 rounded bg-black shadow-lg z-[9999]">
@@ -85,7 +83,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
-      <ConnectWallet />
+        <ConnectWallet />
       </div>
     </header>
   )
