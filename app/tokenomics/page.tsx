@@ -56,7 +56,7 @@ export default function TokenomicsPage() {
       <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
         <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
-          {circulating !== null ? ${circulating} GPARK : 'Loading...'}
+          {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
           Data fetched from Ethereum Mainnet via public RPC.
@@ -78,10 +78,7 @@ export default function TokenomicsPage() {
               dataKey="value"
             >
               {data.map((entry, index) => (
-                <Cell
-                  key={cell-${index}}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
           </PieChart>
