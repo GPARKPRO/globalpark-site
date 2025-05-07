@@ -2,19 +2,35 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAccount } from 'wagmi'
 import { getGparkContract } from '@/lib/contract'
+import Image from 'next/image'
 
 export default function DashboardPage() {
-  const { address, isConnected } = useAccount()
+  const [address, setAddress] = useState<string | null>(null)
   const [balance, setBalance] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
-    if (!isConnected) {
-      router.push('/')
+    const checkConnection = async () => {
+      if (typeof window !== 'undefined' && window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+          if (accounts.length === 0) {
+            router.push('/')
+          } else {
+            setAddress(accounts[0])
+          }
+        } catch (err) {
+          console.error(err)
+          router.push('/')
+        }
+      } else {
+        router.push('/')
+      }
     }
-  }, [isConnected, router])
+
+    checkConnection()
+  }, [router])
 
   useEffect(() => {
     const fetchBalance = async () => {
