@@ -3,7 +3,6 @@ components/Web3Provider.tsx
 app/dashboard/page.tsx
 app/forum/[topicId]/page.tsx
 app/forum/new/page.tsx
-components/Header.tsx
 components/_ConnectWallet.tsx
 components/_Web3Provider.tsx
 app/dashboard/_page.tsx
