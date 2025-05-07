@@ -12,8 +12,8 @@
 !components/Header.tsx
 
 # Включаем основной layout
-!app/layout.tsx
+
 
 # Включаем важные страницы (можно расширить позже)
-!app/page.tsx
+
 !app/tokenomics/page.tsx
