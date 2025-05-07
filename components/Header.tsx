@@ -33,16 +33,16 @@ export default function Header() {
   }, [])
 
   const menuItems = [
-    { label: 'Home', icon: <HomeIcon className="wm-4 h-4 mr-2" />, path: '/' },
-    { label: 'Join DAO', icon: <UserGroupIcon className="wm-4 h-4 mr-2" />, path: '/dao' },
-    { label: 'AI Assistant', icon: <CpuChipIcon className="wm-4 h-4 mr-2" />, path: '/ask-gpt' },
-    { label: 'Tokenomics', icon: <ChartBarIcon className="wm-4 h-4 mr-2" />, path: '/tokenomics' },
-    { label: 'Roadmap', icon: <MapIcon className="wm-4 h-4 mr-2" />, path: '/roadmap' },
-    { label: 'Participation Wall', icon: <RectangleStackIcon className="wm-4 h-4 mr-2" />, path: '/participation-wall' }
+    { label: 'Home', icon: <HomeIcon className="w-4 h-4 mr-2" />, path: '/' },
+    { label: 'Join DAO', icon: <UserGroupIcon className="w-4 h-4 mr-2" />, path: '/dao' },
+    { label: 'AI Assistant', icon: <CpuChipIcon className="w-4 h-4 mr-2" />, path: '/ask-gpt' },
+    { label: 'Tokenomics', icon: <ChartBarIcon className="w-4 h-4 mr-2" />, path: '/tokenomics' },
+    { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
+    { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/participation-wall' }
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -79,6 +79,10 @@ export default function Header() {
             </button>
           </div>
         )}
+      </div>
+
+      <div className="flex items-center space-x-4">
+        {/* Wallet Connect removed */}
       </div>
     </header>
   )
