@@ -1,0 +1,7 @@
+app/dashboard/page.tsx
+app/forum/new/page.tsx
+app/forum/[topicId]/page.tsx
+components/ConnectWallet.tsx
+app/dashboard/_page.tsx
+app/forum/new/_page.tsx
+app/forum/[topicId]/_page.tsx
