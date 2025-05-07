@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import WalletModalPortal from '@/components/WalletModalPortal'
 
 const TOKEN_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1dA'
 const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183'
@@ -99,6 +100,9 @@ export default function TokenomicsPage() {
           Circulating
         </div>
       </div>
+
+      {/* Wallet Button Modal */}
+      <WalletModalPortal />
     </div>
   )
 }
