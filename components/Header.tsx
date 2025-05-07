@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
   UserGroupIcon,
@@ -50,7 +49,7 @@ export default function Header() {
           className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
           aria-label="Explore"
         >
-            ⋯
+          ⋯
         </button>
         {showMenu && (
           <div className="absolute top-full left-0 mt-2 w-56 rounded bg-black shadow-lg z-[9999]">
@@ -82,9 +81,7 @@ export default function Header() {
         )}
       </div>
 
-      <div className="flex items-center space-x-4">
-        <ConnectWallet />
-      </div>
+      {/* WalletConnect temporarily removed */}
     </header>
   )
 }
