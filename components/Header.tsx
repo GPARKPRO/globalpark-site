@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import ConnectWallet from './ConnectWallet'
+// import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
   UserGroupIcon,
