@@ -1,6 +1,6 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { http } from 'wagmi'
-import { mainnet } from '@rainbow-me/rainbowkit/chains'
+import { mainnet } from 'wagmi/chains'
 
 export const chains = [mainnet]
 
