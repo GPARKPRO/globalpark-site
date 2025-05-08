@@ -1,4 +1,4 @@
-# Node modules
+# Dependency directories
 node_modules/
 
 # Build output
@@ -6,26 +6,30 @@ node_modules/
 out/
 dist/
 
+# System files
+.DS_Store
+Thumbs.db
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# Env files
+# Environment files
 .env
-.env.*
+.env.local
+.env.*.local
 !.env.example
 
-# IDE/Editor configs
+# Editor directories and files
 .vscode/
 .idea/
 
-# Optional lock files
-
+# Lockfiles (optional, but leave one if you use it consistently)
+package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Vercel deployment output (optional if you use local preview)
+.vercel/
