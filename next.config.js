@@ -1,7 +1,7 @@
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: 'denial'
+    value: "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self';"
   },
   {
     key: 'Referrer-Policy',
@@ -27,16 +27,13 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()'
   }
-];
+]
 
 const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   experimental: {
     appDir: true
-  },
-  env: {
-    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
   },
   images: {
     remotePatterns: [
@@ -55,9 +52,8 @@ const nextConfig = {
         source: '/(.*)',
         headers: securityHeaders
       }
-    ];
+    ]
   }
-};
+}
 
-module.exports = nextConfig;
-
+module.exports = nextConfig
