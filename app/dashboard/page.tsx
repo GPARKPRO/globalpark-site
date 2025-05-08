@@ -1,54 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAccount } from 'wagmi'
-import { getGparkContract } from '@/lib/contract'
+import { useEffect } from 'react'
 
 export default function DashboardPage() {
-  const { address, isConnected } = useAccount()
-  const [balance, setBalance] = useState<string | null>(null)
   const router = useRouter()
 
+  // При необходимости можно в будущем добавить авторизацию через Supabase
   useEffect(() => {
-    if (!isConnected) {
-      router.push('/')
-    }
-  }, [isConnected, router])
-
-  useEffect(() => {
-    const fetchBalance = async () => {
-      if (!address) return
-      const contract = await getGparkContract()
-      if (!contract) return
-      try {
-        const raw = await contract.balanceOf(address)
-        const formatted = Number(raw) / 1e18
-        setBalance(formatted.toFixed(2))
-      } catch (err) {
-        console.error('Error of balance:', err)
-      }
-    }
-
-    fetchBalance()
-  }, [address])
+    // router.push('/') — если нужна проверка авторизации
+  }, [router])
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20 text-white">
       <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">
         Welcome to Your Dashboard
       </h1>
-
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
-        <span className="border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
-          {address ? `🟡 Wallet Connected: ${address.slice(0, 6)}...${address.slice(-4)}` : '🔴 Not Connected'}
-        </span>
-        {balance !== null && (
-          <span className="border border-pink-500 text-pink-500 font-mono px-5 py-2 rounded-full">
-            GPARK Balance: {balance}
-          </span>
-        )}
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
@@ -91,4 +58,3 @@ export default function DashboardPage() {
     </div>
   )
 }
-
