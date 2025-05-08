@@ -1,6 +1,6 @@
 'use client'
 
-import { WagmiProvider } from 'wagmi/react'
+import { WagmiConfig as WagmiProvider } from 'wagmi'
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { wagmiConfig, chains } from '@/lib/wallet'
