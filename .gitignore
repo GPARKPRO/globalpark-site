@@ -26,6 +26,6 @@ Thumbs.db
 .idea/
 
 # Optional lock files
-
+package-lock.json
 pnpm-lock.yaml
 yarn.lock
