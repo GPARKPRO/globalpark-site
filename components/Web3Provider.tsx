@@ -1,20 +1,25 @@
-'use client'
+'use client';
 
-import { WagmiConfig as WagmiProvider } from 'wagmi'
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { wagmiConfig, chains } from '@/lib/wallet'
+import { ReactNode } from 'react';
+import { WagmiProvider } from 'wagmi';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { wagmiConfig } from '@/lib/wallet';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
-export default function Web3Provider({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: ReactNode;
+};
+
+export function Web3Provider({ children }: Props) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider chains={chains} theme={darkTheme()}>
+        <RainbowKitProvider theme={darkTheme()}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  )
+  );
 }
