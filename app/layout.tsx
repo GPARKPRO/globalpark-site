@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Script from 'next/script'
-import Web3Provider from '../components/Web3Provider'
 
 export const metadata: Metadata = {
   title: 'Global Park',
@@ -36,13 +35,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:image" content="https://globalpark.io/og.png" />
       </head>
       <body className="relative bg-black text-white min-h-screen flex flex-col">
-        <Web3Provider>
-          <Header />
-          <main className="flex-grow flex flex-col items-center justify-center px-6">
-            {children}
-          </main>
-          <Footer />
-        </Web3Provider>
+        <Header />
+        <main className="flex-grow flex flex-col items-center justify-center px-6">
+          {children}
+        </main>
+        <Footer />
         <Script
           strategy="afterInteractive"
           type="application/ld+json"
@@ -68,5 +65,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
-
-
