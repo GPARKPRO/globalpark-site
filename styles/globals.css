@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === Color Variables === */
 :root {
   --color-bg: #000000;
   --color-text: #ffffff;
   --color-muted: #a3a3a3;
 }
 
-/* === Base Styles === */
 html,
 body {
   padding: 0;
@@ -32,25 +30,26 @@ a {
   box-sizing: border-box;
 }
 
-/* === Typography === */
+/* Responsive typography */
 h1 {
   @apply text-3xl md:text-5xl font-bold;
 }
-
 p {
   @apply text-base md:text-lg leading-relaxed;
 }
 
-/* === Layout === */
+/* Footer layout improvements */
 footer {
   @apply text-sm text-gray-400 mt-10 border-t border-gray-700 pt-6;
 }
 
+/* Utility: container with max-width */
 .container {
   @apply w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto;
 }
 
-/* === WalletConnect Button === */
-.rk-connect-button {
-  @apply bg-white text-black px-4 py-2 rounded transition hover:bg-gray-200 text-sm font-medium;
+/* Fix modal portal from RainbowKit */
+div[id^="radix-"] {
+  z-index: 9999 !important;
+  position: fixed !important;
 }
