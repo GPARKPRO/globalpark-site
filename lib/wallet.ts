@@ -1,8 +1,9 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { http } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
+import type { Chain } from 'wagmi/chains'
 
-export const chains = [mainnet]
+export const chains: Chain[] = [mainnet]
 
 export const wagmiConfig = getDefaultConfig({
   appName: 'GlobalPark',
