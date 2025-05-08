@@ -12,9 +12,11 @@ const chains = [mainnet]
 const { connectors } = getDefaultWallets({
   appName: 'GlobalPark',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+  chains, // обязательно передаём здесь
 })
 
 const config = createConfig({
+  chains,        // обязательно передаём здесь
   connectors,
   transports: {
     [mainnet.id]: http(),
