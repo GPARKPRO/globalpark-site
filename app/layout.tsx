@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Script from 'next/script'
+import Web3Provider from '../components/Web3Provider'
 
 export const metadata: Metadata = {
   title: 'Global Park',
@@ -19,7 +20,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-        {/* Open Graph */}
         <meta property="og:locale" content="en" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Global Park DAO" />
@@ -28,18 +28,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:image" content="https://globalpark.io/og.png" />
         <meta property="og:logo" content="https://globalpark.io/og.png" />
 
-        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Global Park DAO" />
         <meta name="twitter:description" content="Art, Tech, and Collective Memory on-chain." />
         <meta name="twitter:image" content="https://globalpark.io/og.png" />
       </head>
       <body className="relative bg-black text-white min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow flex flex-col items-center justify-center px-6">
-          {children}
-        </main>
-        <Footer />
+        <Web3Provider>
+          <Header />
+          <main className="flex-grow flex flex-col items-center justify-center px-6">
+            {children}
+          </main>
+          <Footer />
+        </Web3Provider>
         <Script
           strategy="afterInteractive"
           type="application/ld+json"
