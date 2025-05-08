@@ -12,6 +12,7 @@ import {
   DocumentTextIcon,
   ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false)
@@ -82,6 +83,7 @@ export default function Header() {
           </div>
         )}
       </div>
+      <ConnectButton />
     </header>
   )
 }
