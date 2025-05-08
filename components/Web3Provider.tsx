@@ -12,7 +12,7 @@ type Props = {
   children: ReactNode;
 };
 
-export function Web3Provider({ children }: Props) {
+export default function Web3Provider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
