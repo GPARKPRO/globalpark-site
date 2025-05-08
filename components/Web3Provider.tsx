@@ -1,13 +1,16 @@
 'use client'
 
 import '@rainbow-me/rainbowkit/styles.css'
-import { WagmiConfig, createConfig, configureChains } from 'wagmi'
-import { publicProvider } from 'wagmi/providers/public'
+import { http, createConfig, WagmiProvider } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { configureChains } from '@wagmi/core'
 import { ReactNode } from 'react'
 
-const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [http()]
+)
 
 const { connectors } = getDefaultWallets({
   appName: 'Global Park',
@@ -23,10 +26,10 @@ const config = createConfig({
 
 export default function Web3Provider({ children }: { children: ReactNode }) {
   return (
-    <WagmiConfig config={config}>
-      <RainbowKitProvider locale="en-US" chains={chains}>
+    <WagmiProvider config={config}>
+      <RainbowKitProvider chains={chains}>
         {children}
       </RainbowKitProvider>
-    </WagmiConfig>
+    </WagmiProvider>
   )
 }
