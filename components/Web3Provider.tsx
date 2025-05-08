@@ -1,10 +1,9 @@
 'use client'
 
 import '@rainbow-me/rainbowkit/styles.css'
-import { http, createConfig, WagmiProvider } from 'wagmi'
+import { WagmiProvider, createConfig, http, configureChains } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
-import { configureChains } from '@wagmi/core'
 import { ReactNode } from 'react'
 
 const { chains, publicClient } = configureChains(
