@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
   UserGroupIcon,
@@ -45,7 +44,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -83,11 +82,6 @@ export default function Header() {
           </div>
         )}
       </div>
-
-      <div className="flex items-center space-x-4">
-      <ConnectWallet />
-      </div>
     </header>
   )
 }
-
