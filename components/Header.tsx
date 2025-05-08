@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
   UserGroupIcon,
@@ -12,7 +13,6 @@ import {
   DocumentTextIcon,
   ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false)
@@ -45,7 +45,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -83,7 +83,10 @@ export default function Header() {
           </div>
         )}
       </div>
-      <ConnectButton />
+
+      <div className="flex items-center space-x-4">
+      <ConnectWallet />
+      </div>
     </header>
   )
 }
