@@ -1,16 +1,21 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { http } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
+import { getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { configureChains, createConfig } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+import { publicProvider } from 'wagmi/providers/public'
 
-export const wagmiConfig = getDefaultConfig({
+export const { chains, publicClient } = configureChains(
+  [mainnet],
+  [publicProvider()]
+)
+
+const { connectors } = getDefaultWallets({
   appName: 'GlobalPark',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID as string,
-  chains: [mainnet, polygon, optimism, arbitrum],
-  transports: {
-    [mainnet.id]: http(),
-    [polygon.id]: http(),
-    [optimism.id]: http(),
-    [arbitrum.id]: http(),
-  },
-  ssr: true,
-});
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+  chains,
+})
+
+export const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+})
