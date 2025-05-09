@@ -8,7 +8,7 @@ import { getGparkContract } from '@/lib/contract'
 export default function DashboardPage() {
   const router = useRouter()
   const { address, isConnected } = useAccount()
-  const raw = await contract.read.balanceOf([address])
+  const [balance, setBalance] = useState<string | null>(null)
 
   useEffect(() => {
     if (!isConnected) {
@@ -21,12 +21,11 @@ export default function DashboardPage() {
       if (!address) return
       try {
         const contract = await getGparkContract()
-        const raw = await contract.balanceOf(address)
+        const raw = await contract.read.balanceOf([address])
         const formatted = Number(raw) / 1e18
         setBalance(formatted.toFixed(2))
-      } catch (error) {
-        console.error('Failed to fetch GPARK balance:', error)
-        setBalance(null)
+      } catch (err) {
+        console.error('Error fetching balance:', err)
       }
     }
 
