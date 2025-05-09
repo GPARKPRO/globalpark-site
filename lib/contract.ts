@@ -24,7 +24,7 @@ export const getGparkContract = async (): Promise<GparkContract> => {
   const contract = getContract({
     address: CONTRACT_ADDRESS,
     abi: GPARK_ABI,
-    client: walletClient,
+    walletClient,
   })
 
   return contract as unknown as GparkContract
