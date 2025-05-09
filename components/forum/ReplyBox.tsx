@@ -37,7 +37,7 @@ export default function ReplyBox({ onSubmit, address }: ReplyBoxProps) {
             ? 'Connect wallet to reply.'
             : !isAdmin
               ? 'Only the admin can reply at this stage.'
-              : 'Write your reply using Markdown (e.g., **bold**, [link](url))'
+              : 'Write your reply'
         }
         disabled={disabled}
         rows={6}
