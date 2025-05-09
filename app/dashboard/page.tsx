@@ -21,7 +21,7 @@ export default function DashboardPage() {
       if (!address) return
       try {
         const contract = await getGparkContract()
-        const raw = await contract.balanceOf(address)
+        const raw = await contract.read.balanceOf([address])
         const formatted = Number(raw) / 1e18
         setBalance(formatted.toFixed(2))
       } catch (err) {
