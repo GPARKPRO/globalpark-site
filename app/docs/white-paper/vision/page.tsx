@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import AnimatedLogo from '@/components/AnimatedLogo'
 
 export const metadata: Metadata = {
   title: 'Vision & Philosophy | GlobalPark',
@@ -111,7 +110,6 @@ export default function VisionPage() {
           </Link>
         </div>
       </main>
-      </div>
     </>
   )
 }
