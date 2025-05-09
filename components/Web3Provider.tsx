@@ -20,7 +20,7 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider locale="en">
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
