@@ -1,27 +1,12 @@
 // lib/hooks/useEnsName.ts
+import { useEnsName as useWagmiEnsName } from 'wagmi'
 
-import { useEffect, useState } from 'react'
-import { useEnsName } from 'wagmi'
-
-export function useEnsDisplayName(address: string | null | undefined): string | null {
-  const [ens, setEns] = useState<string | null>(null)
-
-  const { data: ensName } = useEnsName({
+export function useEnsName(address: string | null | undefined) {
+  const { data: ensName } = useWagmiEnsName({
     address: address as `0x${string}`,
-    chainId: 1,
-    enabled: !!address,
+    chainId: 1, // Mainnet
+    // no 'enabled' prop here — wagmi v1/v2 doesn't support it
   })
 
-  useEffect(() => {
-    if (ensName) {
-      setEns(ensName)
-    } else if (address) {
-      const shortened = `${address.slice(0, 6)}...${address.slice(-4)}`
-      setEns(shortened)
-    } else {
-      setEns(null)
-    }
-  }, [ensName, address])
-
-  return ens
+  return ensName
 }
