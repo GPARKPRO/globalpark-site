@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Twitter, Discord, Send } from 'lucide-react' // Используем lucide-react
 
 export default function Footer() {
   return (
@@ -21,6 +22,37 @@ export default function Footer() {
               GitHub
             </Link>
           </p>
+
+          {/* Social links */}
+          <div className="flex items-center gap-4 mt-6">
+            <Link
+              href="https://x.com/GlobalParkDAO"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+              className="hover:text-zinc-300"
+            >
+              <Twitter className="w-5 h-5 text-white" />
+            </Link>
+            <Link
+              href="https://discord.gg/your-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Discord"
+              className="hover:text-zinc-300"
+            >
+              <Discord className="w-5 h-5 text-white" />
+            </Link>
+            <Link
+              href="https://t.me/your-telegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              className="hover:text-zinc-300"
+            >
+              <Send className="w-5 h-5 text-white" />
+            </Link>
+          </div>
         </div>
 
         {/* Right block */}
