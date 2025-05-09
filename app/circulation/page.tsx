@@ -1,145 +1,112 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { formatUnits } from "viem"
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
-import { getGparkReadContract } from "@/lib/contract"
-import Link from "next/link"
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAccount } from 'wagmi'
+import { getGparkReadContract } from '@/lib/contract'
+import { useEnsProfile } from '@/lib/hooks/useEnsProfile'
 
-const TOTAL_SUPPLY = 21_000_000
-const TREASURY_ADDRESS = "0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183"
-
-export default function CirculationPage() {
-  const [circulating, setCirculating] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
+export default function DashboardPage() {
+  const router = useRouter()
+  const { address, status } = useAccount()
+  const { ensName, avatarUrl } = useEnsProfile(address || undefined)
+  const [balance, setBalance] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (status === 'connecting') return
+    if (status === 'disconnected') {
+      router.push('/')
+    }
+  }, [status, router])
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (!address) return
       try {
-        const contract = getGparkReadContract()
-        const [total, treasury] = await Promise.all([
-          contract.read.totalSupply(),
-          contract.read.balanceOf([TREASURY_ADDRESS])
-        ])
-
-        const totalNum = Number(formatUnits(total, 18))
-        const treasuryNum = Number(formatUnits(treasury, 18))
-        const circulatingVal = Math.max(totalNum - treasuryNum, 0)
-
-        setCirculating(circulatingVal)
+        const contract = await getGparkReadContract()
+        const raw = await contract.read.balanceOf([address])
+        const formatted = Number(raw) / 1e18
+        setBalance(formatted.toFixed(2))
       } catch (err) {
-        console.error("Error fetching token data:", err)
-      } finally {
-        setLoading(false)
+        console.error('Error fetching balance:', err)
       }
     }
 
-    fetchData()
-  }, [])
+    fetchBalance()
+  }, [address])
 
-  const chartData = [
-    {
-      name: "Treasury",
-      value: circulating !== null ? TOTAL_SUPPLY - circulating : TOTAL_SUPPLY,
-      color: "#6366F1"
-    },
-    {
-      name: "Circulating",
-      value: circulating ?? 0,
-      color: "#22C55E"
-    }
-  ]
+  if (status === 'connecting') {
+    return (
+      <div className="h-screen flex items-center justify-center text-white">
+        Checking connection...
+      </div>
+    )
+  }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-20 text-white">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">Circulation</h1>
-        <span className="text-xs bg-green-600/20 border border-green-600 text-green-400 px-3 py-1 rounded-full font-mono">
-          ✓ Verified on-chain
-        </span>
+    <div className="max-w-6xl mx-auto px-6 py-20 text-white">
+      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">
+        Welcome to Your Dashboard
+      </h1>
+
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
+        <div className="flex items-center gap-3 border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt="ENS Avatar"
+              className="w-6 h-6 rounded-full object-cover"
+            />
+          )}
+          <span>
+            {ensName ?? `${address?.slice(0, 6)}...${address?.slice(-4)}`}
+          </span>
+        </div>
+
+        {balance !== null && (
+          <span className="border border-pink-500 text-pink-500 font-mono px-5 py-2 rounded-full">
+            GPARK Balance: {balance}
+          </span>
+        )}
       </div>
 
-      <p className="text-gray-400 mb-10 text-center">
-        Live data from Ethereum Mainnet — GPARK token distribution.
-      </p>
-
-      <div className="grid md:grid-cols-2 gap-8 items-center">
-        {/* Pie Chart */}
-        <div className="w-full h-[300px] sm:h-[400px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={chartData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={2}
-              >
-                {chartData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={entry.color}
-                    stroke="#111"
-                    strokeWidth={2}
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                content={({ active, payload }) => {
-                  if (!active || !payload || !payload.length) return null
-                  const data = payload[0].payload
-                  return (
-                    <div className="bg-zinc-800 text-white p-2 rounded shadow text-sm">
-                      {data.name}: {data.value.toLocaleString()} GPARK
-                    </div>
-                  )
-                }}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Stats and Legend */}
-        <div>
-          <h2 className="text-xl font-semibold text-yellow-400 mb-4">
-            Circulating Supply
-          </h2>
-          <div className="text-3xl font-mono text-green-400 mb-2">
-            {loading ? "Loading..." : `${circulating?.toLocaleString()} GPARK`}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          {
+            title: 'NFT Inventory',
+            description: 'View and manage your Global Park NFTs.',
+          },
+          {
+            title: 'DAO Voting',
+            description: 'Vote on key decisions and proposals.',
+          },
+          {
+            title: 'Proof of Presence',
+            description: 'Register your physical presence in the park.',
+          },
+          {
+            title: 'Staking Program',
+            description: 'Earn rewards by staking your tokens.',
+          },
+        ].map(({ title, description }) => (
+          <div
+            key={title}
+            className="relative bg-gradient-to-br from-zinc-900 to-black hover:from-zinc-800 hover:to-zinc-900 transition-all duration-300 rounded-xl p-6 border border-white shadow-md"
+          >
+            <h3 className="text-2xl font-semibold mb-2 text-white">{title}</h3>
+            <p className="text-gray-300 text-sm">{description}</p>
+            <p className="mt-2 text-yellow-400 text-xs italic">Coming soon…</p>
           </div>
+        ))}
+      </div>
 
-          <div className="mt-6 space-y-3 text-sm">
-            {chartData.map(({ name, value, color }) => {
-              const percentage = ((value / TOTAL_SUPPLY) * 100).toFixed(1)
-              return (
-                <div key={name} className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-                  <span className="w-28 text-white font-medium">{name}</span>
-                  <div className="flex-1 bg-white/10 h-2 rounded">
-                    <div
-                      className="h-2 rounded"
-                      style={{ width: `${percentage}%`, backgroundColor: color }}
-                    />
-                  </div>
-                  <span className="w-14 text-right text-white">{percentage}%</span>
-                </div>
-              )
-            })}
-          </div>
-
-          <div className="mt-6">
-            <Link
-              href={`https://etherscan.io/token/${process.env.NEXT_PUBLIC_GPARK_TOKEN_ADDRESS}`}
-              target="_blank"
-              className="text-sm text-pink-500 hover:underline"
-            >
-              → View on Etherscan
-            </Link>
-          </div>
-        </div>
+      <div className="mt-16 text-center">
+        <button
+          onClick={() => router.push('/')}
+          className="inline-block bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition"
+        >
+          ← Back to Home
+        </button>
       </div>
     </div>
   )
