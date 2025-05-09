@@ -1,11 +1,23 @@
-import { getWalletClient, getAccount } from '@wagmi/core'
+// lib/contract.ts
+import { getWalletClient, getAccount, getPublicClient } from '@wagmi/core'
 import { getContract } from 'viem'
 import GPARK_ABI from './GPARKTokenABI.json'
 import { wagmiConfig } from './wagmiConfig'
 
 const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
 
-export const getGparkContract = async () => {
+// Public contract for reads
+export const getGparkReadContract = () => {
+  const publicClient = getPublicClient(wagmiConfig)
+  return getContract({
+    address: CONTRACT_ADDRESS,
+    abi: GPARK_ABI,
+    client: publicClient,
+  }) as any
+}
+
+// Wallet-based contract for writes
+export const getGparkWriteContract = async () => {
   const { address, chainId } = getAccount(wagmiConfig)
   const walletClient = await getWalletClient(wagmiConfig, { chainId })
 
