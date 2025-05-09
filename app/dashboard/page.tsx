@@ -11,7 +11,7 @@ export default function DashboardPage() {
   const [balance, setBalance] = useState<string | null>(null)
 
   useEffect(() => {
-    if (status === 'loading') return
+    if (status === 'connecting') return
     if (status === 'disconnected') {
       router.push('/')
     }
@@ -33,7 +33,7 @@ export default function DashboardPage() {
     fetchBalance()
   }, [address])
 
-  if (status === 'loading') {
+  if (status === 'connecting') {
     return (
       <div className="h-screen flex items-center justify-center text-white">
         Checking connection...
