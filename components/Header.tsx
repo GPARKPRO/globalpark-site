@@ -44,19 +44,11 @@ export default function Header() {
     { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
     { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/participation-wall' },
     { label: 'Forum', icon: <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />, path: '/forum' },
-    ...(isConnected
-      ? [
-          {
-            label: 'Dashboard',
-            icon: <UserGroupIcon className="w-4 h-4 mr-2" />,
-            path: '/dashboard',
-          },
-        ]
-      : []),
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
+      {/* Left menu button */}
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -95,7 +87,16 @@ export default function Header() {
         )}
       </div>
 
+      {/* Right side: Dashboard + ConnectWallet */}
       <div className="flex items-center space-x-4">
+        {isConnected && (
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
+          >
+            Dashboard
+          </button>
+        )}
         <ConnectWallet />
       </div>
     </header>
