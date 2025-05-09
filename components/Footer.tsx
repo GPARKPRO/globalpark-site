@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaXTwitter, FaTelegramPlane, FaDiscord } from 'react-icons/fa6'
+import { FaXTwitter, FaTelegram, FaDiscord } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
             Fully open-source & community-governed initiative for art & memory.
           </p>
           <p className="text-zinc-500">
-            Source & docs:{' '}
+            Source & docs:{" "}
             <Link
               href="https://github.com/GPARKPRO/GlobalPark-DAO"
               target="_blank"
@@ -22,17 +22,33 @@ export default function Footer() {
               GitHub
             </Link>
           </p>
-
-          {/* Social icons */}
-          <div className="flex space-x-4 mt-6 text-xl">
-            <Link href="https://x.com/globalpark_io" target="_blank" aria-label="X / Twitter">
-              <FaXTwitter className="text-white hover:text-pink-500 transition" />
+          <div className="flex gap-4 mt-4">
+            <Link
+              href="https://x.com/globalpark_io"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+              className="hover:text-gray-300"
+            >
+              <FaXTwitter size={20} />
             </Link>
-            <Link href="https://t.me/globalpark_io" target="_blank" aria-label="Telegram">
-              <FaTelegramPlane className="text-white hover:text-pink-500 transition" />
+            <Link
+              href="https://discord.gg/czb5W4UuZv"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Discord"
+              className="hover:text-gray-300"
+            >
+              <FaDiscord size={20} />
             </Link>
-            <Link href="https://discord.gg/czb5W4UuZv" target="_blank" aria-label="Discord">
-              <FaDiscord className="text-white hover:text-pink-500 transition" />
+            <Link
+              href="https://t.me/globalpark_io"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              className="hover:text-gray-300"
+            >
+              <FaTelegram size={20} />
             </Link>
           </div>
         </div>
