@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Twitter, Discord, Send } from 'lucide-react' // Используем lucide-react
+import { FaXTwitter, FaDiscord, FaTelegram } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
@@ -22,37 +22,6 @@ export default function Footer() {
               GitHub
             </Link>
           </p>
-
-          {/* Social links */}
-          <div className="flex items-center gap-4 mt-6">
-            <Link
-              href="https://x.com/GlobalParkDAO"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X (Twitter)"
-              className="hover:text-zinc-300"
-            >
-              <Twitter className="w-5 h-5 text-white" />
-            </Link>
-            <Link
-              href="https://discord.gg/your-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-              className="hover:text-zinc-300"
-            >
-              <Discord className="w-5 h-5 text-white" />
-            </Link>
-            <Link
-              href="https://t.me/your-telegram"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Telegram"
-              className="hover:text-zinc-300"
-            >
-              <Send className="w-5 h-5 text-white" />
-            </Link>
-          </div>
         </div>
 
         {/* Right block */}
@@ -103,8 +72,21 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Social icons */}
+      <div className="flex justify-center gap-6 mt-12 text-xl text-white">
+        <Link href="https://x.com/globalparkdao" target="_blank" aria-label="X">
+          <FaXTwitter />
+        </Link>
+        <Link href="https://discord.gg/YOUR_INVITE" target="_blank" aria-label="Discord">
+          <FaDiscord />
+        </Link>
+        <Link href="https://t.me/globalparkdao" target="_blank" aria-label="Telegram">
+          <FaTelegram />
+        </Link>
+      </div>
+
       {/* Bottom line */}
-      <div className="text-center text-zinc-500 mt-12 text-xs tracking-wider">
+      <div className="text-center text-zinc-500 mt-8 text-xs tracking-wider">
         © {new Date().getFullYear()} Global Park DAO. All rights reserved.
       </div>
     </footer>
