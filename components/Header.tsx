@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
-import ConnectWallet from './ConnectWallet'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
   HomeIcon,
   UserGroupIcon,
@@ -47,8 +47,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-4 py-4 flex items-center justify-between">
-      {/* Left menu button */}
+    <header className="sticky top-0 w-full z-50 bg-black/80 backdrop-blur-md borderb border-gray-800 px-4 py-4 flex items-center justify-between">
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -87,7 +86,6 @@ export default function Header() {
         )}
       </div>
 
-      {/* Right side: Dashboard + ConnectWallet */}
       <div className="flex items-center space-x-4">
         {isConnected && (
           <button
@@ -97,7 +95,7 @@ export default function Header() {
             Dashboard
           </button>
         )}
-        <ConnectWallet />
+        <ConnectButton showBalance={false} accountStatus="avatar" />
       </div>
     </header>
   )
