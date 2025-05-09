@@ -40,7 +40,7 @@ export default function Header() {
     { label: 'Home', icon: <HomeIcon className="w-4 h-4 mr-2" />, path: '/' },
     { label: 'Join DAO', icon: <UserGroupIcon className="w-4 h-4 mr-2" />, path: '/dao' },
     { label: 'AI Assistant', icon: <CpuChipIcon className="w-4 h-4 mr-2" />, path: '/ask-gpt' },
-    { label: 'Tokenomics', icon: <ChartBarIcon className="w-4 h-4 mr-2" />, path: '/tokenomics' },
+    { label: 'Circulation', icon: <ChartBarIcon className="w-4 h-4 mr-2" />, path: '/circulation' },
     { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
     { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/participation-wall' },
     { label: 'Forum', icon: <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />, path: '/forum' },
