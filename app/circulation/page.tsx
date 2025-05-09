@@ -1,74 +1,118 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAccount } from 'wagmi'
-import { useEnsProfile } from '@/lib/hooks/useEnsProfile'
+import { formatUnits } from 'viem'
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import { getGparkReadContract } from '@/lib/contract'
 
+const TOTAL_SUPPLY = 21_000_000
+const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183'
+const COLORS = ['#6366F1', '#22C55E']
+
 export default function CirculationPage() {
-  const router = useRouter()
-  const { address, status } = useAccount()
-
-  const { ensName, avatarUrl } = useEnsProfile(address as `0x${string}`)
-
-  const [balance, setBalance] = useState<string | null>(null)
+  const [circulating, setCirculating] = useState<string | null>(null)
 
   useEffect(() => {
-    if (status === 'connecting') return
-    if (status === 'disconnected') {
-      router.push('/')
-    }
-  }, [status, router])
-
-  useEffect(() => {
-    const fetchBalance = async () => {
-      if (!address) return
+    const fetchData = async () => {
       try {
         const contract = getGparkReadContract()
-        const raw = await contract.read.balanceOf([address])
-        const formatted = Number(raw) / 1e18
-        setBalance(formatted.toFixed(2))
+
+        const [total, treasury] = await Promise.all([
+          contract.read.totalSupply(),
+          contract.read.balanceOf([TREASURY_ADDRESS]),
+        ])
+
+        const totalNum = Number(formatUnits(total, 18))
+        const treasuryNum = Number(formatUnits(treasury, 18))
+        const circulatingValue = Math.max(totalNum - treasuryNum, 0)
+
+        setCirculating(circulatingValue.toFixed(2))
       } catch (err) {
-        console.error('Error fetching balance:', err)
+        console.error('Error fetching token data:', err)
+        setCirculating('0.00')
       }
     }
 
-    fetchBalance()
-  }, [address])
+    fetchData()
+  }, [])
+
+  const data = [
+    {
+      name: 'Treasury',
+      value: circulating ? TOTAL_SUPPLY - Number(circulating) : TOTAL_SUPPLY,
+    },
+    {
+      name: 'Circulating',
+      value: Number(circulating ?? 0),
+    },
+  ]
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 text-white">
-      <h1 className="text-4xl font-bold mb-6 text-center">Circulation</h1>
-      <p className="text-gray-400 text-center mb-10">
-        Monitor the live distribution of GPARK tokens between the DAO Treasury and circulating supply.
+    <div className="max-w-5xl mx-auto px-6 py-20 text-white">
+      <h1 className="text-4xl font-bold mb-4 text-center">Tokenomics</h1>
+      <p className="text-center text-gray-400 mb-10">
+        Real-time breakdown of the GPARK token supply across the ecosystem.
       </p>
 
-      <div className="flex flex-col items-center gap-4 mb-10">
-        <div className="flex items-center gap-3 border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt="ENS Avatar"
-              className="w-6 h-6 rounded-full object-cover"
-            />
-          )}
-          <span>
-            {ensName ?? `${address?.slice(0, 6)}...${address?.slice(-4)}`}
-          </span>
-        </div>
-
-        {balance !== null && (
-          <span className="border border-pink-500 text-pink-500 font-mono px-5 py-2 rounded-full">
-            GPARK Balance: {balance}
-          </span>
-        )}
+      <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
+        <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
+        <p className="text-2xl font-mono text-green-400">
+          {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
+        </p>
+        <p className="text-xs text-gray-500 mt-2">
+          Data fetched from Ethereum Mainnet (read-only).
+        </p>
       </div>
 
-      <div className="bg-white/5 border border-white/10 p-6 rounded-lg text-sm text-gray-300">
+      <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
+        <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">Supply Breakdown</h2>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="flex justify-center gap-4 text-sm text-gray-400 mb-8">
+        <div className="flex items-center gap-1">
+          <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
+          Treasury
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="w-3 h-3 inline-block rounded-full bg-green-500" />
+          Circulating
+        </div>
+      </div>
+
+      <div className="text-center text-gray-400 text-sm max-w-2xl mx-auto">
         <p>
-          The <strong>Treasury</strong> is the collective reserve of the DAO.
-          Tokens in this pool are only disbursed through community voting on Snapshot.
+          <strong className="text-white">Treasury</strong> refers to the DAO's central reserve of GPARK tokens,
+          managed exclusively through
+          <a
+            href="https://snapshot.org/#/globalpark.eth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-pink-500 mx-1"
+          >
+            Snapshot
+          </a>
+          proposals and community voting.
+        </p>
+        <p className="mt-2">
+          All disbursements are subject to decentralized governance, ensuring transparency,
+          accountability, and collective decision-making by token holders.
         </p>
       </div>
     </div>
