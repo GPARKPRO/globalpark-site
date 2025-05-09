@@ -7,17 +7,15 @@ import { getGparkContract } from '@/lib/contract'
 
 export default function DashboardPage() {
   const router = useRouter()
-  const { address, isConnected } = useAccount()
+  const { address, status } = useAccount()
   const [balance, setBalance] = useState<string | null>(null)
-  const [checkingConnection, setCheckingConnection] = useState(true)
 
   useEffect(() => {
-    if (isConnected === false) {
+    if (status === 'loading') return
+    if (status === 'disconnected') {
       router.push('/')
-    } else if (isConnected) {
-      setCheckingConnection(false)
     }
-  }, [isConnected, router])
+  }, [status, router])
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -35,7 +33,7 @@ export default function DashboardPage() {
     fetchBalance()
   }, [address])
 
-  if (checkingConnection) {
+  if (status === 'loading') {
     return (
       <div className="h-screen flex items-center justify-center text-white">
         Checking connection...
