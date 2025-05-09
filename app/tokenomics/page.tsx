@@ -1,14 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { formatUnits } from 'viem'
-import { getPublicClient, readContract } from '@wagmi/core'
-import { wagmiConfig } from '@/lib/wagmiConfig'
+import { readContract } from '@wagmi/core'
+import { GPARK_ABI } from '@/lib/abi/GPARKTokenABI'
+import { TOKEN_ADDRESS, TREASURY_ADDRESS } from '@/lib/constants'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
-import GPARK_ABI from '@/lib/GPARKTokenABI.json'
-
-const TOKEN_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1dA'
-const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183'
 
 export default function TokenomicsPage() {
   const [circulating, setCirculating] = useState<string | null>(null)
@@ -16,15 +12,13 @@ export default function TokenomicsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const client = getPublicClient(wagmiConfig)
-
         const [total, treasury] = await Promise.all([
-          readContract(client, {
+          readContract({
             address: TOKEN_ADDRESS,
             abi: GPARK_ABI,
             functionName: 'totalSupply',
           }),
-          readContract(client, {
+          readContract({
             address: TOKEN_ADDRESS,
             abi: GPARK_ABI,
             functionName: 'balanceOf',
@@ -32,9 +26,10 @@ export default function TokenomicsPage() {
           }),
         ])
 
-        const totalNum = Number(formatUnits(total, 18))
-        const treasuryNum = Number(formatUnits(treasury, 18))
+        const totalNum = Number(total) / 1e18
+        const treasuryNum = Number(treasury) / 1e18
         const circulatingValue = Math.max(totalNum - treasuryNum, 0)
+
         setCirculating(circulatingValue.toFixed(2))
       } catch (err) {
         console.error('Error fetching token data:', err)
@@ -65,18 +60,18 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
+      {/* Circulating Supply */}
       <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
-        <h2 className="text-xl font-semibold text-yellow-400 mb-2">
-          Circulating Supply
-        </h2>
+        <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
           {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
-          Data fetched from Ethereum Mainnet via public RPC.
+          Data fetched from Ethereum Mainnet via readContract().
         </p>
       </div>
 
+      {/* Token Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
         <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">
           Supply Breakdown
@@ -93,16 +88,14 @@ export default function TokenomicsPage() {
               dataKey="value"
             >
               {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
       </div>
 
+      {/* Legend */}
       <div className="flex justify-center gap-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
