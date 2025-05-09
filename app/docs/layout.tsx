@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import AnimatedLogo from '@/components/AnimatedLogo'; // не забудь импортировать!
 
 const navigation = [
   {
@@ -63,11 +64,12 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
 
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
+
+          {/* A minimal animated logo near bottom of docs */}
+          <div className="mt-12 flex justify-center">
+            <AnimatedLogo />
+          </div>
         </main>
-      
-        {/* A minimal animated logo at bottom of page */}
-        <div className="mt-17 flex justify-center">
-        <AnimatedLogo />
       </div>
     </>
   );
