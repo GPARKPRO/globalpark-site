@@ -32,7 +32,7 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
         )}
 
         <div className="flex-1 overflow-hidden">
-          <div className="text-sm text-neutral-300 mb-1 break-words">
+          <div className="text-sm text-neutral-300 mb-1 flex flex-wrap items-center gap-2 break-all">
             <a
               href={`https://etherscan.io/address/${author}`}
               target="_blank"
@@ -42,6 +42,11 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
             >
               {ensName ?? `${author.slice(0, 6)}...${author.slice(-4)}`}
             </a>
+            {isFirst && (
+              <span className="px-2 py-0.5 text-xs bg-yellow-900/30 text-yellow-400 border border-yellow-500 rounded-full">
+                Author
+              </span>
+            )}
           </div>
           <div className="text-xs text-neutral-500">{createdAt}</div>
         </div>
