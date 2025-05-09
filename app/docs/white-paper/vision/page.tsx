@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import AnimatedLogo from '@/components/AnimatedLogo' // 👈 добавляем логотип как отдельный client-компонент
+import AnimatedLogo from '@/components/AnimatedLogo'
 
 export const metadata: Metadata = {
   title: 'Vision & Philosophy | GlobalPark',
@@ -12,7 +12,6 @@ export default function VisionPage() {
   return (
     <>
       <main className="max-w-3xl mx-auto px-6 py-16">
-        {/* ...весь остальной текст без изменений... */}
 
         {/* Navigation buttons */}
         <div className="mt-16 flex justify-between items-center gap-4 text-sm">
@@ -31,7 +30,6 @@ export default function VisionPage() {
         </div>
       </main>
 
-      {/* ✅ Вставляем логотип как анимированный блок с фоном */}
       <div
         className="relative w-full h-[300px] bg-cover bg-center mt-20"
         style={{ backgroundImage: "url('/banners/1920.png')" }}
