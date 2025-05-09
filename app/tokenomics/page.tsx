@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import {
-  readContract,
-  getPublicClient,
-  formatUnits,
-} from 'viem'
-import GPARK_ABI from '@/lib/GPARKTokenABI.json'
-import { CONTRACT_ADDRESS, TREASURY_ADDRESS } from '@/lib/contract'
+import { formatUnits } from 'viem'
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import { getGparkReadContract } from '@/lib/contract'
+
+// Постоянные значения
+const TOTAL_SUPPLY = 21000000
+const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183'
+const COLORS = ['#6366F1', '#22C55E']
 
 export default function TokenomicsPage() {
   const [circulating, setCirculating] = useState<string | null>(null)
@@ -15,20 +16,10 @@ export default function TokenomicsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const client = getPublicClient()
-
+        const contract = getGparkReadContract()
         const [total, treasury] = await Promise.all([
-          readContract(client, {
-            address: TOKEN_ADDRESS,
-            abi: GPARK_ABI,
-            functionName: 'totalSupply',
-          }),
-          readContract(client, {
-            address: TOKEN_ADDRESS,
-            abi: GPARK_ABI,
-            functionName: 'balanceOf',
-            args: [TREASURY_ADDRESS],
-          }),
+          contract.read.totalSupply(),
+          contract.read.balanceOf([TREASURY_ADDRESS]),
         ])
 
         const totalNum = Number(formatUnits(total, 18))
@@ -45,18 +36,10 @@ export default function TokenomicsPage() {
     fetchData()
   }, [])
 
-  const data = [
-    {
-      name: 'Treasury',
-      value: circulating ? 21000000 - Number(circulating) : 21000000,
-    },
-    {
-      name: 'Circulating',
-      value: Number(circulating ?? 0),
-    },
+  const chartData = [
+    { name: 'Treasury', value: circulating ? TOTAL_SUPPLY - Number(circulating) : TOTAL_SUPPLY },
+    { name: 'Circulating', value: Number(circulating ?? 0) },
   ]
-
-  const COLORS = ['#6366F1', '#22C55E']
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-20 text-white">
@@ -65,47 +48,40 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
+      {/* Circulating Supply */}
       <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
         <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
           {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
-          Data fetched from Ethereum Mainnet via viem.
+          Data fetched from Ethereum Mainnet.
         </p>
       </div>
 
       {/* Token Chart */}
       <div className="w-full max-w-full h-[300px] sm:h-[400px] mb-6">
-        <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">
-          Supply Breakdown
-        </h2>
-        <div className="w-full h-full flex items-center justify-center">
-          <svg width="200" height="200" viewBox="0 0 36 36" className="text-center">
-            <circle
-              cx="18"
-              cy="18"
-              r="16"
-              fill="none"
-              stroke="#6366F1"
-              strokeWidth="4"
-              strokeDasharray={`${(data[0].value / 21000000) * 100}, 100`}
-              transform="rotate(-90 18 18)"
-            />
-            <circle
-              cx="18"
-              cy="18"
-              r="16"
-              fill="none"
-              stroke="#22C55E"
-              strokeWidth="4"
-              strokeDasharray={`${(data[1].value / 21000000) * 100}, 100`}
-              transform={`rotate(${(data[0].value / 21000000) * 360 - 90} 18 18)`}
-            />
-          </svg>
-        </div>
+        <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">Supply Breakdown</h2>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={chartData}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
 
+      {/* Legend */}
       <div className="flex justify-center gap-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
