@@ -7,7 +7,7 @@ import {
   formatUnits,
 } from 'viem'
 import GPARK_ABI from '@/lib/GPARKTokenABI.json'
-import { TOKEN_ADDRESS, TREASURY_ADDRESS } from '@/lib/constant'
+import { CONTRACT_ADDRESS, TREASURY_ADDRESS } from '@/lib/contract'
 
 export default function TokenomicsPage() {
   const [circulating, setCirculating] = useState<string | null>(null)
