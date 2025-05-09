@@ -9,9 +9,8 @@ export default function DashboardPage() {
   const router = useRouter()
   const { address, status } = useAccount()
   const [balance, setBalance] = useState<string | null>(null)
-  const [hasNFT, setHasNFT] = useState<boolean | null>(null)
-  const [hasGovernanceNFT, setHasGovernanceNFT] = useState<boolean | null>(null)
 
+  // Redirect if not connected
   useEffect(() => {
     if (status === 'connecting') return
     if (status === 'disconnected') {
@@ -19,41 +18,28 @@ export default function DashboardPage() {
     }
   }, [status, router])
 
+  // Fetch GPARK balance
   useEffect(() => {
     const fetchBalance = async () => {
       if (!address) return
       try {
         const contract = await getGparkContract()
-        const raw = await contract.balanceOf([address])
+        console.log('✅ Contract loaded', contract)
+
+        const raw = await contract.read.balanceOf([address])
+        console.log('🪙 Raw balance:', raw)
+
         const formatted = Number(raw) / 1e18
         setBalance(formatted.toFixed(2))
       } catch (err) {
-        console.error('Error fetching balance:', err)
+        console.error('❌ Error fetching balance:', err)
       }
     }
 
     fetchBalance()
   }, [address])
 
-  useEffect(() => {
-    const checkNFTs = async () => {
-      if (!address) return
-      try {
-        const contract = await getGparkContract()
-        const nftBalance = await contract.balanceOf([address])
-        setHasNFT(Number(nftBalance) > 0)
-
-        // Dummy placeholder for governance NFT logic
-        const govNftBalance = await contract.balanceOf([address, 1])
-        setHasGovernanceNFT(Number(govNftBalance) > 0)
-      } catch (err) {
-        console.error('Error checking NFTs:', err)
-      }
-    }
-
-    checkNFTs()
-  }, [address])
-
+  // Loading screen
   if (status === 'connecting') {
     return (
       <div className="h-screen flex items-center justify-center text-white">
@@ -109,22 +95,6 @@ export default function DashboardPage() {
             <p className="mt-2 text-yellow-400 text-xs italic">Coming soon…</p>
           </div>
         ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-        <div className="bg-zinc-900 border border-white rounded-xl p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">NFT Ownership</h3>
-          <p className="text-gray-300">
-            {hasNFT === null ? 'Checking…' : hasNFT ? '✅ Connected' : '❌ Not Connected'}
-          </p>
-        </div>
-
-        <div className="bg-zinc-900 border border-white rounded-xl p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">NFT Governance</h3>
-          <p className="text-gray-300">
-            {hasGovernanceNFT === null ? 'Checking…' : hasGovernanceNFT ? '✅ Connected' : '❌ Not Connected'}
-          </p>
-        </div>
       </div>
 
       <div className="mt-16 text-center">
