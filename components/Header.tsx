@@ -13,6 +13,7 @@ import {
   RectangleStackIcon,
   DocumentTextIcon,
   ChatBubbleLeftRightIcon,
+  WalletIcon,
 } from '@heroicons/react/24/outline'
 
 export default function Header() {
@@ -90,8 +91,9 @@ export default function Header() {
         {isConnected && (
           <button
             onClick={() => router.push('/dashboard')}
-            className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200"
+            className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-black transition duration-200 flex items-center gap-2"
           >
+            <WalletIcon className="w-4 h-4" />
             Dashboard
           </button>
         )}
