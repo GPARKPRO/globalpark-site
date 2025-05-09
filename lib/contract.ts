@@ -1,7 +1,7 @@
-// lib/contract.ts
-import { getPublicClient, getWalletClient } from 'wagmi/actions'
 import { getContract } from 'viem'
-import GPARK_ABI from './GPARKTokenABI.json'
+import { getWalletClient } from 'wagmi/actions'
+import { Abi } from 'viem'
+import abiJson from './GPARKTokenABI.json'
 
 const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
 
@@ -11,7 +11,7 @@ export const getGparkContract = async () => {
 
   return getContract({
     address: CONTRACT_ADDRESS,
-    abi: GPARK_ABI,
+    abi: abiJson as Abi,
     client: walletClient,
   })
 }
