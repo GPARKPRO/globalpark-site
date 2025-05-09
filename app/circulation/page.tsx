@@ -9,7 +9,7 @@ import Link from "next/link"
 const TOTAL_SUPPLY = 21_000_000
 const TREASURY_ADDRESS = "0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183"
 
-export default function TokenomicsPage() {
+export default function CirculationPage() {
   const [circulating, setCirculating] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -53,7 +53,7 @@ export default function TokenomicsPage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-20 text-white">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">Tokenomics</h1>
+        <h1 className="text-4xl font-bold">Circulation</h1>
         <span className="text-xs bg-green-600/20 border border-green-600 text-green-400 px-3 py-1 rounded-full font-mono">
           ✓ Verified on-chain
         </span>
