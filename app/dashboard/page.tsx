@@ -3,14 +3,13 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
-import { getGparkContract } from '@/lib/contract'
+import { getGparkReadContract } from '@/lib/contract'
 
 export default function DashboardPage() {
   const router = useRouter()
   const { address, status } = useAccount()
   const [balance, setBalance] = useState<string | null>(null)
 
-  // Redirect if not connected
   useEffect(() => {
     if (status === 'connecting') return
     if (status === 'disconnected') {
@@ -18,28 +17,22 @@ export default function DashboardPage() {
     }
   }, [status, router])
 
-  // Fetch GPARK balance
   useEffect(() => {
     const fetchBalance = async () => {
       if (!address) return
       try {
-        const contract = await getGparkContract()
-        console.log('✅ Contract loaded', contract)
-
+        const contract = await getGparkReadContract()
         const raw = await contract.read.balanceOf([address])
-        console.log('🪙 Raw balance:', raw)
-
         const formatted = Number(raw) / 1e18
         setBalance(formatted.toFixed(2))
       } catch (err) {
-        console.error('❌ Error fetching balance:', err)
+        console.error('Error fetching balance:', err)
       }
     }
 
     fetchBalance()
   }, [address])
 
-  // Loading screen
   if (status === 'connecting') {
     return (
       <div className="h-screen flex items-center justify-center text-white">
