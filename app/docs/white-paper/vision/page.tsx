@@ -111,10 +111,6 @@ export default function VisionPage() {
           </Link>
         </div>
       </main>
-
-      {/* A minimal animated logo at bottom of page */}
-      <div className="mt-17 flex justify-center">
-        <AnimatedLogo />
       </div>
     </>
   )
