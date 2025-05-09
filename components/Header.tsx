@@ -13,7 +13,6 @@ import {
   RectangleStackIcon,
   DocumentTextIcon,
   ChatBubbleLeftRightIcon,
-  Squares2X2Icon,
 } from '@heroicons/react/24/outline'
 
 export default function Header() {
@@ -49,7 +48,7 @@ export default function Header() {
       ? [
           {
             label: 'Dashboard',
-            icon: <Squares2X2Icon className="w-4 h-4 mr-2" />,
+            icon: <UserGroupIcon className="w-4 h-4 mr-2" />,
             path: '/dashboard',
           },
         ]
