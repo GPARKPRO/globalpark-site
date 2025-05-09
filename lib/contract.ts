@@ -1,31 +1,24 @@
+// lib/contract.ts
+
+import { getAccount, getWalletClient } from 'wagmi/actions'
 import { getContract } from 'viem'
-import { getWalletClient } from 'wagmi/actions'
+import GPARK_ABI from './GPARKTokenABI.json'
 
-const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
+const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da' as `0x${string}`
 
-const GPARK_ABI = [
-  {
-    name: 'balanceOf',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [{ name: 'account', type: 'address' }],
-    outputs: [{ name: '', type: 'uint256' }],
+export const getGparkContract = async () => {
+  const account = getAccount()
+  const walletClient = await getWalletClient({ chainId: account?.chainId })
+
+  if (!walletClient) {
+    throw new Error('Wallet client not available')
   }
-] as const
-
-type GparkContract = {
-  balanceOf: (account: string) => Promise<bigint>
-}
-
-export const getGparkContract = async (): Promise<GparkContract> => {
-  const walletClient = await getWalletClient()
-  if (!walletClient) throw new Error('Wallet client not available')
 
   const contract = getContract({
     address: CONTRACT_ADDRESS,
     abi: GPARK_ABI,
-    walletClient,
+    client: walletClient,
   })
 
-  return contract as unknown as GparkContract
+  return contract
 }
