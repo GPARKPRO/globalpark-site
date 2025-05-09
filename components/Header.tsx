@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAccount } from 'wagmi'
 import ConnectWallet from './ConnectWallet'
 import {
   HomeIcon,
@@ -18,6 +19,7 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  const { isConnected } = useAccount()
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent | TouchEvent) {
@@ -42,6 +44,15 @@ export default function Header() {
     { label: 'Roadmap', icon: <MapIcon className="w-4 h-4 mr-2" />, path: '/roadmap' },
     { label: 'Participation Wall', icon: <RectangleStackIcon className="w-4 h-4 mr-2" />, path: '/participation-wall' },
     { label: 'Forum', icon: <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />, path: '/forum' },
+    ...(isConnected
+      ? [
+          {
+            label: 'Dashboard',
+            icon: <UserGroupIcon className="w-4 h-4 mr-2" />,
+            path: '/dashboard',
+          },
+        ]
+      : []),
   ]
 
   return (
