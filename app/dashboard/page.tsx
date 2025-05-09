@@ -8,7 +8,7 @@ import { getGparkContract } from '@/lib/contract'
 export default function DashboardPage() {
   const router = useRouter()
   const { address, isConnected } = useAccount()
-  const [balance, setBalance] = useState<string | null>(null)
+  const raw = await contract.balanceOf(address)
 
   useEffect(() => {
     if (!isConnected) {
