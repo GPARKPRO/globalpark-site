@@ -1,10 +1,11 @@
+// app/dashboard/page.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
 import { getGparkReadContract } from '@/lib/contract'
-import { useEnsDisplayName } from '@/lib/hooks/useEnsName'
+import { useEnsDisplayName } from '@/lib/hooks/useEnsDisplayName'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -50,11 +51,23 @@ export default function DashboardPage() {
       </h1>
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
-        <span className="border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
-          {address
-            ? `🟡 Connected: ${displayName}`
-            : '🔴 Wallet Not Connected'}
-        </span>
+        <div className="flex items-center gap-3 border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
+          {displayName.avatarUrl ? (
+            <img
+              src={displayName.avatarUrl}
+              alt="ENS Avatar"
+              className="w-6 h-6 rounded-full"
+            />
+          ) : (
+            <div className="w-6 h-6 rounded-full bg-white/20" />
+          )}
+          <span>
+            {address
+              ? `🟡 Connected: ${displayName.name}`
+              : '🔴 Wallet Not Connected'}
+          </span>
+        </div>
+
         {balance !== null && (
           <span className="border border-pink-500 text-pink-500 font-mono px-5 py-2 rounded-full">
             GPARK Balance: {balance}
