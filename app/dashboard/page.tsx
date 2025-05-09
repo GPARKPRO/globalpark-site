@@ -9,7 +9,7 @@ import { useEnsProfile } from '@/lib/hooks/useEnsProfile'
 export default function DashboardPage() {
   const router = useRouter()
   const { address, status } = useAccount()
-  const { ensName, avatarUrl } = useEnsProfile(address || undefined)
+  const { ensName, avatarUrl } = useEnsProfile(address as `0x${string}`)
   const [balance, setBalance] = useState<string | null>(null)
 
   useEffect(() => {
