@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaXTwitter, FaTelegram, FaDiscord } from 'react-icons/fa6'
+import { FaXTwitter, FaDiscord, FaTelegram } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
@@ -22,13 +22,15 @@ export default function Footer() {
               GitHub
             </Link>
           </p>
+
+          {/* Social Icons */}
           <div className="flex gap-4 mt-4">
             <Link
               href="https://x.com/globalpark_io"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X"
-              className="hover:text-gray-300"
+              className="hover:text-pink-500 transition-colors"
             >
               <FaXTwitter size={20} />
             </Link>
@@ -37,7 +39,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Discord"
-              className="hover:text-gray-300"
+              className="hover:text-pink-500 transition-colors"
             >
               <FaDiscord size={20} />
             </Link>
@@ -46,7 +48,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
-              className="hover:text-gray-300"
+              className="hover:text-pink-500 transition-colors"
             >
               <FaTelegram size={20} />
             </Link>
