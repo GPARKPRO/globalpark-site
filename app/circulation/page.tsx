@@ -132,12 +132,12 @@ export default function TokenomicsPage() {
 
           <div className="mt-6">
             <Link
-              href={`https://etherscan.io/token/${process.env.NEXT_PUBLIC_GPARK_TOKEN_ADDRESS}`}
-              target="_blank"
-              className="text-sm text-pink-500 hover:underline"
-            >
-              → View on Etherscan
-            </Link>
+  href="https://etherscan.io/token/0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da"
+  target="_blank"
+  className="text-sm text-pink-500 hover:underline"
+>
+  → View on Etherscan
+</Link>
           </div>
         </div>
       </div>
