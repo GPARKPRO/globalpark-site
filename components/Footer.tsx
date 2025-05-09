@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaXTwitter, FaDiscord, FaTelegram } from 'react-icons/fa6'
+import { FaXTwitter, FaTelegramPlane, FaDiscord } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
             Fully open-source & community-governed initiative for art & memory.
           </p>
           <p className="text-zinc-500">
-            Source & docs:{" "}
+            Source & docs:{' '}
             <Link
               href="https://github.com/GPARKPRO/GlobalPark-DAO"
               target="_blank"
@@ -22,6 +22,19 @@ export default function Footer() {
               GitHub
             </Link>
           </p>
+
+          {/* Social icons */}
+          <div className="flex space-x-4 mt-6 text-xl">
+            <Link href="https://x.com/globalpark_io" target="_blank" aria-label="X / Twitter">
+              <FaXTwitter className="text-white hover:text-pink-500 transition" />
+            </Link>
+            <Link href="https://t.me/globalpark_io" target="_blank" aria-label="Telegram">
+              <FaTelegramPlane className="text-white hover:text-pink-500 transition" />
+            </Link>
+            <Link href="https://discord.gg/czb5W4UuZv" target="_blank" aria-label="Discord">
+              <FaDiscord className="text-white hover:text-pink-500 transition" />
+            </Link>
+          </div>
         </div>
 
         {/* Right block */}
@@ -72,21 +85,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Social icons */}
-      <div className="flex justify-center gap-6 mt-12 text-xl text-white">
-        <Link href="https://x.com/globalparkdao" target="_blank" aria-label="X">
-          <FaXTwitter />
-        </Link>
-        <Link href="https://discord.gg/YOUR_INVITE" target="_blank" aria-label="Discord">
-          <FaDiscord />
-        </Link>
-        <Link href="https://t.me/globalparkdao" target="_blank" aria-label="Telegram">
-          <FaTelegram />
-        </Link>
-      </div>
-
       {/* Bottom line */}
-      <div className="text-center text-zinc-500 mt-8 text-xs tracking-wider">
+      <div className="text-center text-zinc-500 mt-12 text-xs tracking-wider">
         © {new Date().getFullYear()} Global Park DAO. All rights reserved.
       </div>
     </footer>
