@@ -23,9 +23,9 @@
     "remark-gfm": "^3.0.1",
     "react-markdown": "^8.0.7",
     "@rainbow-me/rainbowkit": "^2.2.4",
-    "wagmi": "1.4.0",
+    "wagmi": "^2.15.2",
     "@walletconnect/ethereum-provider": "^2.10.1",
-    "viem": "^1.21.4"
+    "viem": "^2.29.1"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.2",
