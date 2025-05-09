@@ -4,7 +4,8 @@ import { getContract } from 'viem'
 import GPARK_ABI from './GPARKTokenABI.json'
 import { wagmiConfig } from './wagmiConfig'
 
-const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
+export const CONTRACT_ADDRESS = '0xA88C78A9b635c9724103bAA7745c2A32E9b9F1da'
+export const TREASURY_ADDRESS = '0x4C7635EC1f6870CBBD58c13e3aEB4e43B7EE7183' // добавлен адрес сокровищницы
 
 // Public contract for reads
 export const getGparkReadContract = () => {
