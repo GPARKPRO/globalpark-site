@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { readContract } from '@wagmi/core'
-import { GPARK_ABI } from '@/lib/abi/GPARKTokenABI'
+import {
+  readContract,
+  getPublicClient,
+  formatUnits,
+} from 'viem'
+import GPARK_ABI from '@/lib/GPARKTokenABI.json'
 import { TOKEN_ADDRESS, TREASURY_ADDRESS } from '@/lib/constants'
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
 export default function TokenomicsPage() {
   const [circulating, setCirculating] = useState<string | null>(null)
@@ -12,13 +15,15 @@ export default function TokenomicsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const client = getPublicClient()
+
         const [total, treasury] = await Promise.all([
-          readContract({
+          readContract(client, {
             address: TOKEN_ADDRESS,
             abi: GPARK_ABI,
             functionName: 'totalSupply',
           }),
-          readContract({
+          readContract(client, {
             address: TOKEN_ADDRESS,
             abi: GPARK_ABI,
             functionName: 'balanceOf',
@@ -26,8 +31,8 @@ export default function TokenomicsPage() {
           }),
         ])
 
-        const totalNum = Number(total) / 1e18
-        const treasuryNum = Number(treasury) / 1e18
+        const totalNum = Number(formatUnits(total, 18))
+        const treasuryNum = Number(formatUnits(treasury, 18))
         const circulatingValue = Math.max(totalNum - treasuryNum, 0)
 
         setCirculating(circulatingValue.toFixed(2))
@@ -60,14 +65,13 @@ export default function TokenomicsPage() {
         Explore the real-time distribution of GPARK tokens across the DAO ecosystem.
       </p>
 
-      {/* Circulating Supply */}
       <div className="border border-yellow-500 bg-yellow-900/10 text-center rounded-lg p-6 mb-12">
         <h2 className="text-xl font-semibold text-yellow-400 mb-2">Circulating Supply</h2>
         <p className="text-2xl font-mono text-green-400">
           {circulating !== null ? `${circulating} GPARK` : 'Loading...'}
         </p>
         <p className="text-xs text-gray-500 mt-2">
-          Data fetched from Ethereum Mainnet via readContract().
+          Data fetched from Ethereum Mainnet via viem.
         </p>
       </div>
 
@@ -76,26 +80,32 @@ export default function TokenomicsPage() {
         <h2 className="text-lg font-semibold mb-2 text-center text-gray-300">
           Supply Breakdown
         </h2>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={100}
-              paddingAngle={2}
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
+        <div className="w-full h-full flex items-center justify-center">
+          <svg width="200" height="200" viewBox="0 0 36 36" className="text-center">
+            <circle
+              cx="18"
+              cy="18"
+              r="16"
+              fill="none"
+              stroke="#6366F1"
+              strokeWidth="4"
+              strokeDasharray={`${(data[0].value / 21000000) * 100}, 100`}
+              transform="rotate(-90 18 18)"
+            />
+            <circle
+              cx="18"
+              cy="18"
+              r="16"
+              fill="none"
+              stroke="#22C55E"
+              strokeWidth="4"
+              strokeDasharray={`${(data[1].value / 21000000) * 100}, 100`}
+              transform={`rotate(${(data[0].value / 21000000) * 360 - 90} 18 18)`}
+            />
+          </svg>
+        </div>
       </div>
 
-      {/* Legend */}
       <div className="flex justify-center gap-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 inline-block rounded-full bg-indigo-500" />
