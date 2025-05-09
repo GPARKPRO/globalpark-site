@@ -64,6 +64,10 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         <main className="flex-1 p-6 prose prose-invert max-w-none">
           {children}
         </main>
+      
+        {/* A minimal animated logo at bottom of page */}
+        <div className="mt-17 flex justify-center">
+        <AnimatedLogo />
       </div>
     </>
   );
