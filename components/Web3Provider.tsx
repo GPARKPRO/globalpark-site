@@ -1,24 +1,29 @@
 'use client'
 
 import '@rainbow-me/rainbowkit/styles.css'
-import { WagmiConfig } from 'wagmi'
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
-import { chains, wagmiConfig } from '@/lib/wagmi'
+import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { WagmiProvider } from 'wagmi'
+import { mainnet } from 'wagmi/chains'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { ReactNode, useState } from 'react'
 
-type Props = {
-  children: React.ReactNode
-}
+export default function Web3Provider({ children }: { children: ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient())
 
-export default function Web3Provider({ children }: Props) {
+  const config = getDefaultConfig({
+    appName: 'Global Park',
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+    chains: [mainnet],
+    ssr: true,
+  })
+
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider
-        locale="en-US"
-        chains={chains}
-        modalSize="compact"
-      >
-        {children}
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
