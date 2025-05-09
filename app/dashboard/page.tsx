@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
 import { getGparkReadContract } from '@/lib/contract'
+import { useEnsDisplayName } from '@/lib/hooks/useEnsName'
 
 export default function DashboardPage() {
   const router = useRouter()
   const { address, status } = useAccount()
   const [balance, setBalance] = useState<string | null>(null)
+  const displayName = useEnsDisplayName(address)
 
   useEffect(() => {
     if (status === 'connecting') return
@@ -50,7 +52,7 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-10 text-center">
         <span className="border border-yellow-500 text-yellow-400 font-mono px-5 py-2 rounded-full">
           {address
-            ? `🟡 Wallet Connected: ${address.slice(0, 6)}...${address.slice(-4)}`
+            ? `🟡 Connected: ${displayName}`
             : '🔴 Wallet Not Connected'}
         </span>
         {balance !== null && (
