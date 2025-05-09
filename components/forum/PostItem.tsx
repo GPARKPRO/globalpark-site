@@ -14,22 +14,19 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
 
   return (
     <div
-      className={`px-6 py-5 border border-white/10 rounded-xl ${
-        isFirst ? 'bg-white/5 shadow-lg' : 'bg-black/10'
+      className={`px-6 py-6 border border-white/10 rounded-xl ${
+        isFirst ? 'bg-white/5 shadow-lg' : 'bg-black/5'
       }`}
     >
-      <div className="flex items-start gap-4 mb-4">
+      <div className="flex gap-4 mb-4">
         <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex-shrink-0">
-          {avatarUrl ? (
-            <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
-          ) : null}
+          {avatarUrl && <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />}
         </div>
 
         <div className="flex-1">
-          <div className="flex items-center justify-between mb-1">
-            <div className="text-sm text-neutral-300">
-              {ensName ?? shortenAddress(author)} · {createdAt}
-            </div>
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-1 text-sm text-neutral-300">
+            <span className="font-mono">{ensName ?? author}</span>
+
             {isFirst && (
               <span className="text-xs text-yellow-500 bg-yellow-500/10 border border-yellow-500 px-2 py-0.5 rounded-full">
                 Author
@@ -37,9 +34,11 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
             )}
           </div>
 
+          <div className="text-xs text-neutral-500 mb-4">{createdAt}</div>
+
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            className="prose prose-invert prose-sm max-w-none"
+            className="prose prose-invert prose-base max-w-full"
           >
             {content}
           </ReactMarkdown>
@@ -47,8 +46,4 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
       </div>
     </div>
   )
-}
-
-function shortenAddress(address: string) {
-  return `${address.slice(0, 6)}...${address.slice(-4)}`
 }
