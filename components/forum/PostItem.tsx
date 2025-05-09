@@ -14,24 +14,29 @@ export default function PostItem({ author, content, createdAt, isFirst }: PostIt
 
   return (
     <div
-      className={`px-8 py-6 border border-white/10 rounded-lg ${
-        isFirst ? 'bg-white/5 shadow-md' : ''
+      className={`px-6 py-5 border border-white/10 rounded-xl ${
+        isFirst ? 'bg-white/5 shadow-lg' : 'bg-black/10'
       }`}
     >
       <div className="flex items-start gap-4 mb-4">
-        {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt="avatar"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-        ) : (
-          <div className="w-10 h-10 rounded-full bg-white/10" />
-        )}
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex-shrink-0">
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
+          ) : null}
+        </div>
+
         <div className="flex-1">
-          <div className="text-sm text-neutral-300 mb-2">
-            {ensName ?? shortenAddress(author)} · {createdAt}
+          <div className="flex items-center justify-between mb-1">
+            <div className="text-sm text-neutral-300">
+              {ensName ?? shortenAddress(author)} · {createdAt}
+            </div>
+            {isFirst && (
+              <span className="text-xs text-yellow-500 bg-yellow-500/10 border border-yellow-500 px-2 py-0.5 rounded-full">
+                Author
+              </span>
+            )}
           </div>
+
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             className="prose prose-invert prose-sm max-w-none"
