@@ -1,0 +1,48 @@
+{
+  "name": "globalpark-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "postbuild": "next-sitemap"
+  },
+  "dependencies": {
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ethers": "^6.8.1",
+    "@supabase/supabase-js": "^2.39.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "lucide-react": "^0.263.0",
+    "@heroicons/react": "^2.0.18",
+    "gray-matter": "^4.0.3",
+    "recharts": "2.8.0",
+    "xdm": "^3.1.0",
+    "clsx": "^2.1.0",
+    "remark-gfm": "^3.0.1",
+    "react-markdown": "^8.0.7",
+    "@rainbow-me/rainbowkit": "^2.2.4",
+    "wagmi": "^2.15.2",
+    "@walletconnect/ethereum-provider": "^2.10.1",
+    "viem": "^2.29.1",
+    "node-fetch": "^3.3.2",
+    "supports-color": "^8.1.1",
+    "pino-pretty": "^10.3.0",
+    "react-icons": "^4.12.0",
+    "framer-motion": "^11.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2",
+    "postcss": "^8.4.21",
+    "autoprefixer": "^10.4.14",
+    "typescript": "^5.1.6",
+    "@types/react": "^18.2.21",
+    "@types/node": "^18.17.19",
+    "next-sitemap": "^4.2.2"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
