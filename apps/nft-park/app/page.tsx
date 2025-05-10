@@ -1,10 +1,11 @@
+// apps/nft-park/app/page.tsx
 'use client';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
 
-export default function NftPark() {
+export default function NftParkPage() {
   return (
     <div className="w-full h-screen bg-black">
       <Canvas camera={{ position: [0, 5, 10], fov: 60 }}>
